@@ -651,7 +651,7 @@ def create_app(config: dict) -> Flask:
             # Email (modo prueba)
             subject = f"SmartKet Pedido {order_key}"
             body = (
-                "Nuevo pedido SmartKet (modo prueba).\n\n"
+                "Nuevo pedido SmartKet (modo pruebaa).\n\n"
                 f"Clave: {order_key}\n"
                 "Se adjunta archivo JSON para procesar en la app interna una vez confirmado el pago.\n"
             )
