@@ -1,0 +1,1125 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+:root {
+    --bg: #f3f6fb;
+    --panel: #ffffff;
+    --text: #0f172a;
+    --muted: #64748b;
+    --line: #e7eef7;
+    --brand: #f97316;
+    --brand-dark: #ea580c;
+    --chip: #eef2f7;
+    --shadow: 0 18px 50px rgba(15, 23, 42, .08);
+    --radius: 18px;
+    /* Fallback explícito para el nav “a prueba de fallos” */
+    --brand-orange: #f97316;
+}
+
+/* =============================
+   TOAST (notificaciones)
+   Estado inicial: oculto
+   Se muestra cuando JS agrega .visible
+   ============================= */
+#toast-container {
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    z-index: 9999;
+    display: none; /* ✅ evita que aparezca "Mensaje" al cargar */
+}
+
+    #toast-container.visible {
+        display: block;
+    }
+
+    #toast-container .toast-message {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 12px;
+        border-radius: 12px;
+        background: #ffffff;
+        border: 1px solid rgba(226, 232, 240, .9);
+        box-shadow: 0 16px 40px rgba(15, 23, 42, .12);
+        font-size: 13px;
+        font-weight: 700;
+        color: #0f172a;
+    }
+
+* {
+    box-sizing: border-box;
+}
+
+/* ====== FULL WEB (no “app en ventana”) ====== */
+html, body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    /* ✅ Full web */
+    background: #ffffff;
+    /* ✅ Web “normal”: top, full width, scroll normal */
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    overflow-y: auto;
+}
+
+/* ====== CONTENEDOR PRINCIPAL ====== */
+.app-window {
+    /* Full-web layout */
+    width: 100%;
+    max-width: none;
+    /* Viewport fijo para SPA */
+    min-height: 100vh;
+    height: 100vh;
+    margin: 0;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+    background: #ffffff;
+    overflow: hidden;
+}
+
+/* Responsive: mantener “full web” */
+@media (max-width: 768px) {
+    .app-window {
+        height: 100vh;
+        min-height: 100vh;
+        margin: 0;
+        border-radius: 0;
+    }
+}
+
+/* ====== UTILIDADES / BASE ====== */
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button {
+    font-family: inherit;
+}
+
+.hr {
+    height: 1px;
+    background: var(--line);
+    border: 0;
+    margin: 0;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.muted {
+    color: var(--muted);
+}
+
+/* ====== NAV “a prueba de fallos” (aunque Tailwind no cargue) ====== */
+.nav-pill {
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    border-radius: 999px;
+    padding: 10px 16px;
+    font-weight: 700;
+}
+
+    .nav-pill.active {
+        background: var(--brand-orange, #f97316);
+        color: #fff !important;
+        box-shadow: 0 6px 16px rgba(249,115,22,.25);
+    }
+
+/* ====== (Tu CSS original sigue abajo tal cual) ====== */
+
+.topbar {
+    height: 74px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 28px;
+    border-bottom: 1px solid var(--line);
+}
+
+.brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 800;
+    color: #0b1220;
+}
+
+.brand-badge {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    display: grid;
+    place-items: center;
+    background: rgba(249,115,22,.12);
+    color: var(--brand);
+}
+
+.brand small {
+    display: block;
+    font-weight: 600;
+    color: var(--muted);
+    margin-top: 2px;
+}
+
+.pills {
+    display: inline-flex;
+    gap: 8px;
+    background: #f1f5f9;
+    padding: 6px;
+    border-radius: 999px;
+}
+
+.pill {
+    padding: 10px 16px;
+    border-radius: 999px;
+    border: 0;
+    background: transparent;
+    color: #334155;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+    .pill.active {
+        background: var(--brand);
+        color: #fff;
+        box-shadow: 0 10px 24px rgba(249,115,22,.25);
+    }
+
+main {
+    position: relative;
+    height: calc(100vh - 74px);
+}
+
+/* ====== HOME ====== */
+.home {
+    position: absolute;
+    inset: 0;
+    overflow-y: auto;
+    padding: 34px 24px 64px;
+    background: radial-gradient(1200px 600px at 50% 0%, rgba(249,115,22,.09), transparent 60%);
+}
+
+.hero {
+    max-width: 980px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 24px 0 18px;
+}
+
+.hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 12px;
+    border-radius: 999px;
+    background: rgba(249,115,22,.12);
+    color: var(--brand-dark);
+    font-weight: 800;
+    font-size: 12px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+
+.hero h1 {
+    margin: 14px 0 10px;
+    font-size: clamp(34px, 4vw, 52px);
+    line-height: 1.05;
+    color: #0b1220;
+}
+
+.hero p {
+    margin: 0 auto;
+    max-width: 640px;
+    color: #475569;
+    font-weight: 500;
+    line-height: 1.55;
+}
+
+.hero .cta {
+    margin-top: 18px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 20px;
+    border-radius: 999px;
+    border: 0;
+    cursor: pointer;
+    background: var(--brand);
+    color: #fff;
+    font-weight: 800;
+    box-shadow: 0 16px 30px rgba(249,115,22,.28);
+}
+
+    .hero .cta:hover {
+        background: var(--brand-dark);
+    }
+
+.home-cards {
+    max-width: 1100px;
+    margin: 26px auto 0;
+}
+
+    .home-cards h3 {
+        margin: 0 0 16px;
+        text-align: center;
+        font-size: 18px;
+        color: #0b1220;
+    }
+
+.card-row {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.info-card {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 18px;
+    box-shadow: 0 14px 30px rgba(15,23,42,.05);
+}
+
+    .info-card .icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 999px;
+        display: grid;
+        place-items: center;
+        margin: 0 auto 10px;
+        background: #f1f5f9;
+    }
+
+    .info-card h4 {
+        margin: 0;
+        font-size: 16px;
+        text-align: center;
+    }
+
+    .info-card p {
+        margin: 8px 0 0;
+        color: #64748b;
+        text-align: center;
+        line-height: 1.45;
+        font-weight: 500;
+        font-size: 13px;
+    }
+
+.footer {
+    text-align: center;
+    color: #94a3b8;
+    font-size: 12px;
+    margin-top: 36px;
+}
+
+/* ====== PLAN ====== */
+.plan {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    gap: 0;
+    overflow: hidden;
+}
+
+.left {
+    border-right: 1px solid var(--line);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.left-top {
+    padding: 18px 18px 10px;
+    border-bottom: 1px solid var(--line);
+}
+
+.searchbar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 14px;
+    background: #f8fafc;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+}
+
+    .searchbar input {
+        border: 0;
+        outline: none;
+        background: transparent;
+        flex: 1;
+        font-weight: 600;
+        color: #0b1220;
+    }
+
+    .searchbar .icon {
+        color: #94a3b8;
+    }
+
+.filters {
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.filter-left {
+    display: inline-flex;
+    gap: 8px;
+}
+
+.chip {
+    padding: 8px 12px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: #fff;
+    cursor: pointer;
+    font-weight: 800;
+    color: #334155;
+    font-size: 12px;
+}
+
+    .chip.dark {
+        background: #0b1220;
+        border-color: #0b1220;
+        color: #fff;
+    }
+
+.count {
+    color: #94a3b8;
+    font-weight: 800;
+    font-size: 12px;
+}
+
+.cards {
+    padding: 16px 18px 22px;
+    overflow: auto;
+}
+
+/* ================================
+   ✅ FIX: cards no se cortan con títulos largos
+   - asegura alto mínimo consistente
+   - ancla el contenido inferior (+ Agregar)
+   - clamp robusto a 2 líneas (aunque line-clamp falle)
+   ================================ */
+#recipes-grid {
+    align-content: start;
+    align-items: start;
+    grid-auto-rows: minmax(340px, auto);
+}
+
+.recipe-card {
+    min-height: 340px;
+    display: flex;
+    flex-direction: column;
+}
+
+    /* El body de la card (div con padding) debe poder empujar el footer hacia abajo */
+    .recipe-card > div.p-3 {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+    }
+
+    /* Título fijo a 2 líneas (fallback del line-clamp) */
+    .recipe-card h4 {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+        line-height: 1.2;
+        max-height: calc(1.2em * 2);
+    }
+
+/* ====== (Tu grid original se mantiene) ====== */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.recipe-card {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 14px 28px rgba(15,23,42,.05);
+}
+
+/* ====== IMÁGENES “blindadas” (no dependen de Tailwind h-32) ====== */
+.recipe-img {
+    height: 140px; /* ajusta si quieres 120/160 */
+    width: 100%;
+    overflow: hidden;
+    border-radius: 14px;
+    background: #e5e7eb; /* placeholder si tarda en cargar */
+}
+
+    .recipe-img img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+    }
+
+/* Mantengo tu bloque original también (no rompe, pero el de arriba “manda” por orden) */
+.recipe-img {
+    position: relative;
+    height: 120px;
+    background: #e2e8f0;
+}
+
+    .recipe-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+.price-tag {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(15,23,42,.82);
+    color: #fff;
+    font-weight: 900;
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 999px;
+}
+
+.badges {
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
+    display: flex;
+    gap: 6px;
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 8px;
+    border-radius: 999px;
+    background: rgba(255,255,255,.92);
+    font-weight: 800;
+    font-size: 11px;
+    color: #334155;
+}
+
+.recipe-body {
+    padding: 12px 12px 14px;
+}
+
+.recipe-title {
+    font-weight: 900;
+    font-size: 13px;
+    margin: 0;
+    color: #0b1220;
+}
+
+.recipe-link {
+    color: var(--brand-dark);
+    font-weight: 800;
+    font-size: 11px;
+    margin-top: 6px;
+}
+
+.qty-row {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.qty {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+    .qty button {
+        width: 24px;
+        height: 24px;
+        border-radius: 6px;
+        border: 1px solid var(--line);
+        background: #f8fafc;
+        font-weight: 900;
+        cursor: pointer;
+    }
+
+    .qty span {
+        width: 18px;
+        text-align: center;
+        font-weight: 900;
+        color: #0b1220;
+    }
+
+.icons {
+    display: inline-flex;
+    gap: 6px;
+    align-items: center;
+}
+
+.circle {
+    width: 26px;
+    height: 26px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: #fff;
+    display: grid;
+    place-items: center;
+    color: #94a3b8;
+}
+
+    .circle.active {
+        border-color: rgba(249,115,22,.4);
+        background: rgba(249,115,22,.12);
+        color: var(--brand);
+    }
+
+.addbtn {
+    margin-top: 10px;
+    width: 100%;
+    border: 0;
+    border-radius: 10px;
+    padding: 10px 12px;
+    background: #0b1220;
+    color: #fff;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+    .addbtn:hover {
+        background: #0f172a;
+    }
+
+.right {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.right-top {
+    padding: 16px 16px 10px;
+    border-bottom: 1px solid var(--line);
+}
+
+.right-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+}
+
+    .right-head h3 {
+        margin: 0;
+        font-size: 14px;
+        font-weight: 900;
+        color: #0b1220;
+    }
+
+.clear-all {
+    color: #ef4444;
+    font-weight: 900;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+.days {
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 8px;
+}
+
+.day {
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 9px 8px;
+    cursor: pointer;
+    background: #fff;
+    text-align: center;
+}
+
+    .day.active {
+        background: var(--brand);
+        border-color: var(--brand);
+        color: #fff;
+        box-shadow: 0 14px 28px rgba(249,115,22,.22);
+    }
+
+    .day .dow {
+        font-weight: 900;
+        font-size: 12px;
+    }
+
+    .day .date {
+        font-weight: 800;
+        font-size: 10px;
+        opacity: .8;
+    }
+
+    .day .count {
+        font-weight: 900;
+        font-size: 10px;
+        margin-top: 6px;
+        color: inherit;
+        opacity: .85;
+    }
+
+.plan-body {
+    padding: 14px 16px;
+    overflow: auto;
+    flex: 1;
+}
+
+.plan-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+    .plan-title h4 {
+        margin: 0;
+        font-size: 18px;
+        font-weight: 1000;
+        color: #0b1220;
+    }
+
+    .plan-title .tag {
+        padding: 6px 10px;
+        border-radius: 999px;
+        background: #f1f5f9;
+        border: 1px solid var(--line);
+        font-size: 11px;
+        font-weight: 900;
+        color: #64748b;
+    }
+
+.empty {
+    border: 1px dashed #dbe7f5;
+    border-radius: 14px;
+    background: #fbfdff;
+    height: 360px;
+    display: grid;
+    place-items: center;
+    color: #94a3b8;
+    text-align: center;
+    padding: 18px;
+}
+
+    .empty .ico {
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        border: 1px solid var(--line);
+        display: grid;
+        place-items: center;
+        margin: 0 auto 10px;
+        background: #fff;
+    }
+
+.plan-footer {
+    border-top: 1px solid var(--line);
+    padding: 12px 16px;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    align-items: center;
+    background: #fbfdff;
+}
+
+.linkbtn {
+    border: 0;
+    background: transparent;
+    color: #334155;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+.primary {
+    border: 0;
+    border-radius: 10px;
+    padding: 10px 14px;
+    background: #0b1220;
+    color: #fff;
+    font-weight: 1000;
+    cursor: pointer;
+}
+
+    .primary:hover {
+        background: #0f172a;
+    }
+
+/* ====== PEDIDO ====== */
+.order {
+    position: absolute;
+    inset: 0;
+    overflow-y: auto;
+    padding: 26px 20px 60px;
+    background: #fbfdff;
+}
+
+.order-inner {
+    max-width: 980px;
+    margin: 0 auto;
+}
+
+.back {
+    color: #475569;
+    font-weight: 900;
+    font-size: 12px;
+}
+
+.order-title {
+    margin: 10px 0 16px;
+    font-size: 28px;
+    font-weight: 1000;
+    color: #0b1220;
+}
+
+.steps {
+    display: flex;
+    gap: 20px;
+    color: #64748b;
+    font-weight: 900;
+    margin-bottom: 18px;
+}
+
+.step {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+    .step .num {
+        width: 26px;
+        height: 26px;
+        border-radius: 999px;
+        display: grid;
+        place-items: center;
+        background: #eef2f7;
+        color: #334155;
+    }
+
+    .step.done .num {
+        background: rgba(34,197,94,.14);
+        color: #16a34a;
+    }
+
+.order-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    align-items: start;
+}
+
+.panel {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 14px;
+    box-shadow: 0 14px 28px rgba(15,23,42,.05);
+}
+
+    .panel h4 {
+        margin: 0 0 10px;
+        font-size: 13px;
+        font-weight: 1000;
+    }
+
+    .panel .sub {
+        color: #64748b;
+        font-weight: 700;
+        font-size: 12px;
+        margin-bottom: 10px;
+    }
+
+.picker {
+    display: inline-flex;
+    gap: 10px;
+    background: #f1f5f9;
+    border-radius: 12px;
+    padding: 6px;
+    border: 1px solid var(--line);
+}
+
+    .picker button {
+        border: 0;
+        background: transparent;
+        padding: 10px 14px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-weight: 1000;
+        color: #334155;
+    }
+
+        .picker button.active {
+            background: #0b1220;
+            color: #fff;
+        }
+
+.field {
+    margin-top: 10px;
+}
+
+.label {
+    font-size: 10px;
+    font-weight: 1000;
+    color: #64748b;
+    letter-spacing: .06em;
+}
+
+.input {
+    margin-top: 6px;
+    width: 100%;
+    padding: 12px 12px;
+    border-radius: 12px;
+    border: 1px solid var(--line);
+    background: #fbfdff;
+    outline: none;
+    font-weight: 800;
+}
+
+    .input:focus {
+        border-color: rgba(249,115,22,.45);
+        box-shadow: 0 0 0 4px rgba(249,115,22,.12);
+    }
+
+.whats-btn {
+    margin-top: 12px;
+    width: 100%;
+    border: 0;
+    border-radius: 12px;
+    padding: 12px 12px;
+    background: rgba(34,197,94,.25);
+    color: #166534;
+    font-weight: 1000;
+    cursor: pointer;
+}
+
+    .whats-btn:hover {
+        background: rgba(34,197,94,.32);
+    }
+
+@media (max-width: 1100px) {
+    .plan {
+        grid-template-columns: 1fr 380px;
+    }
+
+    .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 900px) {
+    .plan {
+        grid-template-columns: 1fr;
+    }
+
+    .right {
+        border-top: 1px solid var(--line);
+    }
+
+    .days {
+        grid-template-columns: repeat(7, 1fr);
+    }
+
+    .order-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .card-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* Hover suave cuando NO está activo */
+.nav-pill:not(.active):hover {
+    background: rgba(15, 23, 42, .06);
+}
+
+
+/* ====== PANEL DE FILTROS (toggle) ======
+   Sin depender de Tailwind para abrir/cerrar.
+   Estado inicial: colapsado.
+*/
+.filter-panel-transition {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(-6px);
+    pointer-events: none;
+    transition: max-height .22s ease, opacity .18s ease, transform .22s ease;
+}
+
+    .filter-panel-transition.open {
+        max-height: 700px; /* suficiente para el contenido actual */
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+    }
+
+    .filter-panel-transition.collapsed {
+        max-height: 0;
+        opacity: 0;
+        transform: translateY(-6px);
+        pointer-events: none;
+    }
+
+
+/* ================================
+   BOTÓN "TODOS" – estado activo
+   ================================ */
+#btn-all {
+    background: #fff;
+    color: #475569;
+}
+
+    #btn-all.active {
+        background: rgba(249,115,22,.12);
+        color: #f97316;
+        border-color: rgba(249,115,22,.35);
+        box-shadow: 0 6px 16px rgba(249,115,22,.18);
+    }
+
+    #btn-all:not(.active):hover {
+        background: #f8fafc;
+    }
+
+
+/* ================================
+   CHECKOUT: Resumen de tu plan (scroll interno)
+   Objetivo: que #order-summary-list NO crezca infinito y tenga scroll vertical.
+   Alcance: SOLO afecta el resumen en /Pedido.
+   ================================ */
+#order-summary-list {
+    /* Altura consistente, adaptable a pantalla */
+    max-height: min(520px, 60vh);
+    overflow-y: auto;
+    padding-right: 8px; /* espacio para scrollbar sin cortar contenido */
+}
+
+    /* Scrollbar discreto (WebKit) */
+    #order-summary-list::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    #order-summary-list::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    #order-summary-list::-webkit-scrollbar-thumb {
+        background: rgba(15,23,42,.16);
+        border-radius: 999px;
+        border: 3px solid transparent;
+        background-clip: content-box;
+    }
+
+        #order-summary-list::-webkit-scrollbar-thumb:hover {
+            background: rgba(15,23,42,.24);
+            border: 3px solid transparent;
+            background-clip: content-box;
+        }
+
+@media (max-width: 900px) {
+    #order-summary-list {
+        max-height: min(420px, 55vh);
+    }
+}
+
+
+/* ============================
+   Excluir Ingredientes (Modal)
+   ============================ */
+.exclude-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    border-radius: 999px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0; /* slate-200 */
+    color: #475569; /* slate-600 */
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color .15s ease, border-color .15s ease, color .15s ease;
+}
+
+    .exclude-chip:hover {
+        background: #f8fafc; /* slate-50 */
+    }
+
+    .exclude-chip.selected {
+        background: #fff1f2; /* rose-50 */
+        border-color: #fecdd3; /* rose-200 */
+        color: #e11d48; /* rose-600 */
+    }
+
+.exclude-chip-readonly {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: #fff1f2; /* rose-50 */
+    border: 1px solid #fecdd3; /* rose-200 */
+    color: #e11d48; /* rose-600 */
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+/* ================================
+   CHECKOUT: Cotización vendible (scroll interno)
+   Objetivo: que #quote-items NO crezca infinito y tenga scroll vertical.
+   Alcance: SOLO afecta el desglose en /Pedido.
+   ================================ */
+#quote-items {
+    /*
+      Si el scroll interno no aparece, normalmente es porque otra regla (más específica o inline)
+      está sobreescribiendo overflow/max-height. Forzamos estas propiedades para garantizar
+      scroll interno real en el desglose.
+    */
+    max-height: min(420px, 55vh) !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    padding-right: 6px; /* espacio para scrollbar sin cortar contenido */
+    scrollbar-gutter: stable;
+}
+
+    /* Scrollbar discreto (WebKit: Chrome/Edge) */
+    #quote-items::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    #quote-items::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    #quote-items::-webkit-scrollbar-thumb {
+        background: rgba(15, 23, 42, 0.18);
+        border-radius: 999px;
+    }
+
+        #quote-items::-webkit-scrollbar-thumb:hover {
+            background: rgba(15, 23, 42, 0.28);
+        }

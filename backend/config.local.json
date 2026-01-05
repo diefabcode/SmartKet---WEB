@@ -1,0 +1,13 @@
+{
+    "excel_path": "C:/Users/Proyectos/Desktop/Recetas/Alimentos.xlsx",
+    "resources_dir": "C:/Users/Proyectos/Desktop/Recetas/Recursos",
+    "host": "127.0.0.1",
+    "port": 5050,
+    "orders_outbox_dir": "./backend/orders_outbox",
+    "whatsapp_test_number": "5562527059",
+    "mail_to": "diefabco@gmail.com",
+    "smtp_host": "smtp.gmail.com",
+    "smtp_port": 587,
+    "smtp_user": "diefabco@gmail.com",
+    "smtp_pass": "bndg retb zoxi xcra"
+}

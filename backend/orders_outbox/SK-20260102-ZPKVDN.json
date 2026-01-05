@@ -1,0 +1,137 @@
+{
+  "order_key": "SK-20260102-ZPKVDN",
+  "created_at_utc": "2026-01-02T04:54:29.589436+00:00",
+  "deliveryType": "Domicilio",
+  "plan": {
+    "0": [
+      {
+        "id": "732375",
+        "title": "Pollo a la plancha con verduras al vapor y arroz integral",
+        "category": "Comida",
+        "time": "—",
+        "cals": "250",
+        "price": 0,
+        "img": "https://via.placeholder.com/400x300?text=SmartKet",
+        "ingredients": [
+          "Pechuga de pollo (150 Gramos), Entero, Dorado",
+          "Arroz integral (60 Gramos), Natural, Cocido",
+          "Zanahoria (80 Gramos), Rebanadas, Cocido",
+          "Calabacita (100 Gramos), Rebanadas, Cocido",
+          "Aceite de oliva (1 Cucharada), Líquida, Calentado",
+          "Sal (2 Gramos), Natural, Integrado",
+          "Pimienta negra (1 Gramos), Molido, Integrado"
+        ],
+        "prep": "",
+        "assignedMeal": "Comida",
+        "portions": 1
+      },
+      {
+        "id": "710611",
+        "title": "Tacos de pescado a la plancha con vegetales",
+        "category": "Comida",
+        "time": "—",
+        "cals": "654",
+        "price": 0,
+        "img": "https://via.placeholder.com/400x300?text=SmartKet",
+        "ingredients": [
+          "Filete de pescado (150 Gramos), Entero, Dorado",
+          "Tortilla de maíz (2 Piezas), Entero, Calentado",
+          "Repollo (50 Gramos), Juliana, Crudo",
+          "Jitomate (60 Gramos), Cubos chicos, Crudo",
+          "Cebolla (20 Gramos), Picado fino, Crudo",
+          "Chile serrano (0.5 Piezas), Picado fino, Crudo",
+          "Cilantro (5 Gramos), Picado fino, Crudo",
+          "Limón (1 Piezas), Jugo, Integrado",
+          "Aceite de oliva (1 Cucharada), Líquida, Calentado",
+          "Sal (2 Gramos), Natural, Integrado",
+          "Pimienta negra (1 Gramos), Molido, Integrado"
+        ],
+        "prep": "",
+        "assignedMeal": "Comida",
+        "portions": 1
+      },
+      {
+        "id": "987542",
+        "title": "Sopa de lentejas con verduras",
+        "category": "Comida",
+        "time": "—",
+        "cals": "954",
+        "price": 0,
+        "img": "https://via.placeholder.com/400x300?text=SmartKet",
+        "ingredients": [
+          "Lentejas (70 Gramos), Natural, Cocido",
+          "Cebolla (50 Gramos), Picado fino, Sofrito",
+          "Zanahoria (80 Gramos), Cubos chicos, Sofrito",
+          "Apio (30 Gramos), Cubos chicos, Sofrito",
+          "Jitomate (80 Gramos), Cubos chicos, Sofrito",
+          "Ajo (1 Dientes), Picado fino, Sofrito",
+          "Espinaca (30 Gramos), Entero, Cocido",
+          "Laurel (1 Piezas), Entero, Cocido",
+          "Aceite de oliva (1 Cucharada), Líquida, Calentado",
+          "Comino molido (0.25 Cucharadita), Molido, Integrado",
+          "Sal (2 Gramos), Natural, Integrado",
+          "Pimienta negra (1 Gramos), Molido, Integrado"
+        ],
+        "prep": "",
+        "assignedMeal": "Comida",
+        "portions": 1
+      }
+    ],
+    "1": [],
+    "2": [],
+    "3": [],
+    "4": [],
+    "5": [],
+    "6": []
+  },
+  "dynamicDays": [
+    {
+      "dayName": "Vie",
+      "dateStr": "2 Ene",
+      "fullDate": "2026-01-03T04:53:10.538Z",
+      "isTomorrow": true
+    },
+    {
+      "dayName": "Sáb",
+      "dateStr": "3 Ene",
+      "fullDate": "2026-01-04T04:53:10.538Z",
+      "isTomorrow": false
+    },
+    {
+      "dayName": "Dom",
+      "dateStr": "4 Ene",
+      "fullDate": "2026-01-05T04:53:10.538Z",
+      "isTomorrow": false
+    },
+    {
+      "dayName": "Lun",
+      "dateStr": "5 Ene",
+      "fullDate": "2026-01-06T04:53:10.538Z",
+      "isTomorrow": false
+    },
+    {
+      "dayName": "Mar",
+      "dateStr": "6 Ene",
+      "fullDate": "2026-01-07T04:53:10.538Z",
+      "isTomorrow": false
+    },
+    {
+      "dayName": "Mi ",
+      "dateStr": "7 Ene",
+      "fullDate": "2026-01-08T04:53:10.538Z",
+      "isTomorrow": false
+    },
+    {
+      "dayName": "Jue",
+      "dateStr": "8 Ene",
+      "fullDate": "2026-01-09T04:53:10.538Z",
+      "isTomorrow": false
+    }
+  ],
+  "excludedIngredients": [],
+  "clientMeta": {
+    "uiVersion": "publicweb-v1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"
+  },
+  "schema_version": 1
+}

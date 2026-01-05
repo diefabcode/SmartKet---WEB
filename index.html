@@ -1,0 +1,443 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartKet | Planea tu menú semanal</title>
+
+    <!-- Fuentes e Iconos -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- ✅ Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <!-- ✅ CSS externo (mismo estilo, cero cambios) -->
+    <link rel="stylesheet" href="assets/css/app.css">
+
+    <!-- Configuración de Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            orange: '#f97316',
+                            orangeLight: '#ffedd5',
+                            dark: '#0f172a',
+                            gray: '#f8fafc',
+                            border: '#e2e8f0'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <!-- Toast Notification Element -->
+    <div id="toast-container">
+        <div class="toast-message">
+            <i class="fa-solid fa-circle-info text-blue-400"></i>
+            <span id="toast-text">Mensaje</span>
+        </div>
+    </div>
+
+    <!-- Contenedor Principal -->
+    <div class="app-window" id="app">
+
+        <!-- HEADER -->
+        <header class="flex-none px-6 py-4 border-b border-gray-100 flex justify-between items-center bg-white z-10">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-brand-orange flex items-center justify-center text-white font-bold text-lg">
+                    <i class="fa-solid fa-carrot"></i>
+                </div>
+                <h1 class="text-xl font-bold tracking-tight text-slate-900">SmartKet</h1>
+            </div>
+
+            <nav class="flex bg-slate-100 rounded-full p-1 gap-1">
+                <button onclick="router('inicio')" id="nav-inicio" class="nav-pill px-5 py-2 rounded-full text-sm font-semibold text-slate-600">
+                    Inicio
+                </button>
+                <button onclick="router('plan')" id="nav-plan" class="nav-pill px-5 py-2 rounded-full text-sm font-semibold text-slate-600">
+                    Mi Plan
+                </button>
+                <button onclick="router('pedido')" id="nav-pedido" class="nav-pill px-5 py-2 rounded-full text-sm font-semibold text-slate-600 flex items-center gap-2">
+                    Pedido
+                    <span id="nav-badge" class="hidden w-2 h-2 rounded-full bg-red-500"></span>
+                </button>
+            </nav>
+        </header>
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <main class="flex-1 overflow-hidden relative bg-white">
+
+            <!-- VISTA: INICIO -->
+            <section id="view-inicio" class="absolute inset-0 flex flex-col overflow-y-auto custom-scroll animate-pop">
+                <div class="flex flex-col items-center justify-center text-center px-6 py-16 bg-gradient-to-b from-white to-orange-50/30">
+                    <span class="inline-block py-1 px-3 rounded-full bg-orange-100 text-orange-600 text-xs font-bold mb-4 tracking-wide uppercase">Planifica desde mañana</span>
+                    <h2 class="text-4xl md:text-5xl font-black text-slate-900 mb-4 leading-tight max-w-3xl">
+                        ¿Tu refri es un cementerio de buenas intenciones?
+                    </h2>
+                    <p class="text-lg text-slate-500 max-w-xl mb-8 leading-relaxed">
+                        Esa lechuga que compraste "para la dieta" se está pudriendo ahora mismo. Planifica menús reales que <span class="text-orange-600 font-bold">sí vas a cocinar</span>.
+                    </p>
+                    <button onclick="router('plan')" class="btn-primary px-8 py-4 rounded-full text-lg font-bold shadow-lg shadow-orange-200 transform hover:scale-105 transition-transform flex items-center gap-3">
+                        Comenzar Plan
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+                <!-- Pain Points -->
+                <div class="px-6 py-12 max-w-5xl mx-auto w-full">
+                    <h3 class="text-2xl font-bold text-center mb-10 text-slate-800">¿Por qué usar SmartKet?</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm text-center hover:shadow-md transition-shadow">
+                            <div class="w-14 h-14 rounded-full bg-red-50 text-red-500 flex items-center justify-center mx-auto mb-4 text-2xl font-bold">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </div>
+                            <h4 class="font-bold text-lg mb-2 text-slate-900">Tu dinero a la basura</h4>
+                            <p class="text-sm text-slate-500 leading-relaxed">Compras "por si acaso" y terminas tirando el 30% de tu súper. Si no está en el plan, no lo compras.</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm text-center hover:shadow-md transition-shadow">
+                            <div class="w-14 h-14 rounded-full bg-orange-50 text-orange-600 flex items-center justify-center mx-auto mb-4 text-2xl font-bold">
+                                <i class="fa-solid fa-pizza-slice"></i>
+                            </div>
+                            <h4 class="font-bold text-lg mb-2 text-slate-900">La trampa de la pizza</h4>
+                            <p class="text-sm text-slate-500 leading-relaxed">Llegas cansado, abres el refri y no ves nada claro. ¿Resultado? Pides pizza otra vez.</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm text-center hover:shadow-md transition-shadow">
+                            <div class="w-14 h-14 rounded-full bg-green-50 text-green-600 flex items-center justify-center mx-auto mb-4 text-2xl font-bold">
+                                <i class="fa-solid fa-brain"></i>
+                            </div>
+                            <h4 class="font-bold text-lg mb-2 text-slate-900">Paz Mental</h4>
+                            <p class="text-sm text-slate-500 leading-relaxed">Ten un refri limpio, ordenado y que da gusto abrir.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-auto py-8 text-center border-t border-slate-100 text-xs text-slate-400">
+                    <p>© 2024 SmartKet. Compra realidad, no aspiraciones.</p>
+                </div>
+            </section>
+
+            <!-- VISTA: MI PLAN (CORE) -->
+            <section id="view-plan" class="hidden absolute inset-0 flex flex-col md:flex-row h-full">
+
+                <!-- COLUMNA IZQUIERDA: RECETARIO -->
+                <div class="w-full md:w-7/12 lg:w-2/3 flex flex-col border-r border-slate-100 h-full bg-white relative z-0">
+                    <!-- Header Fijo -->
+                    <div class="p-5 border-b border-slate-100 bg-white sticky top-0 z-20 shadow-sm">
+                        <div class="relative mb-3">
+                            <i class="fa-solid fa-search absolute left-3 top-3.5 text-slate-400 text-sm"></i>
+                            <input type="text" id="search-input" placeholder="Buscar receta..."
+                                   class="w-full pl-10 pr-4 py-3 bg-slate-50 border-none rounded-xl text-sm font-medium focus:ring-2 focus:ring-orange-100 outline-none"
+                                   onkeyup="filterRecipes()">
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex gap-2">
+                                <button onclick="resetFilters()" class="px-4 py-2 rounded-full border border-slate-200 text-xs font-bold text-slate-600 hover:bg-slate-50 transition-colors">Todos</button>
+                                <button onclick="toggleFilterPanel()" id="btn-filters" class="px-4 py-2 rounded-full bg-slate-900 text-white text-xs font-bold flex items-center gap-2 hover:bg-slate-800 transition-colors">
+                                    <i class="fa-solid fa-sliders"></i> Filtros
+                                </button>
+                            </div>
+                            <span id="results-count" class="text-xs font-bold text-slate-400">-- recetas</span>
+                        </div>
+                    </div>
+
+                    <!-- PANEL DE FILTROS -->
+                    <div id="filter-panel" class="filter-panel-transition bg-slate-50 border-b border-slate-200 relative z-10">
+                        <div class="p-5 space-y-6">
+                            <!-- Filtros -->
+                            <div>
+                                <h5 class="text-xs font-bold text-slate-500 uppercase mb-2">Horario</h5>
+                                <div class="flex flex-wrap gap-2">
+                                    <label class="cursor-pointer"><input type="checkbox" name="filter-cat" value="Desayuno" class="peer sr-only" onchange="applyFilters()"><span class="px-3 py-1.5 rounded-lg border border-slate-200 bg-white text-xs font-bold text-slate-600 peer-checked:bg-orange-100 peer-checked:text-orange-600 transition-all">Desayuno</span></label>
+                                    <label class="cursor-pointer"><input type="checkbox" name="filter-cat" value="Comida" class="peer sr-only" onchange="applyFilters()"><span class="px-3 py-1.5 rounded-lg border border-slate-200 bg-white text-xs font-bold text-slate-600 peer-checked:bg-orange-100 peer-checked:text-orange-600 transition-all">Comida</span></label>
+                                    <label class="cursor-pointer"><input type="checkbox" name="filter-cat" value="Cena" class="peer sr-only" onchange="applyFilters()"><span class="px-3 py-1.5 rounded-lg border border-slate-200 bg-white text-xs font-bold text-slate-600 peer-checked:bg-orange-100 peer-checked:text-orange-600 transition-all">Cena</span></label>
+                                    <label class="cursor-pointer"><input type="checkbox" name="filter-cat" value="Colación" class="peer sr-only" onchange="applyFilters()"><span class="px-3 py-1.5 rounded-lg border border-slate-200 bg-white text-xs font-bold text-slate-600 peer-checked:bg-orange-100 peer-checked:text-orange-600 transition-all">Colación</span></label>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-6">
+                                <div>
+                                    <div class="flex justify-between items-center mb-2">
+                                        <h5 class="text-xs font-bold text-slate-500 uppercase">Tiempo Máx.</h5>
+                                        <label class="flex items-center gap-1.5 cursor-pointer hover:opacity-80 transition-opacity">
+                                            <input type="checkbox" id="check-no-limit-time" class="accent-orange-500 w-3.5 h-3.5 rounded" onchange="toggleLimit('time'); applyFilters()">
+                                            <span class="text-[10px] font-bold text-slate-400 uppercase">Sin límite</span>
+                                        </label>
+                                    </div>
+                                    <div id="container-slider-time">
+                                        <div class="flex justify-end mb-1"><span class="text-xs font-bold text-brand-orange" id="lbl-time">60 min</span></div>
+                                        <input type="range" id="filter-time" min="5" max="60" step="5" value="60" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer" oninput="updateRangeLabels(); applyFilters()">
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between items-center mb-2">
+                                        <h5 class="text-xs font-bold text-slate-500 uppercase">Calorías Máx.</h5>
+                                        <label class="flex items-center gap-1.5 cursor-pointer hover:opacity-80 transition-opacity">
+                                            <input type="checkbox" id="check-no-limit-cal" class="accent-orange-500 w-3.5 h-3.5 rounded" onchange="toggleLimit('cal'); applyFilters()">
+                                            <span class="text-[10px] font-bold text-slate-400 uppercase">Sin límite</span>
+                                        </label>
+                                    </div>
+                                    <div id="container-slider-cal">
+                                        <div class="flex justify-end mb-1"><span class="text-xs font-bold text-brand-orange" id="lbl-cal">1000 kcal</span></div>
+                                        <input type="range" id="filter-cal" min="100" max="1000" step="50" value="1000" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer" oninput="updateRangeLabels(); applyFilters()">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Grid de Recetas -->
+                    <div id="recipes-grid" class="flex-1 overflow-y-auto custom-scroll p-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 content-start">
+                        <!-- JS injected -->
+                    </div>
+                </div>
+
+                <!-- COLUMNA DERECHA: CALENDARIO -->
+                <div class="w-full md:w-5/12 lg:w-1/3 flex flex-col bg-slate-50/50 h-[40vh] md:h-full border-t md:border-t-0 border-slate-200">
+                    <div class="p-5 pb-2">
+                        <h3 class="font-bold text-slate-800 mb-4 flex justify-between items-center">
+                            Tu Plan Semanal
+                            <button onclick="clearAll()" class="text-xs text-red-500 font-medium hover:underline">Limpiar todo</button>
+                        </h3>
+
+                        <!-- Días de la semana -->
+                        <div class="flex justify-between gap-1 mb-2">
+                            <div class="flex gap-2 overflow-x-auto w-full pb-4 pr-4 scrollbar-hide" id="calendar-days">
+                                <!-- Days injected here -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Detalle Día -->
+                    <div class="flex-1 overflow-hidden flex flex-col px-5 pb-5">
+                        <div class="bg-white rounded-2xl shadow-sm border border-slate-200 flex-1 flex flex-col overflow-hidden relative">
+                            <div class="p-4 border-b border-slate-100 flex justify-between items-center bg-white">
+                                <h4 class="font-bold text-lg capitalize text-slate-900" id="selected-day-title">--</h4>
+                                <span class="text-xs font-bold text-slate-400 bg-slate-100 px-2 py-1 rounded-md" id="meal-count-badge">0 recetas</span>
+                            </div>
+
+                            <div id="day-meals-list" class="flex-1 overflow-y-auto custom-scroll p-3 space-y-2">
+                                <!-- Empty state JS -->
+                            </div>
+
+                            <div class="p-3 border-t border-slate-100 bg-slate-50 flex justify-between">
+                                <button onclick="clearDay()" class="text-xs font-bold text-slate-500 hover:text-red-500 px-2 py-1">
+                                    <i class="fa-solid fa-trash mr-1"></i> Limpiar día
+                                </button>
+                                <button onclick="router('pedido')" class="text-xs font-bold bg-slate-900 text-white px-4 py-2 rounded-lg hover:bg-slate-800 transition-colors shadow-lg shadow-slate-200">
+                                    Ver Resumen <i class="fa-solid fa-chevron-right ml-1"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- VISTA: PEDIDO (CHECKOUT) -->
+            <section id="view-pedido" class="hidden absolute inset-0 flex flex-col overflow-y-auto custom-scroll bg-white animate-pop">
+                <div class="max-w-3xl mx-auto w-full p-6 md:p-10">
+                    <button onclick="router('plan')" class="mb-6 text-sm font-bold text-slate-500 hover:text-brand-orange flex items-center gap-2">
+                        <i class="fa-solid fa-arrow-left"></i> Volver a editar plan
+                    </button>
+
+                    <h2 class="text-3xl font-black text-slate-900 mb-8">Finalizar Pedido</h2>
+
+                    <!-- Alerta de Restricción Horaria (Dinámica) -->
+                    <div id="late-order-alert" class="hidden mb-6 bg-red-50 border border-red-200 rounded-xl p-4 flex gap-4 items-start">
+                        <div class="bg-red-100 p-2 rounded-full text-red-500 flex-none">
+                            <i class="fa-solid fa-clock"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-red-700 text-sm">¡Es un poco tarde!</h4>
+                            <p class="text-xs text-red-600 mt-1">
+                                Por la hora actual (<span id="current-time-display">20:30</span>), ya no alcanzamos a enviar el <strong>Desayuno de Mañana</strong> a domicilio.
+                            </p>
+                            <p class="text-xs text-red-800 font-bold mt-2">
+                                Opciones: Cámbialo a "Recolección" o se eliminará del pedido.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                        <!-- Lado Izquierdo: Resumen -->
+                        <div>
+                            <div class="flex items-center gap-2 mb-4">
+                                <div class="w-8 h-8 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center font-bold text-sm">1</div>
+                                <h3 class="font-bold text-lg text-slate-800">Resumen de tu plan</h3>
+                            </div>
+
+                            <div id="order-summary-list" class="bg-slate-50 rounded-xl border border-slate-200 p-5 space-y-4 mb-8">
+                                <!-- JS -->
+                            </div>
+
+                            <!-- Cotización (vendible) -->
+                            <div class="flex items-center gap-2 mb-4">
+                                <div class="w-8 h-8 rounded-full bg-amber-50 text-amber-600 flex items-center justify-center font-bold text-sm">1.5</div>
+                                <h3 class="font-bold text-lg text-slate-800">Total y desglose</h3>
+                            </div>
+
+                            <div class="bg-white rounded-xl border border-slate-200 p-5 mb-8">
+                                <div id="quote-status" class="text-sm text-slate-500">Calculando...</div>
+
+                                <div class="mt-3 flex items-baseline justify-between">
+                                    <div class="text-sm font-semibold text-slate-700">Total estimado</div>
+                                    <div id="quote-total" class="text-2xl font-black text-slate-900">$0</div>
+                                </div>
+
+                                <div id="quote-issues" class="hidden mt-4 rounded-lg border border-amber-200 bg-amber-50 p-3 text-xs text-amber-800"></div>
+
+                                <div id="quote-items" class="mt-4 space-y-3">
+                                    <!-- JS -->
+                                </div>
+                            </div>
+
+                            <!-- Preferencias -->
+                            <div class="flex items-center gap-2 mb-4">
+                                <div class="w-8 h-8 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-sm">2</div>
+                                <h3 class="font-bold text-lg text-slate-800">Preferencias</h3>
+                            </div>
+
+                            <div class="bg-white rounded-xl border border-slate-200 p-5 mb-8">
+                                <p class="text-sm font-bold text-slate-700 mb-3">Ingredientes a excluir</p>
+                                <p class="text-xs text-slate-500 mb-3">Selecciona los alimentos que NO quieres recibir.</p>
+                                <button onclick="openExcludeModal()" class="w-full py-3 rounded-xl border-2 border-dashed border-slate-300 text-slate-500 font-bold text-sm hover:border-orange-300 hover:text-orange-500 hover:bg-orange-50 transition-all mb-4 flex items-center justify-center gap-2">
+                                    <i class="fa-solid fa-ban"></i> Excluir alimentos...
+                                </button>
+                                <div id="excluded-ingredients-list" class="flex flex-wrap gap-2">
+                                    <span class="text-xs text-slate-400 italic">No has excluido ningún ingrediente.</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Lado Derecho: Datos y Envío -->
+                        <div>
+                            <div class="flex items-center gap-2 mb-4">
+                                <div class="w-8 h-8 rounded-full bg-green-50 text-green-600 flex items-center justify-center font-bold text-sm">3</div>
+                                <h3 class="font-bold text-lg text-slate-800">Datos de entrega</h3>
+                            </div>
+
+                            <div class="bg-white rounded-2xl shadow-lg border border-slate-100 p-6">
+                                <div class="space-y-4">
+                                    <!-- Tipo de entrega -->
+                                    <div>
+                                        <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Método de entrega</label>
+                                        <div class="grid grid-cols-2 gap-2">
+                                            <label class="cursor-pointer">
+                                                <input type="radio" name="deliveryType" value="Domicilio" class="peer sr-only" checked>
+                                                <div class="peer-checked:bg-slate-900 peer-checked:text-white peer-checked:border-slate-900 border border-slate-200 rounded-lg py-2 text-center text-sm font-bold text-slate-600 transition-all">
+                                                    Domicilio
+                                                </div>
+                                            </label>
+                                            <label class="cursor-pointer">
+                                                <input type="radio" name="deliveryType" value="Recolección" class="peer sr-only">
+                                                <div class="peer-checked:bg-slate-900 peer-checked:text-white peer-checked:border-slate-900 border border-slate-200 rounded-lg py-2 text-center text-sm font-bold text-slate-600 transition-all">
+                                                    Recolección
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <!-- Inputs normales -->
+                                    <div>
+                                        <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Tu Nombre</label>
+                                        <input type="text" id="input-name" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-sm outline-none focus:border-orange-300 transition-colors" placeholder="¿Cómo te llamas?">
+                                    </div>
+
+                                    <div class="flex items-start gap-2 pt-2">
+                                        <input type="checkbox" id="terms" class="mt-1 accent-orange-500">
+                                        <label for="terms" class="text-xs text-slate-500 leading-snug cursor-pointer select-none">
+                                            Acepto enviar mi pedido por WhatsApp para que un agente lo confirme.
+                                        </label>
+                                    </div>
+
+                                    <button id="btn-send-whatsapp" onclick="sendOrder()" class="w-full bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold py-4 rounded-xl shadow-lg shadow-green-100 transition-all transform hover:scale-[1.02] flex justify-center items-center gap-2 text-lg disabled:opacity-50 disabled:cursor-not-allowed">
+                                        <i class="fa-brands fa-whatsapp text-2xl"></i> Enviar Pedido
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- MODALES -->
+    <div id="recipe-modal" class="fixed inset-0 z-[100] hidden modal-center-container">
+        <div class="absolute inset-0 modal-overlay-bg" onclick="closeModal()"></div>
+        <div class="relative w-full max-w-md bg-white rounded-2xl shadow-2xl overflow-hidden animate-pop m-4 z-10 flex flex-col max-h-[90vh]">
+            <div class="relative h-48 bg-gray-200 flex-none">
+                <img id="modal-img" src="" class="w-full h-full object-cover">
+                <button onclick="closeModal()" class="absolute top-3 right-3 w-8 h-8 bg-white/80 rounded-full flex items-center justify-center text-slate-800 hover:bg-white transition-colors"><i class="fa-solid fa-xmark"></i></button>
+                <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
+                    <span id="modal-category" class="text-xs font-bold text-orange-300 uppercase tracking-wide">Cena</span>
+                    <h3 id="modal-title" class="text-2xl font-bold text-white leading-tight">Nombre</h3>
+                </div>
+            </div>
+            <div class="p-6 overflow-y-auto custom-scroll flex-1">
+                <!-- Info -->
+                <div class="flex justify-between items-center border-b border-slate-100 pb-4 mb-6">
+                    <div class="flex gap-4 text-sm text-slate-500">
+                        <div class="flex items-center gap-1"><i class="fa-regular fa-clock"></i> <span id="modal-time">20 min</span></div>
+                        <div class="flex items-center gap-1"><i class="fa-solid fa-fire"></i> <span id="modal-cals">450 kcal</span></div>
+                    </div>
+                    <div class="flex items-center gap-2 bg-slate-50 px-2 py-1 rounded-lg border border-slate-200">
+                        <button class="portion-btn portion-btn-lg" onclick="changeModalPortion(-1)">-</button>
+                        <span id="modal-portion-val" class="text-sm font-bold w-6 text-center text-slate-800">1</span>
+                        <button class="portion-btn portion-btn-lg" onclick="changeModalPortion(1)">+</button>
+                        <i class="fa-solid fa-user text-xs text-slate-400"></i>
+                    </div>
+                </div>
+                <h4 class="font-bold text-slate-800 mb-2">Ingredientes:</h4>
+                <ul id="modal-ingredients" class="list-disc pl-5 text-sm text-slate-600 space-y-1 mb-6"></ul>
+                <h4 class="font-bold text-slate-800 mb-2">Preparación:</h4>
+                <p id="modal-prep" class="text-sm text-slate-600 leading-relaxed mb-4"></p>
+            </div>
+            <div class="p-4 border-t border-slate-100 bg-slate-50 flex flex-col gap-2">
+                <p class="text-xs font-bold text-slate-500 uppercase text-center mb-1">Agregar como:</p>
+                <div class="grid grid-cols-4 gap-2">
+                    <button onclick="addCurrentRecipeFromModal('Desayuno')" class="btn-meal-img" title="Desayuno"><i class="ph-fill ph-coffee"></i><span>Des</span></button>
+                    <button onclick="addCurrentRecipeFromModal('Comida')" class="btn-meal-img" title="Comida"><i class="ph-fill ph-bowl-food"></i><span>Com</span></button>
+                    <button onclick="addCurrentRecipeFromModal('Cena')" class="btn-meal-img" title="Cena"><i class="ph-fill ph-moon-stars"></i><span>Cena</span></button>
+                    <button onclick="addCurrentRecipeFromModal('Colación')" class="btn-meal-img" title="Colación"><i class="ph-fill ph-apple"></i><span>Col</span></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="exclude-modal" class="fixed inset-0 z-[100] hidden modal-center-container">
+        <div class="absolute inset-0 modal-overlay-bg" onclick="closeExcludeModal()"></div>
+        <div class="relative w-full max-w-lg bg-white rounded-2xl shadow-2xl overflow-hidden animate-pop m-4 z-10 flex flex-col max-h-[80vh]">
+            <div class="p-5 border-b border-slate-100 flex justify-between items-center bg-white">
+                <h3 class="font-bold text-lg text-slate-900">Excluir Ingredientes</h3>
+                <button onclick="closeExcludeModal()" class="w-8 h-8 bg-slate-100 rounded-full flex items-center justify-center text-slate-500 hover:bg-slate-200 transition-colors"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="p-5 overflow-y-auto custom-scroll flex-1 bg-slate-50">
+                <div id="modal-ingredients-list" class="flex flex-wrap gap-2"></div>
+                <div id="empty-ingredients-msg" class="hidden text-center py-8 text-slate-400">
+                    <i class="fa-solid fa-basket-shopping text-3xl mb-2 opacity-30"></i>
+                    <p class="text-sm">Agrega recetas a tu plan para ver los ingredientes aquí.</p>
+                </div>
+            </div>
+            <div class="p-4 border-t border-slate-100 bg-white flex justify-end">
+                <button onclick="confirmExclusions()" class="bg-slate-900 text-white font-bold py-2.5 px-6 rounded-xl hover:bg-slate-800 transition-colors shadow-lg shadow-slate-200">Confirmar Selección</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ✅ ORDEN CORRECTO -->
+    <script src="assets/js/modules/state.js"></script>
+    <script src="assets/js/modules/nav.js"></script>
+    <script src="assets/js/modules/filters.js"></script>
+    <script src="assets/js/modules/recipes.cards.js"></script>
+    <script src="assets/js/app.js"></script>
+</body>
+</html>

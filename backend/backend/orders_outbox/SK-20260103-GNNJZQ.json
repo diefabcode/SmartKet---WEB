@@ -1,0 +1,236 @@
+{
+  "order_key": "SK-20260103-GNNJZQ",
+  "created_at_utc": "2026-01-03T01:27:59.015272+00:00",
+  "deliveryType": "Domicilio",
+  "plan": {
+    "0": [
+      {
+        "id": "123456",
+        "title": "Tacos de Huevo a la Mexicana",
+        "category": "Desayuno",
+        "time": "—",
+        "cals": "351",
+        "price": 0,
+        "img": "http://127.0.0.1:5050/api/images/123456",
+        "ingredients_raw": [
+          {
+            "name": "Huevo",
+            "unit": "Piezas",
+            "qty": 4,
+            "forma": "Entero",
+            "proceso": "Cocido"
+          },
+          {
+            "name": "Jitomate",
+            "unit": "Gramos",
+            "qty": 80,
+            "forma": "Cubos chicos",
+            "proceso": "Sofrito"
+          },
+          {
+            "name": "Cebolla",
+            "unit": "Gramos",
+            "qty": 40,
+            "forma": "Cubos chicos",
+            "proceso": "Sofrito"
+          },
+          {
+            "name": "Chile serrano",
+            "unit": "Gramos",
+            "qty": 10,
+            "forma": "Cubos chicos",
+            "proceso": "Sofrito"
+          },
+          {
+            "name": "Aceite de oliva",
+            "unit": "Mililitros",
+            "qty": 5,
+            "forma": "Líquida",
+            "proceso": "Sofrito"
+          },
+          {
+            "name": "Frijoles de la olla",
+            "unit": "Gramos",
+            "qty": 200,
+            "forma": "Cocido",
+            "proceso": "Calentado"
+          },
+          {
+            "name": "Tortilla de maíz",
+            "unit": "Piezas",
+            "qty": 4,
+            "forma": "Entero",
+            "proceso": "Calentado"
+          },
+          {
+            "name": "Aguacate",
+            "unit": "Gramos",
+            "qty": 60,
+            "forma": "Rebanadas",
+            "proceso": "Crudo"
+          },
+          {
+            "name": "Sal",
+            "unit": "Gramos",
+            "qty": 2,
+            "forma": "Entero",
+            "proceso": "Integrado"
+          }
+        ],
+        "ingredients": [
+          "Huevo (4 Piezas), Entero, Cocido",
+          "Jitomate (80 Gramos), Cubos chicos, Sofrito",
+          "Cebolla (40 Gramos), Cubos chicos, Sofrito",
+          "Chile serrano (10 Gramos), Cubos chicos, Sofrito",
+          "Aceite de oliva (5 Mililitros), Líquida, Sofrito",
+          "Frijoles de la olla (200 Gramos), Cocido, Calentado",
+          "Tortilla de maíz (4 Piezas), Entero, Calentado",
+          "Aguacate (60 Gramos), Rebanadas, Crudo",
+          "Sal (2 Gramos), Entero, Integrado"
+        ],
+        "prep": "",
+        "assignedMeal": "Comida",
+        "portions": 4
+      }
+    ],
+    "1": [
+      {
+        "id": "994373",
+        "title": "Tacos de Pollo Deshebrado a la Mexicana",
+        "category": "Desayuno",
+        "time": "—",
+        "cals": "415",
+        "price": 0,
+        "img": "https://via.placeholder.com/400x300?text=SmartKet",
+        "ingredients_raw": [
+          {
+            "name": "Pechuga de pollo",
+            "unit": "Piezas",
+            "qty": 1,
+            "forma": "Deshebrado",
+            "proceso": "Cocido"
+          },
+          {
+            "name": "Jitomate",
+            "unit": "Gramos",
+            "qty": 80,
+            "forma": "Cubos chicos",
+            "proceso": "Sofrito"
+          },
+          {
+            "name": "Cebolla",
+            "unit": "Gramos",
+            "qty": 40,
+            "forma": "Cubos chicos",
+            "proceso": "Sofrito"
+          },
+          {
+            "name": "Aceite de oliva",
+            "unit": "Mililitros",
+            "qty": 5,
+            "forma": "Líquida",
+            "proceso": "Sofrito"
+          },
+          {
+            "name": "Frijoles de la olla",
+            "unit": "Gramos",
+            "qty": 150,
+            "forma": "Cocido",
+            "proceso": "Calentado"
+          },
+          {
+            "name": "Tortilla de maíz",
+            "unit": "Piezas",
+            "qty": 3,
+            "forma": "Entero",
+            "proceso": "Calentado"
+          },
+          {
+            "name": "Aguacate",
+            "unit": "Gramos",
+            "qty": 50,
+            "forma": "Rebanadas",
+            "proceso": "Crudo"
+          },
+          {
+            "name": "Sal",
+            "unit": "Gramos",
+            "qty": 2,
+            "forma": "Entero",
+            "proceso": "Integrado"
+          }
+        ],
+        "ingredients": [
+          "Pechuga de pollo (1 Piezas), Deshebrado, Cocido",
+          "Jitomate (80 Gramos), Cubos chicos, Sofrito",
+          "Cebolla (40 Gramos), Cubos chicos, Sofrito",
+          "Aceite de oliva (5 Mililitros), Líquida, Sofrito",
+          "Frijoles de la olla (150 Gramos), Cocido, Calentado",
+          "Tortilla de maíz (3 Piezas), Entero, Calentado",
+          "Aguacate (50 Gramos), Rebanadas, Crudo",
+          "Sal (2 Gramos), Entero, Integrado"
+        ],
+        "prep": "",
+        "assignedMeal": "Desayuno",
+        "portions": 1
+      }
+    ],
+    "2": [],
+    "3": [],
+    "4": [],
+    "5": [],
+    "6": []
+  },
+  "dynamicDays": [
+    {
+      "dayName": "Sáb",
+      "dateStr": "3 Ene",
+      "fullDate": "2026-01-04T01:07:03.230Z",
+      "isTomorrow": true
+    },
+    {
+      "dayName": "Dom",
+      "dateStr": "4 Ene",
+      "fullDate": "2026-01-05T01:07:03.230Z",
+      "isTomorrow": false
+    },
+    {
+      "dayName": "Lun",
+      "dateStr": "5 Ene",
+      "fullDate": "2026-01-06T01:07:03.230Z",
+      "isTomorrow": false
+    },
+    {
+      "dayName": "Mar",
+      "dateStr": "6 Ene",
+      "fullDate": "2026-01-07T01:07:03.230Z",
+      "isTomorrow": false
+    },
+    {
+      "dayName": "Mi ",
+      "dateStr": "7 Ene",
+      "fullDate": "2026-01-08T01:07:03.230Z",
+      "isTomorrow": false
+    },
+    {
+      "dayName": "Jue",
+      "dateStr": "8 Ene",
+      "fullDate": "2026-01-09T01:07:03.230Z",
+      "isTomorrow": false
+    },
+    {
+      "dayName": "Vie",
+      "dateStr": "9 Ene",
+      "fullDate": "2026-01-10T01:07:03.230Z",
+      "isTomorrow": false
+    }
+  ],
+  "excludedIngredients": [
+    "Aceite de oliva"
+  ],
+  "clientMeta": {
+    "uiVersion": "publicweb-v1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"
+  },
+  "schema_version": 1
+}

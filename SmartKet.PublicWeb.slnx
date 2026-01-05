@@ -1,0 +1,30 @@
+<Solution>
+  <Folder Name="/assets/" />
+  <Folder Name="/assets/css/">
+    <File Path="assets/css/app.css" />
+  </Folder>
+  <Folder Name="/assets/img/" />
+  <Folder Name="/assets/js/">
+    <File Path="assets/js/app.js" />
+  </Folder>
+  <Folder Name="/assets/modules/">
+    <File Path="assets/js/modules/filters.js" />
+    <File Path="assets/js/modules/nav.js" />
+    <File Path="assets/js/modules/recipes.cards.js" />
+    <File Path="assets/js/modules/state.js" />
+  </Folder>
+  <Folder Name="/backend/">
+    <File Path="backend/config.example.json" />
+    <File Path="backend/config.local.json" />
+    <File Path="backend/requirements.txt" />
+    <File Path="backend/server.py" />
+  </Folder>
+  <Folder Name="/backend/services/">
+    <File Path="backend/services/excel_reader.py" />
+    <File Path="backend/services/image_resolver.py" />
+    <File Path="backend/sync_to_postgres.py" />
+  </Folder>
+  <Folder Name="/Elementos de la solución/">
+    <File Path="index.html" />
+  </Folder>
+</Solution>
