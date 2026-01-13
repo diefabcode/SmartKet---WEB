@@ -146,6 +146,10 @@ def _load_ingredients_catalog(ingredientes_xlsx_path):
     col_qty = header["CANTIDAD"]
     col_granel = header["GRANEL"]
 
+    # Opcionales (no rompen si no existen)
+    col_mult = header.get("MULTIPLOS")
+    col_lugar = header.get("LUGAR")
+
     catalog = {}
 
     max_row = ws.max_row or 1
@@ -159,6 +163,12 @@ def _load_ingredients_catalog(ingredientes_xlsx_path):
         gr_s = (str(gr).strip().upper() if gr is not None else "")
         is_bulk = (gr_s == "SI")
 
+        marcas = _split_pipe
+        mult_raw = ws.cell(r, col_mult).value if col_mult else None
+        multiple = _to_float_safe(mult_raw)
+
+        lugares = _split_pipe(ws.cell(r, col_lugar).value) if col_lugar else []
+
         marcas = _split_pipe(ws.cell(r, col_marca).value)
         buys = _split_pipe(ws.cell(r, col_buy).value)
         sales = _split_pipe(ws.cell(r, col_sale).value)
@@ -169,6 +179,9 @@ def _load_ingredients_catalog(ingredientes_xlsx_path):
         n = min(len(marcas), len(buys), len(sales), len(pres), len(units), len(qtys)) if (marcas and buys and sales and pres and units and qtys) else 0
 
         offers = []
+        if lugares and n > 0 and len(lugares) not in (1, n):
+            issues.append(f"[{name}] 'LUGAR' desalineado vs ofertas (pipe por índice). Se usará el primer valor.")
+
         if n == 0 and (marcas or sales or qtys or units):
             issues.append(f"[{name}] Ofertas incompletas o desalineadas (pipe por índice). Revisa columnas B-G.")
         else:
@@ -180,15 +193,65 @@ def _load_ingredients_catalog(ingredientes_xlsx_path):
                     "presentation": pres[i],
                     "unit": (units[i] or "").strip(),
                     "qty": _to_float_safe(qtys[i]),
+                    # Lugar (opcional): intenta alinear por índice; si no, usa el primero.
+                    "place": (lugares[i] if (lugares and len(lugares) == n and i < len(lugares)) else (lugares[0] if lugares else None)),
                 }
                 if offer["sale"] is None or offer["qty"] is None or not offer["unit"]:
                     issues.append(f"[{name}] Oferta inválida en índice {i+1}. Revisa precio/unidad/cantidad.")
                     continue
                 offers.append(offer)
 
-        catalog[name] = {"granel": is_bulk, "offers": offers}
+        catalog[name] = {"granel": is_bulk, "offers": offers, "multiple": multiple}
 
     return catalog, issues
+def _load_ingredients_meta(ingredientes_xlsx_path):
+    """
+    Meta ligera para UI.
+
+    Devuelve:
+      meta[name] = { "category": "<CATEGORÍA>" }
+    """
+    issues = []
+    if not ingredientes_xlsx_path or not os.path.isfile(ingredientes_xlsx_path):
+        return {}, [f"No existe Ingredientes.xlsx en: {ingredientes_xlsx_path}"]
+
+    wb = openpyxl.load_workbook(ingredientes_xlsx_path, data_only=True)
+    ws = wb.active
+
+    # Leer encabezados (fila 1)
+    header = {}
+    max_col = ws.max_column or 1
+    for c in range(1, max_col + 1):
+        v = ws.cell(1, c).value
+        if v is None:
+            continue
+        key = str(v).strip().upper()
+        if key:
+            header[key] = c
+
+    if "INGREDIENTE" not in header:
+        return {}, ["Falta columna requerida en Ingredientes.xlsx: INGREDIENTE"]
+
+    col_ing = header["INGREDIENTE"]
+    col_cat = header.get("CATEGORÍA") or header.get("CATEGORIA")  # tolerante a acento
+
+    if not col_cat:
+        # No romper: simplemente devolvemos meta vacío.
+        return {}, ["Falta columna CATEGORÍA en Ingredientes.xlsx (no se puede categorizar)."]
+
+    meta = {}
+    max_row = ws.max_row or 1
+    for r in range(2, max_row + 1):
+        ing = ws.cell(r, col_ing).value
+        if ing is None or str(ing).strip() == "":
+            continue
+        name = str(ing).strip()
+
+        cat = ws.cell(r, col_cat).value
+        cat_s = str(cat).strip() if cat is not None else ""
+        meta[name] = {"category": cat_s}
+
+    return meta, issues
 
 
 def _aggregate_plan_ingredients(payload):
@@ -322,7 +385,13 @@ def _quote_sellable_items(agg, catalog):
             elif u_norm == "kilogramo":
                 req_canon_qty = req * 1000.0
 
-            line_total = req_canon_qty * chosen["sale_per_canon_unit"]
+            multiple = entry.get("multiple", None)
+            sold_canon_qty = req_canon_qty
+            if isinstance(multiple, (int, float)) and float(multiple) > 0:
+                mval = float(multiple)
+                sold_canon_qty = float(math.ceil(req_canon_qty / mval) * mval)
+
+            line_total = sold_canon_qty * chosen["sale_per_canon_unit"]
             total += line_total
 
             items.append({
@@ -331,9 +400,15 @@ def _quote_sellable_items(agg, catalog):
                 "offer_brand": off.get("brand"),
                 "offer_presentation": off.get("presentation"),
                 "unit": chosen["canon_unit"],
+                # Cantidad requerida real (lo que piden las recetas)
                 "required_qty": round(req_canon_qty, 6),
+                # Cantidad que se venderá (redondeada a múltiplos si aplica)
+                "sold_qty": round(sold_canon_qty, 6),
+                "multiple": (round(float(multiple), 6) if isinstance(multiple, (int, float)) and float(multiple) > 0 else None),
+                "rounding_extra_qty": round((sold_canon_qty - req_canon_qty), 6),
                 "unit_price": round(chosen["sale_per_canon_unit"], 6),
                 "line_total": round(line_total, 2),
+                "offer_place": off.get("place"),
             })
         else:
             chosen = min(evals, key=lambda e: e["canon_pkg_qty"])
@@ -367,6 +442,7 @@ def _quote_sellable_items(agg, catalog):
                 "required_qty": round(req_canon_qty, 6),
                 "waste_qty": round(waste, 6),
                 "line_total": round(line_total, 2),
+                "offer_place": off.get("place"),
             })
 
     items.sort(key=lambda x: (x.get("sell_mode", ""), x.get("ingredient", "").lower()))
@@ -586,6 +662,31 @@ def create_app(config: dict) -> Flask:
         return send_file(path)
 
     
+
+    @app.get("/api/ingredients/meta")
+    def get_ingredients_meta():
+        """Devuelve meta de Ingredientes.xlsx (por ahora: categoría) para UI."""
+        cfg = app.config["SMARTKET_CONFIG"]
+        excel_path, _res_dir, info, issues_paths = _get_effective_paths(cfg)
+        if issues_paths:
+            return jsonify({
+                "ok": False,
+                "error": "config_invalid",
+                "details": issues_paths,
+                "excel_source": info.get("excel_source"),
+                "resources_source": info.get("resources_source"),
+            }), 500
+
+        ingredientes_xlsx = _derive_ingredientes_xlsx_path(excel_path)
+        meta, issues_meta = _load_ingredients_meta(ingredientes_xlsx)
+
+        return jsonify({
+            "ok": True,
+            "ingredients_xlsx": ingredientes_xlsx,
+            "meta": meta,
+            "issues": issues_meta,
+        })
+
 
     @app.post("/api/orders/quote")
     def quote_order():

@@ -29,6 +29,142 @@ function _ensureCardsModule() {
    ============================ */
 const API_BASE = "http://127.0.0.1:5050";
 
+
+/* ============================
+   ✅ Ingredientes Meta (Categorías para excluir)
+   - Se consume desde /api/ingredients/meta (columnas de Ingredientes.xlsx)
+   - Se usa SOLO para UI: agrupar chips en el modal de exclusión
+   ============================ */
+let __ingredientsMeta = null;             // meta cruda del backend: { "Aguacate": {category:"verduras"} ... }
+let __ingredientsCatByKey = {};           // lookup normalizado: { "aguacate": "verduras" ... }
+let __ingredientsMetaLoaded = false;
+
+function _normKey(s) {
+    // Normaliza: minúsculas + sin acentos + trim + colapsa espacios
+    return String(s || "")
+        .trim()
+        .toLowerCase()
+        .normalize("NFD").replace(/[̀-ͯ]/g, "") // quita acentos
+        .replace(/\s+/g, " ");
+}
+
+async function loadIngredientsMetaFromApi() {
+    try {
+        const res = await fetch(`${API_BASE}/api/ingredients/meta`);
+        const data = await res.json();
+
+        if (!data || data.ok !== true || typeof data.meta !== "object") {
+            console.warn("API meta ingredientes respondió pero no con formato esperado. Se continúa sin meta.");
+            __ingredientsMeta = {};
+            __ingredientsCatByKey = {};
+            __ingredientsMetaLoaded = true;
+            return;
+        }
+
+        __ingredientsMeta = data.meta || {};
+        __ingredientsCatByKey = {};
+        Object.keys(__ingredientsMeta).forEach(name => {
+            const cat = (__ingredientsMeta[name] && __ingredientsMeta[name].category) ? String(__ingredientsMeta[name].category).trim() : "";
+            __ingredientsCatByKey[_normKey(name)] = cat;
+        });
+
+        __ingredientsMetaLoaded = true;
+    } catch (err) {
+        // No romper: si backend no está disponible, el modal funciona sin categorías
+        __ingredientsMeta = {};
+        __ingredientsCatByKey = {};
+        __ingredientsMetaLoaded = true;
+    }
+}
+
+
+// --- CATEGORÍAS DINÁMICAS (derivadas de hojas del Excel) ---
+function _deriveCategoriesFromRecipes(list) {
+    const seen = new Set();
+    const inOrder = [];
+    (list || []).forEach(r => {
+        const c = String(r?.category ?? "").trim();
+        if (!c) return;
+        if (!seen.has(c)) { seen.add(c); inOrder.push(c); }
+    });
+
+    // Orden preferido para las 4 categorías base (si existen)
+    const preferred = ['Desayuno', 'Comida', 'Cena', 'Colación'];
+    const ordered = [];
+    preferred.forEach(c => { if (seen.has(c)) ordered.push(c); });
+    inOrder.forEach(c => { if (!ordered.includes(c)) ordered.push(c); });
+
+    return ordered;
+}
+
+function _setCategoriesFromRecipes(list) {
+    categories = _deriveCategoriesFromRecipes(list);
+    // Los módulos (recipes.cards.js) leen window.categories
+    window.categories = categories;
+}
+
+function _iconForCategory(cat) {
+    const c = String(cat || "").toLowerCase();
+    if (c.includes("desay")) return "ph-coffee";
+    if (c.includes("comid")) return "ph-bowl-food";
+    if (c.includes("cena")) return "ph-moon-stars";
+    if (c.includes("colac")) return "ph-apple";
+    return "ph-bowl-food";
+}
+
+function _shortLabel(cat) {
+    const s = String(cat || "").trim();
+    if (!s) return "—";
+    // Etiquetas cortas tipo "Des", "Com", "Cen", "Col"
+    const lower = s.toLowerCase();
+    if (lower.includes("desay")) return "Des";
+    if (lower.includes("comid")) return "Com";
+    if (lower.includes("cena")) return "Cen";
+    if (lower.includes("colac")) return "Col";
+    return s.length <= 3 ? s : s.slice(0, 3);
+}
+
+function _defaultMeal() {
+    if (Array.isArray(categories) && categories.includes('Comida')) return 'Comida';
+    return (Array.isArray(categories) && categories[0]) ? categories[0] : 'Comida';
+}
+
+function renderDynamicCategoryFilters() {
+    const container = document.getElementById('filter-cats');
+    if (!container) return;
+
+    const cats = Array.isArray(categories) ? categories : [];
+    container.innerHTML = cats.map(cat => {
+        const safeVal = String(cat).replace(/"/g, '&quot;');
+        return `
+            <label class="cursor-pointer">
+                <input type="checkbox" name="filter-cat" value="${safeVal}" class="peer sr-only" onchange="applyFilters()">
+                <span class="px-3 py-1.5 rounded-lg border border-slate-200 bg-white text-xs font-bold text-slate-600 peer-checked:bg-orange-100 peer-checked:text-orange-600 transition-all">${cat}</span>
+            </label>
+        `;
+    }).join('');
+}
+
+function renderDynamicModalAddButtons() {
+    const container = document.getElementById('modal-add-buttons');
+    if (!container) return;
+
+    const cats = Array.isArray(categories) ? categories : [];
+    container.innerHTML = cats.map(cat => {
+        const icon = _iconForCategory(cat);
+        const label = _shortLabel(cat);
+        const safeJs = String(cat).replace(/'/g, "\'");
+        return `<button onclick="addCurrentRecipeFromModal('${safeJs}')" class="btn-meal-img"><i class="ph-fill ${icon}"></i><span>${label}</span></button>`;
+    }).join('');
+}
+
+function initDynamicCategoriesUI() {
+    _setCategoriesFromRecipes(recipes);
+    renderDynamicCategoryFilters();
+    renderDynamicModalAddButtons();
+}
+
+
 function _normalizeRecipeFromApi(r) {
     // Normaliza para que tu UI no truene (time/price/cals/id/types)
     const idStr = String(r?.id ?? "").trim();
@@ -101,13 +237,36 @@ document.addEventListener('DOMContentLoaded', async () => {
     // ✅ Nuevo: cargar desde backend (o fallback al mock)
     await loadRecipesFromApi();
 
+    // ✅ Meta de ingredientes (categorías desde Ingredientes.xlsx)
+    await loadIngredientsMetaFromApi();
+
+    initDynamicCategoriesUI();
+
     SmartKetRecipes.renderRecipes(recipes);
     renderCalendarDays();
     updateDayView();
     updateRangeLabels();
+
+    // ✅ Home: imágenes explicativas (misma estrategia que recetas: /api/images/<id>)
+    initHomeExplanationImages();
     // ✅ Sincroniza vista + nav al cargar
     router('inicio');
 });
+
+// --- HOME: IMÁGENES EXPLICATIVAS ---
+function initHomeExplanationImages() {
+    const map = [
+        { elId: 'home-exp-img-1', key: 'Imagen01Explicacion' },
+        { elId: 'home-exp-img-2', key: 'Imagen02Explicacion' },
+        { elId: 'home-exp-img-3', key: 'Imagen03Explicacion' },
+    ];
+
+    map.forEach(({ elId, key }) => {
+        const el = document.getElementById(elId);
+        if (!el) return;
+        el.src = `${API_BASE}/api/images/${encodeURIComponent(key)}`;
+    });
+}
 
 // --- LÓGICA DE FECHAS ---
 function generateCalendarDates() {
@@ -242,14 +401,15 @@ function updateDayView() {
             <div class="h-full flex flex-col items-center justify-center text-center p-4 text-slate-400">
                 <i class="fa-regular fa-calendar-plus text-3xl mb-2 opacity-50"></i>
                 <p class="text-sm font-medium">Planifica para el ${dayObj.dayName}.</p>
-                <p class="text-xs mt-1">Elige Desayuno, Comida o Cena.</p>
+                <p class="text-xs mt-1">Elige una categoría (según tus hojas del Excel).</p>
             </div>`;
         return;
     }
 
     list.innerHTML = '';
-    const order = { 'Desayuno': 1, 'Comida': 2, 'Cena': 3, 'Colación': 4 };
-    currentRecipes.sort((a, b) => (order[a.assignedMeal] || 5) - (order[b.assignedMeal] || 5));
+    const order = {};
+    (Array.isArray(categories) ? categories : []).forEach((c, i) => order[c] = i + 1);
+    currentRecipes.sort((a, b) => (order[a.assignedMeal] || 999) - (order[b.assignedMeal] || 999));
 
     currentRecipes.forEach((item, idx) => {
         const row = document.createElement('div');
@@ -318,7 +478,7 @@ function renderOrderSummary() {
     }
 
     let html = '';
-    const mealOrder = ['Desayuno', 'Comida', 'Cena', 'Colación'];
+    const mealOrder = (Array.isArray(categories) && categories.length) ? categories : ['Desayuno', 'Comida', 'Cena', 'Colación'];
 
     dynamicDays.forEach((dayObj, idx) => {
         if (plan[idx] && plan[idx].length > 0) {
@@ -516,7 +676,7 @@ function setActiveMealForCard(cardEl, recipeId, mealType) {
 }
 
 function addRecipeSelected(recipeId) {
-    const mealType = selectedMealByRecipeId[recipeId] || "Comida";
+    const mealType = selectedMealByRecipeId[recipeId] || _defaultMeal();
     addRecipe(recipeId, mealType);
 }
 
@@ -703,7 +863,6 @@ function openModal(id) {
     document.getElementById('modal-title').innerText = recipe.title;
     document.getElementById('modal-time').innerText = recipe.time;
     document.getElementById('modal-cals').innerText = recipe.cals;
-    document.getElementById('modal-prep').innerText = recipe.prep;
     document.getElementById('modal-ingredients').innerHTML = recipe.ingredients.map(ing => `<li>${ing}</li>`).join('');
     document.getElementById('recipe-modal').classList.remove('hidden');
 }
@@ -732,6 +891,7 @@ function _ingredientTitle(raw) {
     return noMeta;
 }
 
+
 function openExcludeModal() {
     const allIngredients = new Set();
 
@@ -746,27 +906,81 @@ function openExcludeModal() {
     const container = document.getElementById('modal-ingredients-list');
     const emptyMsg = document.getElementById('empty-ingredients-msg');
     container.innerHTML = '';
+
     if (allIngredients.size === 0) {
-        emptyMsg.classList.remove('hidden'); container.classList.add('hidden');
-    } else {
-        emptyMsg.classList.add('hidden'); container.classList.remove('hidden');
-        Array.from(allIngredients).sort().forEach(title => {
+        emptyMsg.classList.remove('hidden');
+        container.classList.add('hidden');
+        document.getElementById('exclude-modal').classList.remove('hidden');
+        return;
+    }
+
+    emptyMsg.classList.add('hidden');
+    container.classList.remove('hidden');
+
+    // ✅ Agrupar por categoría (columna H: CATEGORÍA en Ingredientes.xlsx)
+    // Nota: si la meta no está disponible (backend caído), se renderiza como "Otros".
+    const groups = {}; // { categoria: [titles...] }
+    Array.from(allIngredients).sort((a, b) => a.localeCompare(b, 'es', { sensitivity: 'base' }))
+        .forEach(title => {
+            const key = _normKey(title);
+            let cat = (__ingredientsCatByKey && __ingredientsCatByKey[key]) ? __ingredientsCatByKey[key] : '';
+            cat = String(cat || '').trim();
+            if (!cat) cat = 'Otros';
+            if (!groups[cat]) groups[cat] = [];
+            groups[cat].push(title);
+        });
+
+    // ✅ Orden: "Básicos" primero, luego el resto alfabético
+    const catKeys = Object.keys(groups);
+    catKeys.sort((a, b) => {
+        const na = _normKey(a);
+        const nb = _normKey(b);
+        if (na === 'basicos' && nb !== 'basicos') return -1;
+        if (nb === 'basicos' && na !== 'basicos') return 1;
+        return a.localeCompare(b, 'es', { sensitivity: 'base' });
+    });
+
+    catKeys.forEach(cat => {
+        const section = document.createElement('div');
+        section.className = 'w-full mb-3';
+
+        const header = document.createElement('div');
+        header.className = 'text-[11px] font-extrabold text-slate-500 uppercase tracking-wider mb-2';
+        header.innerText = cat;
+
+        const chipsWrap = document.createElement('div');
+        chipsWrap.className = 'flex flex-wrap gap-2';
+
+        groups[cat].forEach(title => {
             const chip = document.createElement('span');
             const isExcluded = excludedIngredients.has(title);
             chip.className = `exclude-chip ${isExcluded ? 'selected' : ''}`;
             chip.innerText = title;
             chip.onclick = () => toggleIngredientExclusion(title, chip);
-            container.appendChild(chip);
+            chipsWrap.appendChild(chip);
         });
-    }
+
+        section.appendChild(header);
+        section.appendChild(chipsWrap);
+        container.appendChild(section);
+    });
+
     document.getElementById('exclude-modal').classList.remove('hidden');
 }
+
 function toggleIngredientExclusion(ingredient, element) {
     if (excludedIngredients.has(ingredient)) { excludedIngredients.delete(ingredient); element.classList.remove('selected'); }
     else { excludedIngredients.add(ingredient); element.classList.add('selected'); }
 }
 function closeExcludeModal() { document.getElementById('exclude-modal').classList.add('hidden'); }
-function confirmExclusions() { closeExcludeModal(); renderExcludedSummary(); }
+function confirmExclusions() {
+    closeExcludeModal();
+    renderExcludedSummary();
+
+    // ✅ Al confirmar exclusiones, actualiza inmediatamente la cotización (Total y desglose)
+    // Nota: renderOrderQuote() ya valida si los contenedores existen (solo corre en la vista Pedido).
+    renderOrderQuote();
+}
 function renderExcludedSummary() {
     const container = document.getElementById('excluded-ingredients-list');
     container.innerHTML = '';

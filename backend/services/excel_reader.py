@@ -6,7 +6,36 @@ from typing import Any, Dict, List, Optional
 import openpyxl
 
 
-MEAL_SHEETS = ["Desayunos", "Comidas", "Cenas", "Colaciones"]
+
+
+def _get_visible_sheet_names(wb: "openpyxl.Workbook") -> List[str]:
+    """Devuelve nombres de hojas visibles en el orden del workbook."""
+    names: List[str] = []
+    for name in wb.sheetnames:
+        ws = wb[name]
+        # openpyxl usa 'visible', 'hidden' o 'veryHidden'
+        if getattr(ws, "sheet_state", "visible") != "visible":
+            continue
+        names.append(name)
+    return names
+
+
+
+def _sheet_to_category(sheet_name: str) -> str:
+    """Convierte nombres de hoja a una categoría estable para la UI.
+
+    - Mantiene compatibilidad con las 4 categorías base (singular)
+    - Para hojas nuevas, devuelve el nombre tal cual.
+    """
+    name = (sheet_name or "").strip()
+    base_map = {
+        "Desayunos": "Desayuno",
+        "Comidas": "Comida",
+        "Cenas": "Cena",
+        "Colaciones": "Colación",
+    }
+    return base_map.get(name, name)
+
 
 
 def _to_str_id(value: Any) -> str:
@@ -31,7 +60,7 @@ def read_recipes_from_excel(excel_path: str) -> List[Dict[str, Any]]:
 
     recipes: List[Dict[str, Any]] = []
 
-    for sheet_name in MEAL_SHEETS:
+    for sheet_name in _get_visible_sheet_names(wb):
         if sheet_name not in wb.sheetnames:
             continue
 
@@ -46,10 +75,21 @@ def read_recipes_from_excel(excel_path: str) -> List[Dict[str, Any]]:
                 title = ws.cell(row, 2).value
                 rid = ws.cell(row, 3).value
                 cals = ws.cell(row, 4).value
+                prep_time = ws.cell(row, 5).value  # Columna E: Tiempo de preparación (min)
 
                 recipe_id = _to_str_id(rid)
                 recipe_title = (str(title).strip() if title is not None else "").strip()
                 recipe_cals = float(cals) if isinstance(cals, (int, float)) else None
+
+                # Tiempo de preparación
+                recipe_time = None
+                if prep_time is not None and str(prep_time).strip() != "":
+                    if isinstance(prep_time, (int, float)):
+                        minutes = int(prep_time) if float(prep_time).is_integer() else float(prep_time)
+                        recipe_time = f"{minutes} min"
+                    else:
+                        s = str(prep_time).strip()
+                        recipe_time = s if "min" in s.lower() else f"{s} min"
 
                 # Preparaci n (fila siguiente esperada)
                 prep_text = ""
@@ -88,8 +128,8 @@ def read_recipes_from_excel(excel_path: str) -> List[Dict[str, Any]]:
                 recipes.append({
                     "id": recipe_id,
                     "title": recipe_title,
-                    "category": sheet_name[:-1] if sheet_name.endswith("s") else sheet_name,  # "Desayuno", etc.
-                    "time": None,
+                    "category": _sheet_to_category(sheet_name) if sheet_name.endswith("s") else sheet_name,  # "Desayuno", etc.
+                    "time": recipe_time,
                     "cals": recipe_cals,
                     "price": None,
                     "img": None,

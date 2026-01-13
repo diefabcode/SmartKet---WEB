@@ -1,6 +1,6 @@
 {
-    "excel_path": "C:/Users/Proyectos/Desktop/Recetas/Alimentos.xlsx",
-    "resources_dir": "C:/Users/Proyectos/Desktop/Recetas/Recursos",
+    "excel_path": "C:/Users/Huawei/Documents/SmartKet/Recetas/Alimentos.xlsx",
+    "resources_dir": "C:/Users/Huawei/Documents/SmartKet/Recetas/Recursos",
     "host": "127.0.0.1",
     "port": 5050,
     "orders_outbox_dir": "./backend/orders_outbox",
