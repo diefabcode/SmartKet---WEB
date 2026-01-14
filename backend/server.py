@@ -113,13 +113,22 @@ def _derive_ingredientes_xlsx_path(alimentos_excel_path):
 
 def _load_ingredients_catalog(ingredientes_xlsx_path):
     """
-    Devuelve:
-      catalog[name] = {
-        "granel": True/False,
-        "offers": [
-          {"brand":..., "sale":..., "buy":..., "presentation":..., "unit":..., "qty":...}
-        ]
-      }
+    Catálogo estricto (pipe por índice):
+
+    Regla NO negociable:
+      Si hay N marcas, debe haber N valores para:
+        - PRECIO DE COMPRA
+        - PRECIO DE VENTA
+        - PRESENTACION
+        - UNIDAD
+        - CANTIDAD
+        - GRANEL (SI/NO)
+        - MULTIPLOS (o "na")
+        - LUGAR
+
+    NOTA:
+      CATEGORÍA / FORMA / PROCESO pueden traer "|" pero NO tienen correspondencia con N marcas.
+      (Se manejan en meta/otros flujos, no aquí.)
     """
     issues = []
     if not ingredientes_xlsx_path or not os.path.isfile(ingredientes_xlsx_path):
@@ -128,8 +137,19 @@ def _load_ingredients_catalog(ingredientes_xlsx_path):
     wb = openpyxl.load_workbook(ingredientes_xlsx_path, data_only=True)
     ws = wb.active
 
-    header = {str(ws.cell(1, c).value).strip(): c for c in range(1, 40) if ws.cell(1, c).value}
-    required = ["INGREDIENTE", "MARCA", "PRECIO DE COMPRA", "PRECIO DE VENTA", "PRESENTACION", "UNIDAD", "CANTIDAD", "GRANEL"]
+    header = {str(ws.cell(1, c).value).strip(): c for c in range(1, 60) if ws.cell(1, c).value}
+    required = [
+        "INGREDIENTE",
+        "MARCA",
+        "PRECIO DE COMPRA",
+        "PRECIO DE VENTA",
+        "PRESENTACION",
+        "UNIDAD",
+        "CANTIDAD",
+        "GRANEL",
+        "MULTIPLOS",
+        "LUGAR",
+    ]
     for k in required:
         if k not in header:
             issues.append(f"Falta columna requerida en Ingredientes.xlsx: {k}")
@@ -145,29 +165,17 @@ def _load_ingredients_catalog(ingredientes_xlsx_path):
     col_unit = header["UNIDAD"]
     col_qty = header["CANTIDAD"]
     col_granel = header["GRANEL"]
-
-    # Opcionales (no rompen si no existen)
-    col_mult = header.get("MULTIPLOS")
-    col_lugar = header.get("LUGAR")
+    col_mult = header["MULTIPLOS"]
+    col_lugar = header["LUGAR"]
 
     catalog = {}
-
     max_row = ws.max_row or 1
+
     for r in range(2, max_row + 1):
         ing = ws.cell(r, col_ing).value
         if ing is None or str(ing).strip() == "":
             continue
         name = str(ing).strip()
-
-        gr = ws.cell(r, col_granel).value
-        gr_s = (str(gr).strip().upper() if gr is not None else "")
-        is_bulk = (gr_s == "SI")
-
-        marcas = _split_pipe
-        mult_raw = ws.cell(r, col_mult).value if col_mult else None
-        multiple = _to_float_safe(mult_raw)
-
-        lugares = _split_pipe(ws.cell(r, col_lugar).value) if col_lugar else []
 
         marcas = _split_pipe(ws.cell(r, col_marca).value)
         buys = _split_pipe(ws.cell(r, col_buy).value)
@@ -175,35 +183,90 @@ def _load_ingredients_catalog(ingredientes_xlsx_path):
         pres = _split_pipe(ws.cell(r, col_pres).value)
         units = _split_pipe(ws.cell(r, col_unit).value)
         qtys = _split_pipe(ws.cell(r, col_qty).value)
+        granels = _split_pipe(ws.cell(r, col_granel).value)
+        multiples = _split_pipe(ws.cell(r, col_mult).value)
+        lugares = _split_pipe(ws.cell(r, col_lugar).value)
 
-        n = min(len(marcas), len(buys), len(sales), len(pres), len(units), len(qtys)) if (marcas and buys and sales and pres and units and qtys) else 0
+        # Validación estricta por correspondencia (pipe por índice)
+        arrays = {
+            "MARCA": marcas,
+            "PRECIO DE COMPRA": buys,
+            "PRECIO DE VENTA": sales,
+            "PRESENTACION": pres,
+            "UNIDAD": units,
+            "CANTIDAD": qtys,
+            "GRANEL": granels,
+            "MULTIPLOS": multiples,
+            "LUGAR": lugares,
+        }
+
+        lengths = {k: len(v) for k, v in arrays.items()}
+        n = lengths.get("MARCA", 0)
+
+        if n == 0:
+            issues.append(f"[{name}] Sin MARCA (no hay ofertas).")
+            continue
+
+        bad = [k for k, ln in lengths.items() if ln != n]
+        if bad:
+            issues.append(
+                f"[{name}] Ofertas desalineadas (pipe por índice). "
+                f"Se esperaba N={n} en todas las columnas. Diferentes: {', '.join([f'{k}={lengths[k]}' for k in bad])}."
+            )
+            # Estricto: no se construye este ingrediente.
+            continue
 
         offers = []
-        if lugares and n > 0 and len(lugares) not in (1, n):
-            issues.append(f"[{name}] 'LUGAR' desalineado vs ofertas (pipe por índice). Se usará el primer valor.")
+        for i in range(n):
+            bulk_s = (granels[i] or "").strip().upper()
+            is_bulk_offer = (bulk_s == "SI")
 
-        if n == 0 and (marcas or sales or qtys or units):
-            issues.append(f"[{name}] Ofertas incompletas o desalineadas (pipe por índice). Revisa columnas B-G.")
-        else:
-            for i in range(n):
-                offer = {
-                    "brand": marcas[i],
-                    "buy": _to_float_safe(buys[i]),
-                    "sale": _to_float_safe(sales[i]),
-                    "presentation": pres[i],
-                    "unit": (units[i] or "").strip(),
-                    "qty": _to_float_safe(qtys[i]),
-                    # Lugar (opcional): intenta alinear por índice; si no, usa el primero.
-                    "place": (lugares[i] if (lugares and len(lugares) == n and i < len(lugares)) else (lugares[0] if lugares else None)),
-                }
-                if offer["sale"] is None or offer["qty"] is None or not offer["unit"]:
-                    issues.append(f"[{name}] Oferta inválida en índice {i+1}. Revisa precio/unidad/cantidad.")
-                    continue
-                offers.append(offer)
+            mult_val = _to_float_safe(multiples[i])
+            # "na" o vacío -> None
+            if mult_val is not None and float(mult_val) <= 0:
+                mult_val = None
 
-        catalog[name] = {"granel": is_bulk, "offers": offers, "multiple": multiple}
+            place_val = (lugares[i] or "").strip()
+            if not place_val:
+                issues.append(f"[{name}] LUGAR vacío en índice {i+1}.")
+                continue
+
+            offer = {
+                "index": i,
+                "brand": (marcas[i] or "").strip(),
+                "buy": _to_float_safe(buys[i]),
+                "sale": _to_float_safe(sales[i]),
+                "presentation": (pres[i] or "").strip(),
+                "unit": (units[i] or "").strip(),
+                "qty": _to_float_safe(qtys[i]),
+                "bulk": is_bulk_offer,
+                "multiple": mult_val,
+                "place": place_val,
+            }
+
+            if not offer["brand"]:
+                issues.append(f"[{name}] MARCA vacía en índice {i+1}.")
+                continue
+            if offer["sale"] is None or offer["buy"] is None:
+                issues.append(f"[{name}] Precio inválido en índice {i+1}. Revisa COMPRA/VENTA.")
+                continue
+            if offer["qty"] is None or offer["qty"] <= 0:
+                issues.append(f"[{name}] CANTIDAD inválida en índice {i+1}.")
+                continue
+            if not offer["unit"]:
+                issues.append(f"[{name}] UNIDAD vacía en índice {i+1}.")
+                continue
+
+            offers.append(offer)
+
+        if not offers:
+            issues.append(f"[{name}] Sin ofertas válidas (revisa filas/valores).")
+            continue
+
+        catalog[name] = {"offers": offers}
 
     return catalog, issues
+
 def _load_ingredients_meta(ingredientes_xlsx_path):
     """
     Meta ligera para UI.
@@ -306,29 +369,50 @@ def _aggregate_plan_ingredients(payload):
     return agg
 
 
-def _quote_sellable_items(agg, catalog):
+def _norm_ing_name(s: str) -> str:
+    return (str(s or "").strip().lower())
+
+def _quote_sellable_items(agg, catalog, offer_overrides=None):
     """
     Convierte 'usos de receta' en 'items vendibles' y total (precio de venta).
-    Selección:
-      - GRANEL=SI -> oferta con menor $/unidad (venta)
-      - GRANEL=NO -> oferta con menor tamaño de empaque (minimiza desperdicio)
+
+    Soporta overrides por ingrediente:
+      offer_overrides = { "Chorizo": 0, "Leche": 1, ... }
+    donde el valor es el índice dentro de catalog[name]["offers"].
+
+    NOTA:
+      Si no se envían overrides, el comportamiento base se mantiene: elige la oferta más conveniente.
     """
     items = []
     issues = []
     total = 0.0
 
+    # Mapa normalizado para tolerar mayúsculas/espacios
+    overrides_norm = {}
+    if isinstance(offer_overrides, dict):
+        for k, v in offer_overrides.items():
+            try:
+                overrides_norm[_norm_ing_name(k)] = int(v)
+            except Exception:
+                continue
+
+    # Índice normalizado del catálogo (para buscar por nombre tolerante)
+    catalog_norm = {_norm_ing_name(k): k for k in catalog.keys()}
+
     for ing_name, uses in agg.items():
-        if ing_name not in catalog:
+        key_exact = ing_name if ing_name in catalog else None
+        key_norm = catalog_norm.get(_norm_ing_name(ing_name))
+        key = key_exact or key_norm
+
+        if not key or key not in catalog:
             issues.append(f"Ingrediente no encontrado en catálogo: {ing_name}")
             continue
 
-        entry = catalog[ing_name]
+        entry = catalog[key]
         offers = entry.get("offers") or []
         if not offers:
             issues.append(f"Sin ofertas válidas para ingrediente: {ing_name}")
             continue
-
-        is_bulk = bool(entry.get("granel", False))
 
         def required_in_unit(target_unit):
             total_req = 0.0
@@ -341,10 +425,10 @@ def _quote_sellable_items(agg, catalog):
             return total_req
 
         evals = []
-        for off in offers:
-            off_unit = off.get("unit", "")
-            off_qty = off.get("qty", None)
-            off_sale = off.get("sale", None)
+        for idx, off in enumerate(offers):
+            off_unit = off.get("unit")
+            off_qty = off.get("qty")
+            off_sale = off.get("sale")
             if not off_unit or off_qty is None or off_sale is None:
                 continue
 
@@ -361,89 +445,121 @@ def _quote_sellable_items(agg, catalog):
                 canon_qty = float(off_qty) * 1000.0
                 canon_unit = "gramos"
 
+            sale_per_canon_unit = float(off_sale) / canon_qty if canon_qty > 0 else float("inf")
+
+            # Requerimiento en cantidad canónica
+            req_canon_qty = float(req)
+            u_norm = _norm_unit(off_unit)
+            if u_norm == "litro":
+                req_canon_qty = float(req) * 1000.0
+            elif u_norm == "kilogramo":
+                req_canon_qty = float(req) * 1000.0
+
+            # Cálculo de compra/venta según modo
+            is_bulk_offer = bool(off.get("bulk", False))
+            multiple = off.get("multiple", None)
+
+            if is_bulk_offer:
+                sold_canon_qty = req_canon_qty
+                if isinstance(multiple, (int, float)) and float(multiple) > 0:
+                    mval = float(multiple)
+                    sold_canon_qty = float(math.ceil(req_canon_qty / mval) * mval)
+                line_total = sold_canon_qty * sale_per_canon_unit
+                waste = sold_canon_qty - req_canon_qty
+                packs = None
+            else:
+                pkg_canon_qty = canon_qty
+                packs = int(math.ceil(req_canon_qty / pkg_canon_qty)) if pkg_canon_qty > 0 else 0
+                line_total = float(off_sale) * packs
+                waste = (packs * pkg_canon_qty) - req_canon_qty
+
             evals.append({
+                "offer_index": int(off.get("index", idx)),
                 "offer": off,
                 "req_in_offer_unit": float(req),
                 "canon_unit": canon_unit,
                 "canon_pkg_qty": canon_qty,
-                "sale_per_canon_unit": float(off_sale) / canon_qty if canon_qty > 0 else float("inf"),
+                "sale_per_canon_unit": sale_per_canon_unit,
+                "req_canon_qty": req_canon_qty,
+                "sold_canon_qty": (sold_canon_qty if is_bulk_offer else (packs * canon_qty)),
+                "packages_needed": packs,
+                "line_total": float(line_total),
+                "waste_qty": float(waste),
+                "sell_mode": "bulk" if is_bulk_offer else "package",
             })
 
         if not evals:
             issues.append(f"No se pudo convertir unidades para ingrediente: {ing_name} (unidad receta vs catálogo)")
             continue
 
-        if is_bulk:
-            chosen = min(evals, key=lambda e: e["sale_per_canon_unit"])
-            off = chosen["offer"]
-            req = chosen["req_in_offer_unit"]
+        # Default: elegir la opción más conveniente por costo total (y menos desperdicio como desempate)
+        chosen_default = min(evals, key=lambda e: (e["line_total"], e["waste_qty"], e["sale_per_canon_unit"]))
+        default_idx = chosen_default["offer_index"]
 
-            req_canon_qty = req
-            u_norm = _norm_unit(off["unit"])
-            if u_norm == "litro":
-                req_canon_qty = req * 1000.0
-            elif u_norm == "kilogramo":
-                req_canon_qty = req * 1000.0
+        # Override (si existe y es válido)
+        chosen = chosen_default
+        ovr = overrides_norm.get(_norm_ing_name(ing_name))
+        override_applied = False
+        if isinstance(ovr, int) and 0 <= ovr < len(offers):
+            # Buscar eval con ese offer_index (puede coincidir con i)
+            cand = next((e for e in evals if e["offer_index"] == ovr), None)
+            if cand is not None:
+                chosen = cand
+                override_applied = True
+            else:
+                issues.append(f"[{ing_name}] Override inválido por unidad no convertible para índice {ovr}. Se usó default.")
 
-            multiple = entry.get("multiple", None)
-            sold_canon_qty = req_canon_qty
-            if isinstance(multiple, (int, float)) and float(multiple) > 0:
-                mval = float(multiple)
-                sold_canon_qty = float(math.ceil(req_canon_qty / mval) * mval)
+        off = chosen["offer"]
 
-            line_total = sold_canon_qty * chosen["sale_per_canon_unit"]
-            total += line_total
+        # Resumen de opciones para UI (sin cálculos)
+        offers_summary = [{
+            "index": int(o.get("index", i)),
+            "brand": o.get("brand"),
+            "buy": o.get("buy"),
+            "sale": o.get("sale"),
+            "presentation": o.get("presentation"),
+            "unit": o.get("unit"),
+            "qty": o.get("qty"),
+            "bulk": bool(o.get("bulk", False)),
+            "multiple": o.get("multiple"),
+            "place": o.get("place"),
+        } for i, o in enumerate(offers)]
 
-            items.append({
-                "ingredient": ing_name,
-                "sell_mode": "bulk",
-                "offer_brand": off.get("brand"),
-                "offer_presentation": off.get("presentation"),
-                "unit": chosen["canon_unit"],
-                # Cantidad requerida real (lo que piden las recetas)
-                "required_qty": round(req_canon_qty, 6),
-                # Cantidad que se venderá (redondeada a múltiplos si aplica)
-                "sold_qty": round(sold_canon_qty, 6),
-                "multiple": (round(float(multiple), 6) if isinstance(multiple, (int, float)) and float(multiple) > 0 else None),
-                "rounding_extra_qty": round((sold_canon_qty - req_canon_qty), 6),
+        line_total = chosen["line_total"]
+        total += line_total
+
+        # Item para UI
+        item = {
+            "ingredient": ing_name,
+            "sell_mode": chosen["sell_mode"],
+            "selected_offer_index": int(chosen["offer_index"]),
+            "default_offer_index": int(default_idx),
+            "override_applied": bool(override_applied),
+            "offer_brand": off.get("brand"),
+            "offer_presentation": off.get("presentation"),
+            "offer_place": off.get("place"),
+            "offers": offers_summary,
+            "required_qty": round(chosen["req_canon_qty"], 6),
+            "waste_qty": round(chosen["waste_qty"], 6),
+            "line_total": round(line_total, 2),
+        }
+
+        if chosen["sell_mode"] == "bulk":
+            item.update({
+                "bulk_unit": chosen["canon_unit"],
+                "sold_qty": round(chosen["sold_canon_qty"], 6),
                 "unit_price": round(chosen["sale_per_canon_unit"], 6),
-                "line_total": round(line_total, 2),
-                "offer_place": off.get("place"),
+                "multiple": off.get("multiple"),
             })
         else:
-            chosen = min(evals, key=lambda e: e["canon_pkg_qty"])
-            off = chosen["offer"]
-
-            req = chosen["req_in_offer_unit"]
-            u_norm = _norm_unit(off["unit"])
-            req_canon_qty = req
-            pkg_canon_qty = chosen["canon_pkg_qty"]
-            canon_unit = chosen["canon_unit"]
-
-            if u_norm == "litro":
-                req_canon_qty = req * 1000.0
-            elif u_norm == "kilogramo":
-                req_canon_qty = req * 1000.0
-
-            packs = int(math.ceil(req_canon_qty / pkg_canon_qty)) if pkg_canon_qty > 0 else 0
-            line_total = float(off["sale"]) * packs
-            total += line_total
-            waste = (packs * pkg_canon_qty) - req_canon_qty
-
-            items.append({
-                "ingredient": ing_name,
-                "sell_mode": "package",
-                "offer_brand": off.get("brand"),
-                "offer_presentation": off.get("presentation"),
-                "package_unit": canon_unit,
-                "package_qty": round(pkg_canon_qty, 6),
-                "packages_needed": packs,
-                "unit_price": round(float(off["sale"]), 2),
-                "required_qty": round(req_canon_qty, 6),
-                "waste_qty": round(waste, 6),
-                "line_total": round(line_total, 2),
-                "offer_place": off.get("place"),
+            item.update({
+                "package_unit": chosen["canon_unit"],
+                "package_qty": round(chosen["canon_pkg_qty"], 6),
+                "packages_needed": int(chosen["packages_needed"] or 0),
+                "unit_price": round(float(off.get("sale") or 0.0), 2),
             })
+
+        items.append(item)
 
     items.sort(key=lambda x: (x.get("sell_mode", ""), x.get("ingredient", "").lower()))
     return items, round(total, 2), issues
@@ -713,7 +829,9 @@ def create_app(config: dict) -> Flask:
             catalog, issues_cat = _load_ingredients_catalog(ingredientes_xlsx)
 
             agg = _aggregate_plan_ingredients(payload)
-            items, total, issues_quote = _quote_sellable_items(agg, catalog)
+
+            offer_overrides = payload.get("offerOverrides") or payload.get("offer_overrides") or {}
+            items, total, issues_quote = _quote_sellable_items(agg, catalog, offer_overrides)
 
             return jsonify({
                 "ok": True,

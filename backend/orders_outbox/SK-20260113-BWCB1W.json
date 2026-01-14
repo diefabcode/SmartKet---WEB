@@ -1,0 +1,257 @@
+{
+  "order_key": "SK-20260113-BWCB1W",
+  "created_at_utc": "2026-01-13T22:50:11.198920+00:00",
+  "deliveryType": "Domicilio",
+  "plan": {
+    "0": [
+      {
+        "id": "222172",
+        "title": "Huevo con espicana y champiñones",
+        "category": "Desayuno",
+        "time": "15 min",
+        "cals": "400",
+        "price": 0,
+        "img": "http://127.0.0.1:5050/api/images/222172",
+        "ingredients_raw": [
+          {
+            "name": "Huevo",
+            "unit": "Piezas",
+            "qty": 3,
+            "forma": "Entero",
+            "proceso": "Cocido"
+          },
+          {
+            "name": "Champiñones",
+            "unit": "Gramos",
+            "qty": 100,
+            "forma": "Rebanadas",
+            "proceso": "Sofrito"
+          },
+          {
+            "name": "Espinaca",
+            "unit": "Gramos",
+            "qty": 30,
+            "forma": "Natural",
+            "proceso": "Sofrito"
+          },
+          {
+            "name": "Aceite vegetal",
+            "unit": "Mililitros",
+            "qty": 5,
+            "forma": "Líquido",
+            "proceso": "Calentado"
+          },
+          {
+            "name": "Sal",
+            "unit": "Gramos",
+            "qty": 3,
+            "forma": "Natural",
+            "proceso": "Integrado"
+          },
+          {
+            "name": "Aguacate",
+            "unit": "Gramos",
+            "qty": 50,
+            "forma": "Rebanadas",
+            "proceso": "Crudo"
+          }
+        ],
+        "ingredients": [
+          "Huevo (3 Piezas), Entero, Cocido",
+          "Champiñones (100 Gramos), Rebanadas, Sofrito",
+          "Espinaca (30 Gramos), Natural, Sofrito",
+          "Aceite vegetal (5 Mililitros), Líquido, Calentado",
+          "Sal (3 Gramos), Natural, Integrado",
+          "Aguacate (50 Gramos), Rebanadas, Crudo"
+        ],
+        "prep": "",
+        "assignedMeal": "Desayuno",
+        "portions": 1
+      },
+      {
+        "id": "108633",
+        "title": "Omellet de huevo con jamon y panela",
+        "category": "Desayuno",
+        "time": "18 min",
+        "cals": "550",
+        "price": 0,
+        "img": "http://127.0.0.1:5050/api/images/108633",
+        "ingredients_raw": [
+          {
+            "name": "Huevo",
+            "unit": "Piezas",
+            "qty": 3,
+            "forma": "Entero",
+            "proceso": "Cocido"
+          },
+          {
+            "name": "Queso panela",
+            "unit": "Gramos",
+            "qty": 75,
+            "forma": "Cubos chicos",
+            "proceso": "Integrado"
+          },
+          {
+            "name": "Jamón de pavo",
+            "unit": "Gramos",
+            "qty": 75,
+            "forma": "Cuadros chicos",
+            "proceso": "Sofrito"
+          },
+          {
+            "name": "Aceite vegetal",
+            "unit": "Mililitros",
+            "qty": 5,
+            "forma": "Líquido",
+            "proceso": "Calentado"
+          },
+          {
+            "name": "Sal",
+            "unit": "Gramos",
+            "qty": 3,
+            "forma": "Natural",
+            "proceso": "Integrado"
+          },
+          {
+            "name": "Aguacate",
+            "unit": "Gramos",
+            "qty": 50,
+            "forma": "Rebanadas",
+            "proceso": "Crudo"
+          }
+        ],
+        "ingredients": [
+          "Huevo (3 Piezas), Entero, Cocido",
+          "Queso panela (75 Gramos), Cubos chicos, Integrado",
+          "Jamón de pavo (75 Gramos), Cuadros chicos, Sofrito",
+          "Aceite vegetal (5 Mililitros), Líquido, Calentado",
+          "Sal (3 Gramos), Natural, Integrado",
+          "Aguacate (50 Gramos), Rebanadas, Crudo"
+        ],
+        "prep": "",
+        "assignedMeal": "Comida",
+        "portions": 1
+      },
+      {
+        "id": "108633",
+        "title": "Omellet de huevo con jamon y panela",
+        "category": "Desayuno",
+        "time": "18 min",
+        "cals": "550",
+        "price": 0,
+        "img": "http://127.0.0.1:5050/api/images/108633",
+        "ingredients_raw": [
+          {
+            "name": "Huevo",
+            "unit": "Piezas",
+            "qty": 3,
+            "forma": "Entero",
+            "proceso": "Cocido"
+          },
+          {
+            "name": "Queso panela",
+            "unit": "Gramos",
+            "qty": 75,
+            "forma": "Cubos chicos",
+            "proceso": "Integrado"
+          },
+          {
+            "name": "Jamón de pavo",
+            "unit": "Gramos",
+            "qty": 75,
+            "forma": "Cuadros chicos",
+            "proceso": "Sofrito"
+          },
+          {
+            "name": "Aceite vegetal",
+            "unit": "Mililitros",
+            "qty": 5,
+            "forma": "Líquido",
+            "proceso": "Calentado"
+          },
+          {
+            "name": "Sal",
+            "unit": "Gramos",
+            "qty": 3,
+            "forma": "Natural",
+            "proceso": "Integrado"
+          },
+          {
+            "name": "Aguacate",
+            "unit": "Gramos",
+            "qty": 50,
+            "forma": "Rebanadas",
+            "proceso": "Crudo"
+          }
+        ],
+        "ingredients": [
+          "Huevo (3 Piezas), Entero, Cocido",
+          "Queso panela (75 Gramos), Cubos chicos, Integrado",
+          "Jamón de pavo (75 Gramos), Cuadros chicos, Sofrito",
+          "Aceite vegetal (5 Mililitros), Líquido, Calentado",
+          "Sal (3 Gramos), Natural, Integrado",
+          "Aguacate (50 Gramos), Rebanadas, Crudo"
+        ],
+        "prep": "",
+        "assignedMeal": "Cena",
+        "portions": 1
+      }
+    ],
+    "1": [],
+    "2": [],
+    "3": [],
+    "4": [],
+    "5": [],
+    "6": []
+  },
+  "dynamicDays": [
+    {
+      "dayName": "Mi ",
+      "dateStr": "14 Ene",
+      "fullDate": "2026-01-14T22:47:55.788Z",
+      "isTomorrow": true
+    },
+    {
+      "dayName": "Jue",
+      "dateStr": "15 Ene",
+      "fullDate": "2026-01-15T22:47:55.788Z",
+      "isTomorrow": false
+    },
+    {
+      "dayName": "Vie",
+      "dateStr": "16 Ene",
+      "fullDate": "2026-01-16T22:47:55.788Z",
+      "isTomorrow": false
+    },
+    {
+      "dayName": "Sáb",
+      "dateStr": "17 Ene",
+      "fullDate": "2026-01-17T22:47:55.788Z",
+      "isTomorrow": false
+    },
+    {
+      "dayName": "Dom",
+      "dateStr": "18 Ene",
+      "fullDate": "2026-01-18T22:47:55.788Z",
+      "isTomorrow": false
+    },
+    {
+      "dayName": "Lun",
+      "dateStr": "19 Ene",
+      "fullDate": "2026-01-19T22:47:55.788Z",
+      "isTomorrow": false
+    },
+    {
+      "dayName": "Mar",
+      "dateStr": "20 Ene",
+      "fullDate": "2026-01-20T22:47:55.788Z",
+      "isTomorrow": false
+    }
+  ],
+  "excludedIngredients": [],
+  "clientMeta": {
+    "uiVersion": "publicweb-v1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"
+  },
+  "schema_version": 1
+}

@@ -1,0 +1,385 @@
+{
+  "order_key": "SK-20260113-ZF0WDA",
+  "created_at_utc": "2026-01-13T23:02:49.489470+00:00",
+  "deliveryType": "Domicilio",
+  "plan": {
+    "0": [
+      {
+        "id": "676335",
+        "title": "Huevo a la mexicana",
+        "category": "Desayuno",
+        "time": "15 min",
+        "cals": "450",
+        "price": 0,
+        "img": "http://127.0.0.1:5050/api/images/676335",
+        "ingredients_raw": [
+          {
+            "name": "Huevo",
+            "unit": "Piezas",
+            "qty": 3,
+            "forma": "Entero",
+            "proceso": "Cocido"
+          },
+          {
+            "name": "Jitomate",
+            "unit": "Gramos",
+            "qty": 75,
+            "forma": "Cubos chicos",
+            "proceso": "Sofrito"
+          },
+          {
+            "name": "Cebolla",
+            "unit": "Gramos",
+            "qty": 20,
+            "forma": "Picado fino",
+            "proceso": "Sofrito"
+          },
+          {
+            "name": "Chile serrano",
+            "unit": "Gramos",
+            "qty": 20,
+            "forma": "Picado fino",
+            "proceso": "Sofrito"
+          },
+          {
+            "name": "Aceite vegetal",
+            "unit": "Mililitros",
+            "qty": 5,
+            "forma": "Líquido",
+            "proceso": "Calentado"
+          },
+          {
+            "name": "Sal",
+            "unit": "Gramos",
+            "qty": 3,
+            "forma": "Natural",
+            "proceso": "Integrado"
+          },
+          {
+            "name": "Pan integral",
+            "unit": "Rebanadas",
+            "qty": 2,
+            "forma": "Rebanadas",
+            "proceso": "Crudo"
+          }
+        ],
+        "ingredients": [
+          "Huevo (3 Piezas), Entero, Cocido",
+          "Jitomate (75 Gramos), Cubos chicos, Sofrito",
+          "Cebolla (20 Gramos), Picado fino, Sofrito",
+          "Chile serrano (20 Gramos), Picado fino, Sofrito",
+          "Aceite vegetal (5 Mililitros), Líquido, Calentado",
+          "Sal (3 Gramos), Natural, Integrado",
+          "Pan integral (2 Rebanadas), Rebanadas, Crudo"
+        ],
+        "prep": "",
+        "assignedMeal": "Desayuno",
+        "portions": 1
+      },
+      {
+        "id": "912345",
+        "title": "Tostadas de tinga de pollo",
+        "category": "Comida",
+        "time": "35 min",
+        "cals": "450",
+        "price": 0,
+        "img": "http://127.0.0.1:5050/api/images/912345",
+        "ingredients_raw": [
+          {
+            "name": "Pechuga de pollo",
+            "unit": "Gramos",
+            "qty": 150,
+            "forma": "Deshebrado",
+            "proceso": "Cocido"
+          },
+          {
+            "name": "Cebolla",
+            "unit": "Gramos",
+            "qty": 50,
+            "forma": "Pluma",
+            "proceso": "Sofrito"
+          },
+          {
+            "name": "Jitomate",
+            "unit": "Gramos",
+            "qty": 100,
+            "forma": "Cubos chicos",
+            "proceso": "Sofrito"
+          },
+          {
+            "name": "Chile chipotle adobado",
+            "unit": "Gramos",
+            "qty": 10,
+            "forma": "Molido",
+            "proceso": "Integrado"
+          },
+          {
+            "name": "Aceite vegetal",
+            "unit": "Mililitros",
+            "qty": 5,
+            "forma": "Líquido",
+            "proceso": "Calentado"
+          },
+          {
+            "name": "Sal",
+            "unit": "Gramos",
+            "qty": 3,
+            "forma": "Natural",
+            "proceso": "Integrado"
+          },
+          {
+            "name": "Tostada de maíz",
+            "unit": "Piezas",
+            "qty": 2,
+            "forma": "Entero",
+            "proceso": "Crudo"
+          },
+          {
+            "name": "Crema",
+            "unit": "Mililitros",
+            "qty": 20,
+            "forma": "Untado",
+            "proceso": "Integrado"
+          },
+          {
+            "name": "Lechuga romana",
+            "unit": "Gramos",
+            "qty": 20,
+            "forma": "Picado fino",
+            "proceso": "Crudo"
+          }
+        ],
+        "ingredients": [
+          "Pechuga de pollo (150 Gramos), Deshebrado, Cocido",
+          "Cebolla (50 Gramos), Pluma, Sofrito",
+          "Jitomate (100 Gramos), Cubos chicos, Sofrito",
+          "Chile chipotle adobado (10 Gramos), Molido, Integrado",
+          "Aceite vegetal (5 Mililitros), Líquido, Calentado",
+          "Sal (3 Gramos), Natural, Integrado",
+          "Tostada de maíz (2 Piezas), Entero, Crudo",
+          "Crema (20 Mililitros), Untado, Integrado",
+          "Lechuga romana (20 Gramos), Picado fino, Crudo"
+        ],
+        "prep": "",
+        "assignedMeal": "Comida",
+        "portions": 1
+      },
+      {
+        "id": "641378",
+        "title": "Sopa de verduras a la mexicana",
+        "category": "Sopas",
+        "time": "35 min",
+        "cals": "260",
+        "price": 0,
+        "img": "http://127.0.0.1:5050/api/images/641378",
+        "ingredients_raw": [
+          {
+            "name": "Papa",
+            "unit": "Gramos",
+            "qty": 120,
+            "forma": "Cubos medianos",
+            "proceso": "Cocido"
+          },
+          {
+            "name": "Zanahoria",
+            "unit": "Gramos",
+            "qty": 60,
+            "forma": "Cubos chicos",
+            "proceso": "Cocido"
+          },
+          {
+            "name": "Calabacita",
+            "unit": "Gramos",
+            "qty": 120,
+            "forma": "Cubos medianos",
+            "proceso": "Cocido"
+          },
+          {
+            "name": "Elote desgranado",
+            "unit": "Gramos",
+            "qty": 60,
+            "forma": "Granos",
+            "proceso": "Cocido"
+          },
+          {
+            "name": "Jitomate",
+            "unit": "Gramos",
+            "qty": 120,
+            "forma": "Cubos chicos",
+            "proceso": "Sofrito"
+          },
+          {
+            "name": "Cebolla",
+            "unit": "Gramos",
+            "qty": 40,
+            "forma": "Picado fino",
+            "proceso": "Sofrito"
+          },
+          {
+            "name": "Ajo",
+            "unit": "Gramos",
+            "qty": 5,
+            "forma": "Picado fino",
+            "proceso": "Sofrito"
+          },
+          {
+            "name": "Aceite vegetal",
+            "unit": "Mililitros",
+            "qty": 5,
+            "forma": "Líquido",
+            "proceso": "Calentado"
+          },
+          {
+            "name": "Agua",
+            "unit": "Mililitros",
+            "qty": 500,
+            "forma": "Líquido",
+            "proceso": "Calentado"
+          },
+          {
+            "name": "Caldo de pollo",
+            "unit": "Gramos",
+            "qty": 5,
+            "forma": "Harina",
+            "proceso": "Integrado"
+          }
+        ],
+        "ingredients": [
+          "Papa (120 Gramos), Cubos medianos, Cocido",
+          "Zanahoria (60 Gramos), Cubos chicos, Cocido",
+          "Calabacita (120 Gramos), Cubos medianos, Cocido",
+          "Elote desgranado (60 Gramos), Granos, Cocido",
+          "Jitomate (120 Gramos), Cubos chicos, Sofrito",
+          "Cebolla (40 Gramos), Picado fino, Sofrito",
+          "Ajo (5 Gramos), Picado fino, Sofrito",
+          "Aceite vegetal (5 Mililitros), Líquido, Calentado",
+          "Agua (500 Mililitros), Líquido, Calentado",
+          "Caldo de pollo (5 Gramos), Harina, Integrado"
+        ],
+        "prep": "",
+        "assignedMeal": "Cena",
+        "portions": 1
+      },
+      {
+        "id": "765316",
+        "title": "Pepino y jícama con limón y chile",
+        "category": "Colación",
+        "time": "10 min",
+        "cals": "120",
+        "price": 0,
+        "img": "http://127.0.0.1:5050/api/images/765316",
+        "ingredients_raw": [
+          {
+            "name": "Jícama",
+            "unit": "Gramos",
+            "qty": 200,
+            "forma": "Rebanadas",
+            "proceso": "Crudo"
+          },
+          {
+            "name": "Pepino",
+            "unit": "Gramos",
+            "qty": 150,
+            "forma": "Rebanadas",
+            "proceso": "Crudo"
+          },
+          {
+            "name": "Limón",
+            "unit": "Gramos",
+            "qty": 10,
+            "forma": "Líquido",
+            "proceso": "Integrado"
+          },
+          {
+            "name": "Sal",
+            "unit": "Gramos",
+            "qty": 2,
+            "forma": "Natural",
+            "proceso": "Integrado"
+          },
+          {
+            "name": "Chile piquín",
+            "unit": "Gramos",
+            "qty": 2,
+            "forma": "Harina",
+            "proceso": "Integrado"
+          }
+        ],
+        "ingredients": [
+          "Jícama (200 Gramos), Rebanadas, Crudo",
+          "Pepino (150 Gramos), Rebanadas, Crudo",
+          "Limón (10 Gramos), Líquido, Integrado",
+          "Sal (2 Gramos), Natural, Integrado",
+          "Chile piquín (2 Gramos), Harina, Integrado"
+        ],
+        "prep": "",
+        "assignedMeal": "Colación",
+        "portions": 1
+      }
+    ],
+    "1": [],
+    "2": [],
+    "3": [],
+    "4": [],
+    "5": [],
+    "6": []
+  },
+  "dynamicDays": [
+    {
+      "dayName": "Mi ",
+      "dateStr": "14 Ene",
+      "fullDate": "2026-01-14T22:47:55.788Z",
+      "isTomorrow": true
+    },
+    {
+      "dayName": "Jue",
+      "dateStr": "15 Ene",
+      "fullDate": "2026-01-15T22:47:55.788Z",
+      "isTomorrow": false
+    },
+    {
+      "dayName": "Vie",
+      "dateStr": "16 Ene",
+      "fullDate": "2026-01-16T22:47:55.788Z",
+      "isTomorrow": false
+    },
+    {
+      "dayName": "Sáb",
+      "dateStr": "17 Ene",
+      "fullDate": "2026-01-17T22:47:55.788Z",
+      "isTomorrow": false
+    },
+    {
+      "dayName": "Dom",
+      "dateStr": "18 Ene",
+      "fullDate": "2026-01-18T22:47:55.788Z",
+      "isTomorrow": false
+    },
+    {
+      "dayName": "Lun",
+      "dateStr": "19 Ene",
+      "fullDate": "2026-01-19T22:47:55.788Z",
+      "isTomorrow": false
+    },
+    {
+      "dayName": "Mar",
+      "dateStr": "20 Ene",
+      "fullDate": "2026-01-20T22:47:55.788Z",
+      "isTomorrow": false
+    }
+  ],
+  "excludedIngredients": [
+    "Aceite vegetal",
+    "Crema",
+    "Tostada de maíz",
+    "Agua",
+    "Caldo de pollo",
+    "Chile piquín",
+    "Sal"
+  ],
+  "clientMeta": {
+    "uiVersion": "publicweb-v1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"
+  },
+  "schema_version": 1
+}

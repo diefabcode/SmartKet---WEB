@@ -122,8 +122,8 @@
                 };
             });
 
-            // Aplica estado inicial
-            setActiveMealForCard(card, recipe.id, recipe.category);
+            // Aplica estado inicial (solo 4 horarios fijos)
+            setActiveMealForCard(card, recipe.id, selectedMealByRecipeId[recipe.id] || "Comida");
 
             grid.appendChild(card);
         });

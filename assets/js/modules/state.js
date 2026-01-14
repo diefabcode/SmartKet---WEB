@@ -11,6 +11,46 @@ let plan = {};
 let currentModalRecipe = null;
 let currentModalPortions = 1;
 let excludedIngredients = new Set();
-let categories = []; // categorías dinámicas (derivadas de las hojas del Excel)
+let categories = ["Desayuno", "Comida", "Cena", "Colación"]; // categorías FIJAS para asignación (cards/plan)
 
 const selectedMealByRecipeId = {};
+
+/* =========================================================
+   ✅ Overrides de cotización (Iteración #2)
+   - key: nombre EXACTO del ingrediente (como lo devuelve el quote)
+   - value: índice de oferta seleccionado (0..N-1)
+   ========================================================= */
+let offerOverrides = {}; // { "Chorizo": 1, "Leche": 0, ... }
+
+function setOfferOverride(ingredientName, offerIndex) {
+    const key = String(ingredientName || '').trim();
+    if (!key) return;
+
+    const n = Number(offerIndex);
+    if (!Number.isFinite(n) || n < 0) {
+        delete offerOverrides[key];
+        return;
+    }
+    offerOverrides[key] = Math.floor(n);
+}
+
+function getOfferOverride(ingredientName) {
+    const key = String(ingredientName || '').trim();
+    if (!key) return undefined;
+    return Object.prototype.hasOwnProperty.call(offerOverrides, key) ? offerOverrides[key] : undefined;
+}
+
+function clearOfferOverride(ingredientName) {
+    const key = String(ingredientName || '').trim();
+    if (!key) return;
+    delete offerOverrides[key];
+}
+
+function clearOfferOverrides() {
+    offerOverrides = {};
+}
+
+function getOfferOverrides() {
+    // Devuelve copia para no mutar por accidente desde otros módulos
+    return { ...offerOverrides };
+}

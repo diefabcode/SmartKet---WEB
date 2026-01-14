@@ -1,0 +1,1004 @@
+{
+  "order_key": "SK-20260113-6NLA4B",
+  "created_at_utc": "2026-01-13T22:42:36.566702+00:00",
+  "deliveryType": "Domicilio",
+  "plan": {
+    "0": [
+      {
+        "id": "222172",
+        "title": "Huevo con espicana y champiñones",
+        "category": "Desayuno",
+        "time": "15 min",
+        "cals": "400",
+        "price": 0,
+        "img": "http://127.0.0.1:5050/api/images/222172",
+        "ingredients_raw": [
+          {
+            "name": "Huevo",
+            "unit": "Piezas",
+            "qty": 3,
+            "forma": "Entero",
+            "proceso": "Cocido"
+          },
+          {
+            "name": "Champiñones",
+            "unit": "Gramos",
+            "qty": 100,
+            "forma": "Rebanadas",
+            "proceso": "Sofrito"
+          },
+          {
+            "name": "Espinaca",
+            "unit": "Gramos",
+            "qty": 30,
+            "forma": "Natural",
+            "proceso": "Sofrito"
+          },
+          {
+            "name": "Aceite vegetal",
+            "unit": "Mililitros",
+            "qty": 5,
+            "forma": "Líquido",
+            "proceso": "Calentado"
+          },
+          {
+            "name": "Sal",
+            "unit": "Gramos",
+            "qty": 3,
+            "forma": "Natural",
+            "proceso": "Integrado"
+          },
+          {
+            "name": "Aguacate",
+            "unit": "Gramos",
+            "qty": 50,
+            "forma": "Rebanadas",
+            "proceso": "Crudo"
+          }
+        ],
+        "ingredients": [
+          "Huevo (3 Piezas), Entero, Cocido",
+          "Champiñones (100 Gramos), Rebanadas, Sofrito",
+          "Espinaca (30 Gramos), Natural, Sofrito",
+          "Aceite vegetal (5 Mililitros), Líquido, Calentado",
+          "Sal (3 Gramos), Natural, Integrado",
+          "Aguacate (50 Gramos), Rebanadas, Crudo"
+        ],
+        "prep": "",
+        "assignedMeal": "Desayuno",
+        "portions": 1
+      },
+      {
+        "id": "735499",
+        "title": "Alambre de pollo",
+        "category": "Comida",
+        "time": "30 min",
+        "cals": "800",
+        "price": 0,
+        "img": "http://127.0.0.1:5050/api/images/735499",
+        "ingredients_raw": [
+          {
+            "name": "Tocino",
+            "unit": "Gramos",
+            "qty": 75,
+            "forma": "Picado fino",
+            "proceso": "Cocido"
+          },
+          {
+            "name": "Cebolla",
+            "unit": "Gramos",
+            "qty": 38,
+            "forma": "Pluma",
+            "proceso": "Sofrito"
+          },
+          {
+            "name": "Jugo maggi",
+            "unit": "Mililitros",
+            "qty": 3,
+            "forma": "Líquido",
+            "proceso": "Integrado"
+          },
+          {
+            "name": "Queso oaxaca",
+            "unit": "Gramos",
+            "qty": 100,
+            "forma": "Deshebrado",
+            "proceso": "Integrado"
+          },
+          {
+            "name": "Sal",
+            "unit": "Gramos",
+            "qty": 4,
+            "forma": "Natural",
+            "proceso": "Integrado"
+          },
+          {
+            "name": "Tortilla de maíz",
+            "unit": "Piezas",
+            "qty": 4,
+            "forma": "Entero",
+            "proceso": "Calentado"
+          },
+          {
+            "name": "Caldo de pollo",
+            "unit": "Gramos",
+            "qty": 2,
+            "forma": "Harina",
+            "proceso": "Integrado"
+          },
+          {
+            "name": "Aguacate",
+            "unit": "Gramos",
+            "qty": 75,
+            "forma": "Rebanadas",
+            "proceso": "Crudo"
+          },
+          {
+            "name": "Pechuga de pollo",
+            "unit": "Gramos",
+            "qty": 250,
+            "forma": "Cubos medianos",
+            "proceso": "Dorado"
+          },
+          {
+            "name": "Aceite vegetal",
+            "unit": "Mililitros",
+            "qty": 5,
+            "forma": "Líquido",
+            "proceso": "Calentado"
+          }
+        ],
+        "ingredients": [
+          "Tocino (75 Gramos), Picado fino, Cocido",
+          "Cebolla (38 Gramos), Pluma, Sofrito",
+          "Jugo maggi (3 Mililitros), Líquido, Integrado",
+          "Queso oaxaca (100 Gramos), Deshebrado, Integrado",
+          "Sal (4 Gramos), Natural, Integrado",
+          "Tortilla de maíz (4 Piezas), Entero, Calentado",
+          "Caldo de pollo (2 Gramos), Harina, Integrado",
+          "Aguacate (75 Gramos), Rebanadas, Crudo",
+          "Pechuga de pollo (250 Gramos), Cubos medianos, Dorado",
+          "Aceite vegetal (5 Mililitros), Líquido, Calentado"
+        ],
+        "prep": "",
+        "assignedMeal": "Comida",
+        "portions": 1
+      },
+      {
+        "id": "160842",
+        "title": "Bistec con nopales en salsa verde",
+        "category": "Comida",
+        "time": "35 min",
+        "cals": "675",
+        "price": 0,
+        "img": "http://127.0.0.1:5050/api/images/160842",
+        "ingredients_raw": [
+          {
+            "name": "Nopales",
+            "unit": "Gramos",
+            "qty": 150,
+            "forma": "Cuadros  medianos",
+            "proceso": "Cocido"
+          },
+          {
+            "name": "Bistec",
+            "unit": "Gramos",
+            "qty": 250,
+            "forma": "Rebanadas",
+            "proceso": "Cocido"
+          },
+          {
+            "name": "Tomate",
+            "unit": "Gramos",
+            "qty": 250,
+            "forma": "Cubos chicos",
+            "proceso": "Sofrito"
+          },
+          {
+            "name": "Cilantro",
+            "unit": "Gramos",
+            "qty": 5,
+            "forma": "Picado fino",
+            "proceso": "Crudo"
+          },
+          {
+            "name": "Cebolla",
+            "unit": "Gramos",
+            "qty": 38,
+            "forma": "Picado fino",
+            "proceso": "Sofrito"
+          },
+          {
+            "name": "Chile serrano",
+            "unit": "Gramos",
+            "qty": 15,
+            "forma": "Picado fino",
+            "proceso": "Sofrito"
+          },
+          {
+            "name": "Sal",
+            "unit": "Gramos",
+            "qty": 3,
+            "forma": "Natural",
+            "proceso": "Integrado"
+          },
+          {
+            "name": "Caldo de pollo",
+            "unit": "Gramos",
+            "qty": 3,
+            "forma": "Harina",
+            "proceso": "Integrado"
+          },
+          {
+            "name": "Tortilla de maíz",
+            "unit": "Piezas",
+            "qty": 4,
+            "forma": "Entero",
+            "proceso": "Calentado"
+          },
+          {
+            "name": "Aceite vegetal",
+            "unit": "Mililitros",
+            "qty": 5,
+            "forma": "Líquido",
+            "proceso": "Calentado"
+          }
+        ],
+        "ingredients": [
+          "Nopales (150 Gramos), Cuadros  medianos, Cocido",
+          "Bistec (250 Gramos), Rebanadas, Cocido",
+          "Tomate (250 Gramos), Cubos chicos, Sofrito",
+          "Cilantro (5 Gramos), Picado fino, Crudo",
+          "Cebolla (38 Gramos), Picado fino, Sofrito",
+          "Chile serrano (15 Gramos), Picado fino, Sofrito",
+          "Sal (3 Gramos), Natural, Integrado",
+          "Caldo de pollo (3 Gramos), Harina, Integrado",
+          "Tortilla de maíz (4 Piezas), Entero, Calentado",
+          "Aceite vegetal (5 Mililitros), Líquido, Calentado"
+        ],
+        "prep": "",
+        "assignedMeal": "Cena",
+        "portions": 1
+      },
+      {
+        "id": "602910",
+        "title": "Yogur con fruta y chía",
+        "category": "Colación",
+        "time": "5 min",
+        "cals": "280",
+        "price": 0,
+        "img": "http://127.0.0.1:5050/api/images/602910",
+        "ingredients_raw": [
+          {
+            "name": "Yogur natural",
+            "unit": "Gramos",
+            "qty": 145,
+            "forma": "Natural",
+            "proceso": "Crudo"
+          },
+          {
+            "name": "Plátano",
+            "unit": "Gramos",
+            "qty": 60,
+            "forma": "Rebanadas",
+            "proceso": "Crudo"
+          },
+          {
+            "name": "Fresa",
+            "unit": "Gramos",
+            "qty": 60,
+            "forma": "Cubos chicos",
+            "proceso": "Crudo"
+          },
+          {
+            "name": "Chía",
+            "unit": "Gramos",
+            "qty": 10,
+            "forma": "Semillas",
+            "proceso": "Integrado"
+          },
+          {
+            "name": "Miel",
+            "unit": "Gramos",
+            "qty": 10,
+            "forma": "Líquido",
+            "proceso": "Integrado"
+          }
+        ],
+        "ingredients": [
+          "Yogur natural (145 Gramos), Natural, Crudo",
+          "Plátano (60 Gramos), Rebanadas, Crudo",
+          "Fresa (60 Gramos), Cubos chicos, Crudo",
+          "Chía (10 Gramos), Semillas, Integrado",
+          "Miel (10 Gramos), Líquido, Integrado"
+        ],
+        "prep": "",
+        "assignedMeal": "Colación",
+        "portions": 1
+      }
+    ],
+    "1": [
+      {
+        "id": "108633",
+        "title": "Omellet de huevo con jamon y panela",
+        "category": "Desayuno",
+        "time": "18 min",
+        "cals": "550",
+        "price": 0,
+        "img": "http://127.0.0.1:5050/api/images/108633",
+        "ingredients_raw": [
+          {
+            "name": "Huevo",
+            "unit": "Piezas",
+            "qty": 3,
+            "forma": "Entero",
+            "proceso": "Cocido"
+          },
+          {
+            "name": "Queso panela",
+            "unit": "Gramos",
+            "qty": 75,
+            "forma": "Cubos chicos",
+            "proceso": "Integrado"
+          },
+          {
+            "name": "Jamón de pavo",
+            "unit": "Gramos",
+            "qty": 75,
+            "forma": "Cuadros chicos",
+            "proceso": "Sofrito"
+          },
+          {
+            "name": "Aceite vegetal",
+            "unit": "Mililitros",
+            "qty": 5,
+            "forma": "Líquido",
+            "proceso": "Calentado"
+          },
+          {
+            "name": "Sal",
+            "unit": "Gramos",
+            "qty": 3,
+            "forma": "Natural",
+            "proceso": "Integrado"
+          },
+          {
+            "name": "Aguacate",
+            "unit": "Gramos",
+            "qty": 50,
+            "forma": "Rebanadas",
+            "proceso": "Crudo"
+          }
+        ],
+        "ingredients": [
+          "Huevo (3 Piezas), Entero, Cocido",
+          "Queso panela (75 Gramos), Cubos chicos, Integrado",
+          "Jamón de pavo (75 Gramos), Cuadros chicos, Sofrito",
+          "Aceite vegetal (5 Mililitros), Líquido, Calentado",
+          "Sal (3 Gramos), Natural, Integrado",
+          "Aguacate (50 Gramos), Rebanadas, Crudo"
+        ],
+        "prep": "",
+        "assignedMeal": "Desayuno",
+        "portions": 1
+      },
+      {
+        "id": "912345",
+        "title": "Tostadas de tinga de pollo",
+        "category": "Comida",
+        "time": "35 min",
+        "cals": "450",
+        "price": 0,
+        "img": "http://127.0.0.1:5050/api/images/912345",
+        "ingredients_raw": [
+          {
+            "name": "Pechuga de pollo",
+            "unit": "Gramos",
+            "qty": 150,
+            "forma": "Deshebrado",
+            "proceso": "Cocido"
+          },
+          {
+            "name": "Cebolla",
+            "unit": "Gramos",
+            "qty": 50,
+            "forma": "Pluma",
+            "proceso": "Sofrito"
+          },
+          {
+            "name": "Jitomate",
+            "unit": "Gramos",
+            "qty": 100,
+            "forma": "Cubos chicos",
+            "proceso": "Sofrito"
+          },
+          {
+            "name": "Chile chipotle adobado",
+            "unit": "Gramos",
+            "qty": 10,
+            "forma": "Molido",
+            "proceso": "Integrado"
+          },
+          {
+            "name": "Aceite vegetal",
+            "unit": "Mililitros",
+            "qty": 5,
+            "forma": "Líquido",
+            "proceso": "Calentado"
+          },
+          {
+            "name": "Sal",
+            "unit": "Gramos",
+            "qty": 3,
+            "forma": "Natural",
+            "proceso": "Integrado"
+          },
+          {
+            "name": "Tostada de maíz",
+            "unit": "Piezas",
+            "qty": 2,
+            "forma": "Entero",
+            "proceso": "Crudo"
+          },
+          {
+            "name": "Crema",
+            "unit": "Mililitros",
+            "qty": 20,
+            "forma": "Untado",
+            "proceso": "Integrado"
+          },
+          {
+            "name": "Lechuga romana",
+            "unit": "Gramos",
+            "qty": 20,
+            "forma": "Picado fino",
+            "proceso": "Crudo"
+          }
+        ],
+        "ingredients": [
+          "Pechuga de pollo (150 Gramos), Deshebrado, Cocido",
+          "Cebolla (50 Gramos), Pluma, Sofrito",
+          "Jitomate (100 Gramos), Cubos chicos, Sofrito",
+          "Chile chipotle adobado (10 Gramos), Molido, Integrado",
+          "Aceite vegetal (5 Mililitros), Líquido, Calentado",
+          "Sal (3 Gramos), Natural, Integrado",
+          "Tostada de maíz (2 Piezas), Entero, Crudo",
+          "Crema (20 Mililitros), Untado, Integrado",
+          "Lechuga romana (20 Gramos), Picado fino, Crudo"
+        ],
+        "prep": "",
+        "assignedMeal": "Comida",
+        "portions": 1
+      },
+      {
+        "id": "198531",
+        "title": "Tostadas de atún a la mexicana",
+        "category": "Cena",
+        "time": "15 min",
+        "cals": "480",
+        "price": 0,
+        "img": "http://127.0.0.1:5050/api/images/198531",
+        "ingredients_raw": [
+          {
+            "name": "Atún en agua",
+            "unit": "Gramos",
+            "qty": 120,
+            "forma": "Natural",
+            "proceso": "Escurrido"
+          },
+          {
+            "name": "Jitomate",
+            "unit": "Gramos",
+            "qty": 80,
+            "forma": "Cubos chicos",
+            "proceso": "Crudo"
+          },
+          {
+            "name": "Cebolla",
+            "unit": "Gramos",
+            "qty": 20,
+            "forma": "Picado fino",
+            "proceso": "Crudo"
+          },
+          {
+            "name": "Chile serrano",
+            "unit": "Gramos",
+            "qty": 10,
+            "forma": "Picado fino",
+            "proceso": "Crudo"
+          },
+          {
+            "name": "Cilantro",
+            "unit": "Gramos",
+            "qty": 5,
+            "forma": "Picado fino",
+            "proceso": "Crudo"
+          },
+          {
+            "name": "Mayonesa",
+            "unit": "Gramos",
+            "qty": 10,
+            "forma": "Untado",
+            "proceso": "Integrado"
+          },
+          {
+            "name": "Limón",
+            "unit": "Gramos",
+            "qty": 10,
+            "forma": "Líquido",
+            "proceso": "Integrado"
+          },
+          {
+            "name": "Sal",
+            "unit": "Gramos",
+            "qty": 2,
+            "forma": "Natural",
+            "proceso": "Integrado"
+          },
+          {
+            "name": "Tostada de maíz",
+            "unit": "Piezas",
+            "qty": 2,
+            "forma": "Entero",
+            "proceso": "Crudo"
+          },
+          {
+            "name": "Aguacate",
+            "unit": "Gramos",
+            "qty": 50,
+            "forma": "Rebanadas",
+            "proceso": "Crudo"
+          }
+        ],
+        "ingredients": [
+          "Atún en agua (120 Gramos), Natural, Escurrido",
+          "Jitomate (80 Gramos), Cubos chicos, Crudo",
+          "Cebolla (20 Gramos), Picado fino, Crudo",
+          "Chile serrano (10 Gramos), Picado fino, Crudo",
+          "Cilantro (5 Gramos), Picado fino, Crudo",
+          "Mayonesa (10 Gramos), Untado, Integrado",
+          "Limón (10 Gramos), Líquido, Integrado",
+          "Sal (2 Gramos), Natural, Integrado",
+          "Tostada de maíz (2 Piezas), Entero, Crudo",
+          "Aguacate (50 Gramos), Rebanadas, Crudo"
+        ],
+        "prep": "",
+        "assignedMeal": "Cena",
+        "portions": 1
+      },
+      {
+        "id": "765316",
+        "title": "Pepino y jícama con limón y chile",
+        "category": "Colación",
+        "time": "10 min",
+        "cals": "120",
+        "price": 0,
+        "img": "http://127.0.0.1:5050/api/images/765316",
+        "ingredients_raw": [
+          {
+            "name": "Jícama",
+            "unit": "Gramos",
+            "qty": 200,
+            "forma": "Rebanadas",
+            "proceso": "Crudo"
+          },
+          {
+            "name": "Pepino",
+            "unit": "Gramos",
+            "qty": 150,
+            "forma": "Rebanadas",
+            "proceso": "Crudo"
+          },
+          {
+            "name": "Limón",
+            "unit": "Gramos",
+            "qty": 10,
+            "forma": "Líquido",
+            "proceso": "Integrado"
+          },
+          {
+            "name": "Sal",
+            "unit": "Gramos",
+            "qty": 2,
+            "forma": "Natural",
+            "proceso": "Integrado"
+          },
+          {
+            "name": "Chile piquín",
+            "unit": "Gramos",
+            "qty": 2,
+            "forma": "Harina",
+            "proceso": "Integrado"
+          }
+        ],
+        "ingredients": [
+          "Jícama (200 Gramos), Rebanadas, Crudo",
+          "Pepino (150 Gramos), Rebanadas, Crudo",
+          "Limón (10 Gramos), Líquido, Integrado",
+          "Sal (2 Gramos), Natural, Integrado",
+          "Chile piquín (2 Gramos), Harina, Integrado"
+        ],
+        "prep": "",
+        "assignedMeal": "Colación",
+        "portions": 1
+      }
+    ],
+    "2": [],
+    "3": [],
+    "4": [],
+    "5": [
+      {
+        "id": "108633",
+        "title": "Omellet de huevo con jamon y panela",
+        "category": "Desayuno",
+        "time": "18 min",
+        "cals": "550",
+        "price": 0,
+        "img": "http://127.0.0.1:5050/api/images/108633",
+        "ingredients_raw": [
+          {
+            "name": "Huevo",
+            "unit": "Piezas",
+            "qty": 3,
+            "forma": "Entero",
+            "proceso": "Cocido"
+          },
+          {
+            "name": "Queso panela",
+            "unit": "Gramos",
+            "qty": 75,
+            "forma": "Cubos chicos",
+            "proceso": "Integrado"
+          },
+          {
+            "name": "Jamón de pavo",
+            "unit": "Gramos",
+            "qty": 75,
+            "forma": "Cuadros chicos",
+            "proceso": "Sofrito"
+          },
+          {
+            "name": "Aceite vegetal",
+            "unit": "Mililitros",
+            "qty": 5,
+            "forma": "Líquido",
+            "proceso": "Calentado"
+          },
+          {
+            "name": "Sal",
+            "unit": "Gramos",
+            "qty": 3,
+            "forma": "Natural",
+            "proceso": "Integrado"
+          },
+          {
+            "name": "Aguacate",
+            "unit": "Gramos",
+            "qty": 50,
+            "forma": "Rebanadas",
+            "proceso": "Crudo"
+          }
+        ],
+        "ingredients": [
+          "Huevo (3 Piezas), Entero, Cocido",
+          "Queso panela (75 Gramos), Cubos chicos, Integrado",
+          "Jamón de pavo (75 Gramos), Cuadros chicos, Sofrito",
+          "Aceite vegetal (5 Mililitros), Líquido, Calentado",
+          "Sal (3 Gramos), Natural, Integrado",
+          "Aguacate (50 Gramos), Rebanadas, Crudo"
+        ],
+        "prep": "",
+        "assignedMeal": "Desayuno",
+        "portions": 1
+      },
+      {
+        "id": "160842",
+        "title": "Bistec con nopales en salsa verde",
+        "category": "Comida",
+        "time": "35 min",
+        "cals": "675",
+        "price": 0,
+        "img": "http://127.0.0.1:5050/api/images/160842",
+        "ingredients_raw": [
+          {
+            "name": "Nopales",
+            "unit": "Gramos",
+            "qty": 150,
+            "forma": "Cuadros  medianos",
+            "proceso": "Cocido"
+          },
+          {
+            "name": "Bistec",
+            "unit": "Gramos",
+            "qty": 250,
+            "forma": "Rebanadas",
+            "proceso": "Cocido"
+          },
+          {
+            "name": "Tomate",
+            "unit": "Gramos",
+            "qty": 250,
+            "forma": "Cubos chicos",
+            "proceso": "Sofrito"
+          },
+          {
+            "name": "Cilantro",
+            "unit": "Gramos",
+            "qty": 5,
+            "forma": "Picado fino",
+            "proceso": "Crudo"
+          },
+          {
+            "name": "Cebolla",
+            "unit": "Gramos",
+            "qty": 38,
+            "forma": "Picado fino",
+            "proceso": "Sofrito"
+          },
+          {
+            "name": "Chile serrano",
+            "unit": "Gramos",
+            "qty": 15,
+            "forma": "Picado fino",
+            "proceso": "Sofrito"
+          },
+          {
+            "name": "Sal",
+            "unit": "Gramos",
+            "qty": 3,
+            "forma": "Natural",
+            "proceso": "Integrado"
+          },
+          {
+            "name": "Caldo de pollo",
+            "unit": "Gramos",
+            "qty": 3,
+            "forma": "Harina",
+            "proceso": "Integrado"
+          },
+          {
+            "name": "Tortilla de maíz",
+            "unit": "Piezas",
+            "qty": 4,
+            "forma": "Entero",
+            "proceso": "Calentado"
+          },
+          {
+            "name": "Aceite vegetal",
+            "unit": "Mililitros",
+            "qty": 5,
+            "forma": "Líquido",
+            "proceso": "Calentado"
+          }
+        ],
+        "ingredients": [
+          "Nopales (150 Gramos), Cuadros  medianos, Cocido",
+          "Bistec (250 Gramos), Rebanadas, Cocido",
+          "Tomate (250 Gramos), Cubos chicos, Sofrito",
+          "Cilantro (5 Gramos), Picado fino, Crudo",
+          "Cebolla (38 Gramos), Picado fino, Sofrito",
+          "Chile serrano (15 Gramos), Picado fino, Sofrito",
+          "Sal (3 Gramos), Natural, Integrado",
+          "Caldo de pollo (3 Gramos), Harina, Integrado",
+          "Tortilla de maíz (4 Piezas), Entero, Calentado",
+          "Aceite vegetal (5 Mililitros), Líquido, Calentado"
+        ],
+        "prep": "",
+        "assignedMeal": "Comida",
+        "portions": 1
+      },
+      {
+        "id": "937834",
+        "title": "Molletes con pico de gallo",
+        "category": "Cena",
+        "time": "20 min",
+        "cals": "720",
+        "price": 0,
+        "img": "http://127.0.0.1:5050/api/images/937834",
+        "ingredients_raw": [
+          {
+            "name": "Bolillo",
+            "unit": "Pieza",
+            "qty": 1,
+            "forma": "Rebanadas",
+            "proceso": "Horneado"
+          },
+          {
+            "name": "Frijoles refritos",
+            "unit": "Gramos",
+            "qty": 120,
+            "forma": "Molido",
+            "proceso": "Calentado"
+          },
+          {
+            "name": "Queso oaxaca",
+            "unit": "Gramos",
+            "qty": 60,
+            "forma": "Deshebrado",
+            "proceso": "Gratinado"
+          },
+          {
+            "name": "Mantequilla",
+            "unit": "Gramos",
+            "qty": 10,
+            "forma": "Untado",
+            "proceso": "Calentado"
+          },
+          {
+            "name": "Tomate",
+            "unit": "Gramos",
+            "qty": 80,
+            "forma": "Cubos chicos",
+            "proceso": "Crudo"
+          },
+          {
+            "name": "Cebolla",
+            "unit": "Gramos",
+            "qty": 20,
+            "forma": "Picado fino",
+            "proceso": "Crudo"
+          },
+          {
+            "name": "Chile serrano",
+            "unit": "Gramos",
+            "qty": 10,
+            "forma": "Picado fino",
+            "proceso": "Crudo"
+          },
+          {
+            "name": "Cilantro",
+            "unit": "Gramos",
+            "qty": 5,
+            "forma": "Picado fino",
+            "proceso": "Crudo"
+          },
+          {
+            "name": "Limón",
+            "unit": "Gramos",
+            "qty": 10,
+            "forma": "Líquido",
+            "proceso": "Integrado"
+          },
+          {
+            "name": "Sal",
+            "unit": "Gramos",
+            "qty": 2,
+            "forma": "Natural",
+            "proceso": "Integrado"
+          }
+        ],
+        "ingredients": [
+          "Bolillo (1 Pieza), Rebanadas, Horneado",
+          "Frijoles refritos (120 Gramos), Molido, Calentado",
+          "Queso oaxaca (60 Gramos), Deshebrado, Gratinado",
+          "Mantequilla (10 Gramos), Untado, Calentado",
+          "Tomate (80 Gramos), Cubos chicos, Crudo",
+          "Cebolla (20 Gramos), Picado fino, Crudo",
+          "Chile serrano (10 Gramos), Picado fino, Crudo",
+          "Cilantro (5 Gramos), Picado fino, Crudo",
+          "Limón (10 Gramos), Líquido, Integrado",
+          "Sal (2 Gramos), Natural, Integrado"
+        ],
+        "prep": "",
+        "assignedMeal": "Cena",
+        "portions": 1
+      },
+      {
+        "id": "765316",
+        "title": "Pepino y jícama con limón y chile",
+        "category": "Colación",
+        "time": "10 min",
+        "cals": "120",
+        "price": 0,
+        "img": "http://127.0.0.1:5050/api/images/765316",
+        "ingredients_raw": [
+          {
+            "name": "Jícama",
+            "unit": "Gramos",
+            "qty": 200,
+            "forma": "Rebanadas",
+            "proceso": "Crudo"
+          },
+          {
+            "name": "Pepino",
+            "unit": "Gramos",
+            "qty": 150,
+            "forma": "Rebanadas",
+            "proceso": "Crudo"
+          },
+          {
+            "name": "Limón",
+            "unit": "Gramos",
+            "qty": 10,
+            "forma": "Líquido",
+            "proceso": "Integrado"
+          },
+          {
+            "name": "Sal",
+            "unit": "Gramos",
+            "qty": 2,
+            "forma": "Natural",
+            "proceso": "Integrado"
+          },
+          {
+            "name": "Chile piquín",
+            "unit": "Gramos",
+            "qty": 2,
+            "forma": "Harina",
+            "proceso": "Integrado"
+          }
+        ],
+        "ingredients": [
+          "Jícama (200 Gramos), Rebanadas, Crudo",
+          "Pepino (150 Gramos), Rebanadas, Crudo",
+          "Limón (10 Gramos), Líquido, Integrado",
+          "Sal (2 Gramos), Natural, Integrado",
+          "Chile piquín (2 Gramos), Harina, Integrado"
+        ],
+        "prep": "",
+        "assignedMeal": "Colación",
+        "portions": 1
+      }
+    ],
+    "6": []
+  },
+  "dynamicDays": [
+    {
+      "dayName": "Mi ",
+      "dateStr": "14 Ene",
+      "fullDate": "2026-01-14T22:34:29.247Z",
+      "isTomorrow": true
+    },
+    {
+      "dayName": "Jue",
+      "dateStr": "15 Ene",
+      "fullDate": "2026-01-15T22:34:29.247Z",
+      "isTomorrow": false
+    },
+    {
+      "dayName": "Vie",
+      "dateStr": "16 Ene",
+      "fullDate": "2026-01-16T22:34:29.247Z",
+      "isTomorrow": false
+    },
+    {
+      "dayName": "Sáb",
+      "dateStr": "17 Ene",
+      "fullDate": "2026-01-17T22:34:29.247Z",
+      "isTomorrow": false
+    },
+    {
+      "dayName": "Dom",
+      "dateStr": "18 Ene",
+      "fullDate": "2026-01-18T22:34:29.247Z",
+      "isTomorrow": false
+    },
+    {
+      "dayName": "Lun",
+      "dateStr": "19 Ene",
+      "fullDate": "2026-01-19T22:34:29.247Z",
+      "isTomorrow": false
+    },
+    {
+      "dayName": "Mar",
+      "dateStr": "20 Ene",
+      "fullDate": "2026-01-20T22:34:29.247Z",
+      "isTomorrow": false
+    }
+  ],
+  "excludedIngredients": [
+    "Mayonesa",
+    "Sal",
+    "Aceite vegetal",
+    "Tortilla de maíz",
+    "Atún en agua",
+    "Cebolla",
+    "Queso panela",
+    "Limón"
+  ],
+  "clientMeta": {
+    "uiVersion": "publicweb-v1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"
+  },
+  "schema_version": 1
+}

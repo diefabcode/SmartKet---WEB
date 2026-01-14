@@ -78,8 +78,12 @@ async function loadIngredientsMetaFromApi() {
 }
 
 
-// --- CATEGORÍAS DINÁMICAS (derivadas de hojas del Excel) ---
-function _deriveCategoriesFromRecipes(list) {
+// --- CATEGORÍAS DE FILTRO (derivadas de hojas del Excel vía recipe.category) ---
+// Importante: esto SOLO afecta el panel de filtros.
+// Las tarjetas (asignación de horario) siguen con 4 categorías fijas (Desayuno/Comida/Cena/Colación).
+let recipeFilterCategories = [];
+
+function _deriveFilterCategoriesFromRecipes(list) {
     const seen = new Set();
     const inOrder = [];
     (list || []).forEach(r => {
@@ -97,43 +101,11 @@ function _deriveCategoriesFromRecipes(list) {
     return ordered;
 }
 
-function _setCategoriesFromRecipes(list) {
-    categories = _deriveCategoriesFromRecipes(list);
-    // Los módulos (recipes.cards.js) leen window.categories
-    window.categories = categories;
-}
-
-function _iconForCategory(cat) {
-    const c = String(cat || "").toLowerCase();
-    if (c.includes("desay")) return "ph-coffee";
-    if (c.includes("comid")) return "ph-bowl-food";
-    if (c.includes("cena")) return "ph-moon-stars";
-    if (c.includes("colac")) return "ph-apple";
-    return "ph-bowl-food";
-}
-
-function _shortLabel(cat) {
-    const s = String(cat || "").trim();
-    if (!s) return "—";
-    // Etiquetas cortas tipo "Des", "Com", "Cen", "Col"
-    const lower = s.toLowerCase();
-    if (lower.includes("desay")) return "Des";
-    if (lower.includes("comid")) return "Com";
-    if (lower.includes("cena")) return "Cen";
-    if (lower.includes("colac")) return "Col";
-    return s.length <= 3 ? s : s.slice(0, 3);
-}
-
-function _defaultMeal() {
-    if (Array.isArray(categories) && categories.includes('Comida')) return 'Comida';
-    return (Array.isArray(categories) && categories[0]) ? categories[0] : 'Comida';
-}
-
 function renderDynamicCategoryFilters() {
     const container = document.getElementById('filter-cats');
     if (!container) return;
 
-    const cats = Array.isArray(categories) ? categories : [];
+    const cats = Array.isArray(recipeFilterCategories) ? recipeFilterCategories : [];
     container.innerHTML = cats.map(cat => {
         const safeVal = String(cat).replace(/"/g, '&quot;');
         return `
@@ -145,23 +117,9 @@ function renderDynamicCategoryFilters() {
     }).join('');
 }
 
-function renderDynamicModalAddButtons() {
-    const container = document.getElementById('modal-add-buttons');
-    if (!container) return;
-
-    const cats = Array.isArray(categories) ? categories : [];
-    container.innerHTML = cats.map(cat => {
-        const icon = _iconForCategory(cat);
-        const label = _shortLabel(cat);
-        const safeJs = String(cat).replace(/'/g, "\'");
-        return `<button onclick="addCurrentRecipeFromModal('${safeJs}')" class="btn-meal-img"><i class="ph-fill ${icon}"></i><span>${label}</span></button>`;
-    }).join('');
-}
-
-function initDynamicCategoriesUI() {
-    _setCategoriesFromRecipes(recipes);
+function initRecipeCategoryFilters() {
+    recipeFilterCategories = _deriveFilterCategoriesFromRecipes(recipes);
     renderDynamicCategoryFilters();
-    renderDynamicModalAddButtons();
 }
 
 
@@ -240,7 +198,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     // ✅ Meta de ingredientes (categorías desde Ingredientes.xlsx)
     await loadIngredientsMetaFromApi();
 
-    initDynamicCategoriesUI();
+    initRecipeCategoryFilters();
 
     SmartKetRecipes.renderRecipes(recipes);
     renderCalendarDays();
@@ -529,8 +487,150 @@ function renderOrderSummary() {
     container.innerHTML = html;
 
     // ✅ Cotización vendible
-    renderOrderQuote();
+    renderOrderQuotePreserveScroll();
 
+}
+
+
+// ============================
+// ✅ Quote: selector de opción/marca (Iteración #2)
+// ============================
+function _escapeHtml(str) {
+    return String(str ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+}
+
+function _escapeAttr(str) {
+    // Para atributos HTML (data-*)
+    return _escapeHtml(str);
+}
+
+function _safeOfferIndex(v) {
+    const n = Number(v);
+    if (!Number.isFinite(n) || n < 0) return null;
+    return Math.floor(n);
+}
+
+function _getOfferOverridesPayload() {
+    if (typeof getOfferOverrides !== 'function') return {};
+    const raw = getOfferOverrides() || {};
+    const clean = {};
+    Object.keys(raw).forEach(k => {
+        const key = String(k || '').trim();
+        if (!key) return;
+        const idx = _safeOfferIndex(raw[k]);
+        if (idx === null) return;
+        clean[key] = idx;
+    });
+    return clean;
+}
+
+function _formatOfferLabel(off, idx) {
+    // Label corto, claro (sin saturar UI)
+    const brand = (off && off.brand) ? String(off.brand).trim() : '';
+    const pres = (off && off.presentation) ? String(off.presentation).trim() : '';
+    const qty = (off && off.qty != null) ? String(off.qty).trim() : '';
+    const unit = (off && off.unit) ? String(off.unit).trim() : '';
+    const place = (off && off.place) ? String(off.place).trim() : '';
+
+    let label = brand || `Opción ${idx + 1}`;
+    if (pres) label += ` · ${pres}`;
+    if (qty && unit) label += ` · ${qty} ${unit}`;
+    if (place) label += ` · ${place}`;
+    return label;
+}
+
+function _renderOfferSelector(it) {
+    const offers = Array.isArray(it?.offers) ? it.offers : [];
+    if (offers.length <= 1) return '';
+
+    const ing = String(it?.ingredient ?? '').trim();
+    if (!ing) return '';
+
+    // Preferimos: selected_offer_index (backend) > override guardado (frontend) > 0
+    let selected = _safeOfferIndex(it?.selected_offer_index);
+    if (selected === null && typeof getOfferOverride === 'function') {
+        selected = _safeOfferIndex(getOfferOverride(ing));
+    }
+    if (selected === null) selected = 0;
+
+    const opts = offers.map((off, i) => {
+        const label = _formatOfferLabel(off, i);
+        const sel = (i === selected) ? 'selected' : '';
+        return `<option value="${i}" ${sel}>${_escapeHtml(label)}</option>`;
+    }).join('');
+
+    return `
+        <div class="mt-2">
+            <label class="block text-[10px] font-extrabold text-slate-500 uppercase tracking-wide">Opción</label>
+            <select data-offer-select="1" data-ingredient="${_escapeAttr(ing)}"
+                class="mt-1 w-full rounded-lg border border-slate-200 bg-white px-2.5 py-2 text-xs font-bold text-slate-700 focus:outline-none focus:ring-2 focus:ring-orange-200">
+                ${opts}
+            </select>
+        </div>
+    `;
+}
+
+/* ==========================================================
+   ✅ FIX "salto feo" al cambiar marca/opción
+   - Cuando se cambia el select, se recotiza (renderOrderQuote)
+   - Pero renderOrderQuote re-renderiza el HTML y eso puede:
+       - resetear scroll del contenedor
+       - mover el scroll de la página (jump visual)
+   - Solución: envolver la recotización guardando/restaurando scroll.
+   ========================================================== */
+function renderOrderQuotePreserveScroll(anchorIngredient) {
+    // Guardar scroll de página (o del scroller principal)
+    const scroller = document.scrollingElement || document.documentElement;
+    const pageTop = scroller ? scroller.scrollTop : (window.scrollY || 0);
+
+    // Guardar scroll del contenedor de items (si es scrollable)
+    const itemsEl = document.getElementById('quote-items');
+    const itemsTop = itemsEl ? itemsEl.scrollTop : 0;
+
+    // Ejecutar cotización normal y restaurar scroll en el siguiente frame
+    return Promise.resolve()
+        .then(() => renderOrderQuote())
+        .then(() => {
+            requestAnimationFrame(() => {
+                try {
+                    if (itemsEl) itemsEl.scrollTop = itemsTop;
+                    if (scroller) scroller.scrollTop = pageTop;
+                    else window.scrollTo(0, pageTop);
+                } catch (_) { }
+
+                // Extra (suave): si el navegador movió el foco raro, lo dejamos,
+                // pero NO hacemos scrollIntoView para no forzar otro salto.
+                // anchorIngredient se deja por si luego quieres extender esta lógica.
+                void anchorIngredient;
+            });
+        });
+}
+
+function _bindOfferSelectors(containerEl) {
+    if (!containerEl) return;
+    const sels = containerEl.querySelectorAll('select[data-offer-select="1"]');
+    sels.forEach(sel => {
+        sel.addEventListener('change', () => {
+            const ing = sel.getAttribute('data-ingredient') || '';
+            const idx = _safeOfferIndex(sel.value);
+            if (idx === null) return;
+
+            if (typeof setOfferOverride === 'function') {
+                setOfferOverride(ing, idx);
+            } else {
+                // fallback (no debería pasar)
+                window.offerOverrides = window.offerOverrides || {};
+                window.offerOverrides[ing] = idx;
+            }
+            // ✅ Recotiza SIN salto feo
+            renderOrderQuotePreserveScroll(ing);
+        });
+    });
 }
 
 async function renderOrderQuote() {
@@ -548,11 +648,18 @@ async function renderOrderQuote() {
     };
 
     try {
+        // ✅ Anti-jump: NO vaciar el contenedor antes del fetch (evita flash/reflow).
+        // Congela la altura actual para que el layout no "brinque" mientras llega la nueva cotización.
         statusEl.textContent = 'Calculando...';
-        itemsEl.innerHTML = '';
+
+        const __prevMinHeight = itemsEl.style.minHeight;
+        const __freezeH = itemsEl.offsetHeight;
+        if (__freezeH) itemsEl.style.minHeight = `${__freezeH}px`;
+        itemsEl.classList.add('sk-quote-loading');
+
+        // Mantén el total y el desglose visible hasta que llegue la respuesta (actualización "en vivo" sin salto).
         issuesEl.classList.add('hidden');
         issuesEl.textContent = '';
-        totalEl.textContent = fmtMoney(0);
 
         // Construir payload en formato que espera el backend: { plan: [ [ {id,title,portions,ingredients:[{name,unit,qty}]} ] ] }
         const planPayload = dynamicDays.map((_, dayIdx) => {
@@ -576,16 +683,28 @@ async function renderOrderQuote() {
             });
         });
 
+
+        // Overrides opcionales (Iteración #2): { "Chorizo": 1, ... }
+        const offerOverridesPayload = _getOfferOverridesPayload();
+        const quotePayload = { plan: planPayload };
+        if (offerOverridesPayload && Object.keys(offerOverridesPayload).length) {
+            quotePayload.offerOverrides = offerOverridesPayload;
+        }
+
         const res = await fetch(`${API_BASE}/api/orders/quote`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ plan: planPayload })
+            body: JSON.stringify(quotePayload)
         });
 
         const data = await res.json().catch(() => null);
         if (!res.ok || !data || data.ok === false) {
             const msg = (data && (data.error || data.message)) ? String(data.error || data.message) : `HTTP ${res.status}`;
             statusEl.textContent = `No se pudo cotizar (${msg}).`;
+
+            // ✅ Anti-jump: liberar loading aunque falle
+            itemsEl.classList.remove('sk-quote-loading');
+            itemsEl.style.minHeight = __prevMinHeight;
             return;
         }
 
@@ -601,7 +720,12 @@ async function renderOrderQuote() {
             issuesEl.textContent = 'Avisos: ' + issues.join(' | ');
         }
 
-        if (!items.length) return;
+        if (!items.length) {
+            // ✅ Anti-jump: liberar congelamiento aunque no haya items
+            itemsEl.classList.remove('sk-quote-loading');
+            itemsEl.style.minHeight = __prevMinHeight;
+            return;
+        }
 
         itemsEl.innerHTML = items.map(it => {
             const mode = it.sell_mode === 'bulk' ? 'Granel' : 'Empaque';
@@ -618,6 +742,7 @@ async function renderOrderQuote() {
                                 <div class="text-xs text-slate-600 mt-2">
                                     Requerido: <span class="font-semibold">${it.required_qty} ${it.unit}</span> · Precio unitario: <span class="font-semibold">${fmtMoney(it.unit_price)} / ${it.unit}</span>
                                 </div>
+                                ${_renderOfferSelector(it)}
                             </div>
                             <div class="text-sm font-black text-slate-900">${fmtMoney(it.line_total)}</div>
                         </div>
@@ -640,14 +765,28 @@ async function renderOrderQuote() {
                                 Precio por empaque: <span class="font-semibold">${fmtMoney(it.unit_price)}</span>
                                 ${Number(it.waste_qty || 0) > 0 ? ` · Desperdicio aprox: <span class="font-semibold">${it.waste_qty} ${it.package_unit}</span>` : ''}
                             </div>
+                            ${_renderOfferSelector(it)}
                         </div>
                         <div class="text-sm font-black text-slate-900">${fmtMoney(it.line_total)}</div>
                     </div>
                 </div>
             `;
         }).join('');
+
+        _bindOfferSelectors(itemsEl);
+
+        // ✅ Anti-jump: liberar congelamiento de altura y estado loading
+        itemsEl.classList.remove('sk-quote-loading');
+        itemsEl.style.minHeight = __prevMinHeight;
     } catch (err) {
         statusEl.textContent = 'No se pudo cotizar (error de red o CORS).';
+
+        // ✅ Anti-jump: si falla, quitar estado loading y devolver altura normal (sin borrar lo previo)
+        try {
+            itemsEl.classList.remove('sk-quote-loading');
+            itemsEl.style.minHeight = __prevMinHeight;
+        } catch (_) { }
+
         // console.error(err);
     }
 }
@@ -721,6 +860,7 @@ function clearAll() {
         updateDayView();
         checkOrderBadge();
         excludedIngredients.clear();
+        if (typeof clearOfferOverrides === 'function') clearOfferOverrides();
     }
 }
 
