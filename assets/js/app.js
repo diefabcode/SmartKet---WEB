@@ -712,6 +712,27 @@ async function renderOrderQuote() {
         const issues = Array.isArray(data.issues) ? data.issues : [];
         const total = Number(data.order_total ?? 0);
 
+        // ✅ Persistir selección de ofertas (incluye defaults) para que al crear el pedido
+        // el JSON final ya traiga qué marca/presentación quedó elegida por ingrediente,
+        // y WPF NO tenga que recalcular nada.
+        //
+        // Nota: solo persistimos ingredientes con múltiples ofertas.
+        if (typeof setOfferOverride === 'function') {
+            try {
+                items.forEach(it => {
+                    const ing = String(it?.ingredient ?? '').trim();
+                    if (!ing) return;
+                    const offers = Array.isArray(it?.offers) ? it.offers : [];
+                    if (offers.length <= 1) return;
+                    const sel = _safeOfferIndex(it?.selected_offer_index);
+                    const def = _safeOfferIndex(it?.default_offer_index);
+                    const idx = (sel !== null) ? sel : ((def !== null) ? def : 0);
+                    setOfferOverride(ing, idx);
+                });
+            } catch (_) { }
+        }
+
+
         totalEl.textContent = fmtMoney(total);
         statusEl.textContent = items.length ? 'Cotización estimada' : 'No hay items para cotizar (revisa tu plan).';
 
@@ -1179,6 +1200,7 @@ function sendOrder() {
         plan: (typeof plan !== 'undefined' ? plan : null),
         dynamicDays: (typeof dynamicDays !== 'undefined' ? dynamicDays : null),
         excludedIngredients: (typeof excludedIngredients !== 'undefined' ? Array.from(excludedIngredients) : []),
+        offerOverrides: _getOfferOverridesPayload(),
         clientMeta: {
             // En esta fase NO pedimos datos personales al usuario
             uiVersion: "publicweb-v1",

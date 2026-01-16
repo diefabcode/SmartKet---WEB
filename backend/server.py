@@ -3,6 +3,7 @@ import json
 import os
 import secrets
 import math
+import re
 from datetime import datetime, timezone
 import smtplib
 from email.message import EmailMessage
@@ -564,6 +565,533 @@ def _quote_sellable_items(agg, catalog, offer_overrides=None):
     items.sort(key=lambda x: (x.get("sell_mode", ""), x.get("ingredient", "").lower()))
     return items, round(total, 2), issues
 
+def _iso_date_from_dynamic_day(full_date: str) -> str:
+    """Convierte dynamicDays[i].fullDate a 'YYYY-MM-DD'. Acepta ISO con 'Z'."""
+    if not full_date:
+        raise ValueError("fullDate vacío")
+    s = str(full_date).strip()
+    if s.endswith("Z"):
+        s = s[:-1] + "+00:00"
+    # fromisoformat requiere offset explícito si hay zona
+    dtv = datetime.fromisoformat(s)
+    return dtv.date().isoformat()
+
+
+def _safe_days_from_dynamic_days(dynamic_days) -> list:
+    """Devuelve lista ['YYYY-MM-DD', ...] con el mismo orden que dynamicDays."""
+    if not isinstance(dynamic_days, list):
+        return []
+    out = []
+    for d in dynamic_days:
+        try:
+            out.append(_iso_date_from_dynamic_day(d.get("fullDate")))
+        except Exception:
+            # fallback: intenta parsear dateStr si ya viniera como YYYY-MM-DD
+            fd = (d.get("fullDate") or d.get("dateStr") or "").strip()
+            if re.match(r"^\d{4}-\d{2}-\d{2}$", fd):
+                out.append(fd)
+            else:
+                out.append("")
+    return out
+
+
+def _norm_key(s: str) -> str:
+    return str(s or "").strip().lower()
+
+# ----------------------------
+# PurchaseSnapshot helpers (contrato fuerte para WPF)
+# ----------------------------
+
+def _strip_accents(s: str) -> str:
+    s = str(s or "")
+    # Mantener simple (sin dependencias externas)
+    return (s
+            .replace("á", "a").replace("é", "e").replace("í", "i").replace("ó", "o").replace("ú", "u")
+            .replace("Á", "a").replace("É", "e").replace("Í", "i").replace("Ó", "o").replace("Ú", "u")
+            .replace("ñ", "n").replace("Ñ", "n"))
+
+
+def _collapse_spaces(s: str) -> str:
+    return re.sub(r"\s+", " ", str(s or "").strip())
+
+
+def _norm_key_part(s: str) -> str:
+    """Normaliza para keys: sin acentos, sin dobles espacios, lower-case."""
+    s = _strip_accents(str(s or ""))
+    s = _collapse_spaces(s)
+    return s.lower()
+
+
+def _num_to_key(v) -> str:
+    """Convierte números a string estable para key (sin .0)."""
+    if v is None:
+        return "na"
+    try:
+        f = float(v)
+        if f.is_integer():
+            return str(int(f))
+        # evita notación científica si se puede
+        return ("%s" % f).rstrip("0").rstrip(".")
+    except Exception:
+        return _norm_key_part(str(v))
+
+def _maybe_int_num(v):
+    """Devuelve int si es entero, si no float; None si None."""
+    if v is None:
+        return None
+    try:
+        f = float(v)
+        if f.is_integer():
+            return int(f)
+        return float(f)
+    except Exception:
+        return v
+
+
+def _human_num_str(v) -> str:
+    """Formato humano estable (sin .0)."""
+    if v is None:
+        return ""
+    try:
+        f = float(v)
+        if f.is_integer():
+            return str(int(f))
+        return ("%s" % f).rstrip("0").rstrip(".")
+    except Exception:
+        return str(v)
+
+
+def _build_display_label_package(ingredient: str, brand: str, presentation: str, pack_qty, unit: str) -> str:
+    pq = _human_num_str(_maybe_int_num(pack_qty))
+    return f"{ingredient} | {brand} | {presentation} | {pq} {unit}".strip()
+
+
+def _build_display_label_bulk(ingredient: str, brand: str, presentation: str, unit: str, multiple_val) -> str:
+    base = f"{ingredient} | {brand} | {presentation} | {unit}".strip()
+    if multiple_val is not None:
+        mv = _human_num_str(_maybe_int_num(multiple_val))
+        base = f"{base} | múltiplo {mv}"
+    return base
+
+
+def _build_quantity_label_package(packages_needed: int, buy_qty, unit: str) -> str:
+    base = f"Cantidad: {int(packages_needed)} paquetes"
+    if buy_qty is not None and unit:
+        bq = _human_num_str(_maybe_int_num(buy_qty))
+        base = f"{base} ({bq} {unit} total)"
+    return base
+
+
+def _build_quantity_label_bulk(buy_qty, unit: str) -> str:
+    bq = _human_num_str(_maybe_int_num(buy_qty))
+    return f"Cantidad: {bq} {unit}".strip()
+
+
+def _unit_for_snapshot(canon_unit: str) -> str:
+    """Snapshot usa unidades humanas (ej: ml, gramos)."""
+    u = (canon_unit or "").strip().lower()
+    if u == "mililitro":
+        return "ml"
+    if u == "litro":
+        return "l"
+    if u == "kilogramo":
+        return "kg"
+    return u
+
+
+def _canon_offer_unit_qty(offer_unit, offer_qty):
+    """Canoniza qty de la oferta (litro->ml, kilogramo->gramos) igual que la cotización."""
+    ou = offer_unit
+    oq = offer_qty
+    try:
+        oqf = float(oq)
+    except Exception:
+        return None, None
+
+    canon_unit = _norm_unit(ou)
+    canon_qty = float(oqf)
+
+    if canon_unit == "litro":
+        canon_unit = "mililitro"
+        canon_qty = float(oqf) * 1000.0
+    elif canon_unit == "kilogramo":
+        canon_unit = "gramos"
+        canon_qty = float(oqf) * 1000.0
+
+    return canon_unit, canon_qty
+
+
+def _build_purchase_line_key_package(place, ingredient, brand, presentation, unit, pack_qty) -> str:
+    return "|".join([
+        _norm_key_part(place),
+        _norm_key_part(ingredient),
+        _norm_key_part(brand),
+        _norm_key_part(presentation),
+        _norm_key_part(unit),
+        _num_to_key(pack_qty),
+        "package",
+    ])
+
+
+def _build_purchase_line_key_bulk(place, ingredient, brand, presentation, unit, multiple) -> str:
+    mult = _num_to_key(multiple)
+    return "|".join([
+        _norm_key_part(place),
+        _norm_key_part(ingredient),
+        _norm_key_part(brand),
+        _norm_key_part(presentation),
+        _norm_key_part(unit),
+        f"multiple={mult}",
+        "bulk",
+    ])
+
+
+def _find_selected_offer(item: dict):
+    sel = item.get("selected_offer_index")
+    offers = item.get("offers") or []
+    for o in offers:
+        try:
+            if int(o.get("index")) == int(sel):
+                return o
+        except Exception:
+            continue
+    return None
+
+
+def _build_purchase_snapshot_from_quote_items(items: list) -> dict:
+    """Construye purchaseSnapshot.lines[] a partir de quoteSnapshot.items[].
+
+    Estrategia de errores: omite líneas sin oferta válida (ya quedan registradas en quoteSnapshot.issues).
+    """
+    now_utc = datetime.now(timezone.utc).isoformat()
+    out = {
+        "schema_version": 2,
+        "generated_at_utc": now_utc,
+        "semantics": {
+            "package_mode": {
+                "primary_quantity_field": "packages_needed",
+                "buy_qty_definition": "packages_needed * offer.pack_qty"
+            },
+            "bulk_mode": {
+                "primary_quantity_field": "buy_qty",
+                "buy_qty_definition": "required_qty rounded up to offer.multiple when present"
+            }
+        },
+        "lines": [],
+    }
+
+    if not isinstance(items, list):
+        return out
+
+    for it in items:
+        if not isinstance(it, dict):
+            continue
+
+        ingredient = (it.get("ingredient") or "").strip()
+        sell_mode = (it.get("sell_mode") or "").strip().lower()
+        selected_offer_index = it.get("selected_offer_index")
+
+        off = _find_selected_offer(it)
+        if not off:
+            # Sin oferta -> omitimos (issues ya lo reporta en quoteSnapshot)
+            continue
+
+        place = (it.get("offer_place") or off.get("place") or "").strip()
+        brand = (it.get("offer_brand") or off.get("brand") or "").strip()
+        presentation = (it.get("offer_presentation") or off.get("presentation") or "").strip()
+
+        # Canonizar unit/pack_qty para que el snapshot sea estable
+        canon_unit, canon_qty = _canon_offer_unit_qty(off.get("unit"), off.get("qty"))
+        if canon_unit is None or canon_qty is None:
+            continue
+
+        snap_unit = _unit_for_snapshot(canon_unit)
+
+        required_qty = it.get("required_qty")
+        try:
+            required_qty_f = float(required_qty)
+        except Exception:
+            continue
+
+        multiple = off.get("multiple")
+        multiple_val = None
+        try:
+            if multiple is not None and str(multiple).strip() != "":
+                mv = float(multiple)
+                if mv > 0:
+                    multiple_val = mv
+        except Exception:
+            multiple_val = None
+
+        if sell_mode == "package":
+            pack_qty = canon_qty
+            try:
+                packages_needed = int(it.get("packages_needed") or 0)
+            except Exception:
+                packages_needed = 0
+            if packages_needed <= 0:
+                # Recalcular por seguridad
+                packages_needed = int(math.ceil(required_qty_f / float(pack_qty))) if float(pack_qty) > 0 else 0
+
+            buy_qty = float(packages_needed) * float(pack_qty)
+
+            purchase_line_key = _build_purchase_line_key_package(
+                place=place,
+                ingredient=ingredient,
+                brand=brand,
+                presentation=presentation,
+                unit=snap_unit,
+                pack_qty=pack_qty,
+            )
+
+            line = {
+                "purchase_line_key": purchase_line_key,
+                "ingredient": ingredient,
+                "place": place,
+                "sell_mode": "package",
+                "selected_offer_index": int(selected_offer_index) if selected_offer_index is not None else None,
+                "offer": {
+                    "brand": brand,
+                    "presentation": presentation,
+                    "unit": snap_unit,
+                    "pack_qty": _maybe_int_num(pack_qty),
+                    "bulk": False,
+                    "multiple": None,
+                },
+                "required_qty": float(required_qty_f),
+                "packages_needed": int(packages_needed),
+                "buy_qty": float(buy_qty),
+                "rounding_rule": "ceil(required_qty / pack_qty)",
+                "display_label": _build_display_label_package(ingredient, brand, presentation, pack_qty, snap_unit),
+                "quantity_label": _build_quantity_label_package(int(packages_needed), buy_qty, snap_unit),
+            }
+            out["lines"].append(line)
+
+        elif sell_mode == "bulk":
+            # buy_qty: usar sold_qty ya calculado (redondeo por múltiplo si aplica)
+            sold_qty = it.get("sold_qty")
+            try:
+                buy_qty = float(sold_qty) if sold_qty is not None else float(required_qty_f)
+            except Exception:
+                buy_qty = float(required_qty_f)
+
+            mult_for_key = multiple_val if multiple_val is not None else "na"
+
+            purchase_line_key = _build_purchase_line_key_bulk(
+                place=place,
+                ingredient=ingredient,
+                brand=brand,
+                presentation=presentation,
+                unit=snap_unit,
+                multiple=mult_for_key,
+            )
+
+            rounding_rule = "no_rounding"
+            if multiple_val is not None:
+                rounding_rule = "round_up_to_multiple(required_qty, multiple)"
+
+            line = {
+                "purchase_line_key": purchase_line_key,
+                "ingredient": ingredient,
+                "place": place,
+                "sell_mode": "bulk",
+                "selected_offer_index": int(selected_offer_index) if selected_offer_index is not None else None,
+                "offer": {
+                    "brand": brand,
+                    "presentation": presentation,
+                    "unit": snap_unit,
+                    # Para bulk mantenemos pack_qty como el tamaño de la oferta (canonizado) por trazabilidad
+                    "pack_qty": _maybe_int_num(canon_qty),
+                    "bulk": True,
+                    "multiple": int(multiple_val) if (isinstance(multiple_val, float) and multiple_val.is_integer()) else multiple_val,
+                },
+                "required_qty": float(required_qty_f),
+                "packages_needed": None,
+                "buy_qty": float(buy_qty),
+                "rounding_rule": rounding_rule,
+                "display_label": _build_display_label_bulk(ingredient, brand, presentation, snap_unit, multiple_val),
+                "quantity_label": _build_quantity_label_bulk(buy_qty, snap_unit),
+            }
+            out["lines"].append(line)
+
+        else:
+            # modo desconocido -> omitimos
+            continue
+
+    return out
+
+
+def _build_plan_for_quote(plan, excluded_ingredients) -> list:
+    """
+    Convierte el plan 'rico' que manda la WEB (con ingredients_raw, assignedMeal, etc.)
+    a un plan mínimo que entiende /api/orders/quote:
+      plan: [ [ { id,title,portions,ingredients:[{name,unit,qty}]} ] ]
+    Además aplica exclusiones (post-exclusión).
+    """
+    excl = set(_norm_key(x) for x in (excluded_ingredients or []) if str(x or "").strip())
+    # Ordenar días
+    if isinstance(plan, list):
+        day_items_iter = enumerate(plan)
+        max_day = len(plan)
+    elif isinstance(plan, dict):
+        def _k(x):
+            try:
+                return int(x)
+            except Exception:
+                return 10**9
+        keys = sorted(plan.keys(), key=_k)
+        day_items_iter = ((int(k) if str(k).isdigit() else k, plan[k]) for k in keys)
+        max_day = len(keys)
+    else:
+        return []
+
+    # Construimos lista por índice (0..n-1) para estabilidad
+    out = [[] for _ in range(max_day)]
+    for day_idx, items in day_items_iter:
+        try:
+            di = int(day_idx)
+        except Exception:
+            continue
+        if di < 0 or di >= len(out):
+            continue
+
+        if not isinstance(items, list):
+            continue
+
+        for it in items:
+            if not isinstance(it, dict):
+                continue
+            rid = str(it.get("id", "")).strip()
+            title = (it.get("title") or "").strip()
+            try:
+                portions = int(it.get("portions", 1) or 1)
+            except Exception:
+                portions = 1
+
+            raw = it.get("ingredients_raw") or []
+            ingredients = []
+            if isinstance(raw, list):
+                for ing in raw:
+                    if not isinstance(ing, dict):
+                        continue
+                    name = (ing.get("name") or "").strip()
+                    if not name:
+                        continue
+                    if _norm_key(name) in excl:
+                        continue
+                    unit = (ing.get("unit") or "").strip()
+                    qty = ing.get("qty", None)
+                    ingredients.append({
+                        "name": name,
+                        "unit": unit,
+                        "qty": qty,
+                    })
+
+            out[di].append({
+                "id": rid,
+                "title": title,
+                "portions": portions,
+                "ingredients": ingredients,
+            })
+
+    return out
+
+
+def _build_recipe_blocks(plan, dynamic_days, excluded_ingredients) -> list:
+    """
+    Construye recipeBlocks[] post-exclusión:
+      { day, slot, recipe{...}, portions, prep, ingredients[] escalados }
+    """
+    days = _safe_days_from_dynamic_days(dynamic_days)
+    excl = set(_norm_key(x) for x in (excluded_ingredients or []) if str(x or "").strip())
+
+    # Normaliza plan a dict por índice para acceder con dayIdx
+    plan_by_day = {}
+    if isinstance(plan, list):
+        for i, items in enumerate(plan):
+            plan_by_day[i] = items
+    elif isinstance(plan, dict):
+        for k, v in plan.items():
+            try:
+                plan_by_day[int(k)] = v
+            except Exception:
+                continue
+
+    blocks = []
+    # Recorremos por len(days) para que el pedido sea estable por fechas reales
+    for day_idx, day_iso in enumerate(days):
+        items = plan_by_day.get(day_idx) or []
+        if not isinstance(items, list):
+            continue
+
+        for it in items:
+            if not isinstance(it, dict):
+                continue
+
+            slot = (it.get("assignedMeal") or "").strip()
+            if slot not in ("Desayuno", "Comida", "Cena", "Colación"):
+                # Si algo raro entra, lo dejamos como string (pero nunca null)
+                slot = slot or "Comida"
+
+            try:
+                portions = int(it.get("portions", 1) or 1)
+            except Exception:
+                portions = 1
+
+            rid = str(it.get("id", "")).strip()
+            title = (it.get("title") or "").strip()
+            prep = (it.get("prep") or "").strip()
+
+            raw = it.get("ingredients_raw") or []
+            ingredients_out = []
+            if isinstance(raw, list):
+                for ing in raw:
+                    if not isinstance(ing, dict):
+                        continue
+                    name = (ing.get("name") or "").strip()
+                    if not name:
+                        continue
+                    if _norm_key(name) in excl:
+                        continue
+
+                    unit = (ing.get("unit") or "").strip()
+                    forma = (ing.get("forma") or "").strip()
+                    proceso = (ing.get("proceso") or "").strip()
+
+                    qty = ing.get("qty", None)
+                    qty_scaled = None
+                    if qty is not None and str(qty).strip() != "":
+                        try:
+                            qty_scaled = float(qty) * float(portions)
+                            # Redondeo suave para evitar basura flotante
+                            qty_scaled = round(qty_scaled, 6)
+                        except Exception:
+                            qty_scaled = qty
+
+                    ingredients_out.append({
+                        "name": name,
+                        "unit": unit,
+                        "qty": qty_scaled,
+                        "form": forma,
+                        "process": proceso,
+                    })
+
+            blocks.append({
+                "day": day_iso,
+                "day_index": day_idx,
+                "slot": slot,
+                "recipe": {
+                    "id": rid,
+                    "title": title,
+                },
+                "portions": portions,
+                "prep": prep,
+                "ingredients": ingredients_out,
+            })
+
+    return blocks
+
+
 def load_config(path: str) -> dict:
     if not path:
         raise ValueError("Config path vacío.")
@@ -833,11 +1361,14 @@ def create_app(config: dict) -> Flask:
             offer_overrides = payload.get("offerOverrides") or payload.get("offer_overrides") or {}
             items, total, issues_quote = _quote_sellable_items(agg, catalog, offer_overrides)
 
+            purchase_snapshot = _build_purchase_snapshot_from_quote_items(items)
+
             return jsonify({
                 "ok": True,
                 "ingredients_xlsx": ingredientes_xlsx,
                 "items": items,
                 "order_total": total,
+                "purchaseSnapshot": purchase_snapshot,
                 "issues": issues_cat + issues_quote,
             })
         except Exception as ex:
@@ -851,16 +1382,74 @@ def create_app(config: dict) -> Flask:
             payload = request.get_json(silent=True) or {}
             order_key = _generate_order_key()
 
+
+            # ------------------------------------------------------------------
+            # Contrato JSON v2 (Iteración 1 + 2)
+            # - recipeBlocks ya vienen POST-EXCLUSIÓN (con day + slot)
+            # - se persisten offerOverrides del cliente (marca/presentación elegida)
+            # - se incluye quoteSnapshot para que WPF pueda generar lista de compra
+            # ------------------------------------------------------------------
+
+            dynamic_days = payload.get("dynamicDays")
+            excluded = payload.get("excludedIngredients", [])
+            offer_overrides = payload.get("offerOverrides") or payload.get("offer_overrides") or {}
+
+            days = _safe_days_from_dynamic_days(dynamic_days)
+            recipe_blocks = _build_recipe_blocks(payload.get("plan"), dynamic_days, excluded)
+
+            quote_snapshot = None
+            quote_issues = []
+            try:
+                excel_path, _res_dir, info, issues_paths = _get_effective_paths(cfg)
+                if issues_paths:
+                    quote_issues.extend(issues_paths)
+                else:
+                    ingredientes_xlsx = _derive_ingredientes_xlsx_path(excel_path)
+                    catalog, issues_cat = _load_ingredients_catalog(ingredientes_xlsx)
+                    quote_issues.extend(issues_cat)
+
+                    plan_for_quote = _build_plan_for_quote(payload.get("plan"), excluded)
+                    agg = _aggregate_plan_ingredients({"plan": plan_for_quote})
+
+                    items, total, issues_quote = _quote_sellable_items(agg, catalog, offer_overrides)
+
+                    quote_issues.extend(issues_quote)
+
+                    quote_snapshot = {
+                        "ingredients_xlsx": ingredientes_xlsx,
+                        "items": items,
+                        "order_total": total,
+                        "issues": quote_issues,
+                    }
+            except Exception as ex2:
+                quote_issues.append(str(ex2))
+                quote_snapshot = {
+                    "items": [],
+                    "order_total": 0.0,
+                    "issues": quote_issues,
+                }
+
+
+            # purchaseSnapshot (contrato fuerte): se congela a partir de quoteSnapshot.items
+            purchase_snapshot = _build_purchase_snapshot_from_quote_items((quote_snapshot or {}).get("items") or [])
             outbox = _orders_outbox_dir(cfg)
+
             order = {
                 "order_key": order_key,
                 "created_at_utc": datetime.now(timezone.utc).isoformat(),
                 "deliveryType": payload.get("deliveryType"),
+                # trazabilidad (raw)
                 "plan": payload.get("plan"),
                 "dynamicDays": payload.get("dynamicDays"),
-                "excludedIngredients": payload.get("excludedIngredients", []),
+                "excludedIngredients": excluded,
                 "clientMeta": payload.get("clientMeta", {}),
-                "schema_version": 1
+                # contrato v2
+                "days": days,
+                "recipeBlocks": recipe_blocks,
+                "offerOverrides": offer_overrides,
+                "quoteSnapshot": quote_snapshot,
+                "purchaseSnapshot": purchase_snapshot,
+                "schema_version": 2
             }
 
             order_json = json.dumps(order, ensure_ascii=False, indent=2).encode("utf-8")

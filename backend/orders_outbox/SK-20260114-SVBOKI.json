@@ -1,0 +1,2672 @@
+{
+  "order_key": "SK-20260114-SVBOKI",
+  "created_at_utc": "2026-01-14T22:35:54.716223+00:00",
+  "deliveryType": "Domicilio",
+  "plan": {
+    "0": [
+      {
+        "id": "676335",
+        "title": "Huevo a la mexicana",
+        "category": "Desayuno",
+        "time": "15 min",
+        "cals": "450",
+        "price": 0,
+        "img": "http://127.0.0.1:5050/api/images/676335",
+        "ingredients_raw": [
+          {
+            "name": "Huevo",
+            "unit": "Piezas",
+            "qty": 3,
+            "forma": "Entero",
+            "proceso": "Cocido"
+          },
+          {
+            "name": "Jitomate",
+            "unit": "Gramos",
+            "qty": 75,
+            "forma": "Cubos chicos",
+            "proceso": "Sofrito"
+          },
+          {
+            "name": "Cebolla",
+            "unit": "Gramos",
+            "qty": 20,
+            "forma": "Picado fino",
+            "proceso": "Sofrito"
+          },
+          {
+            "name": "Chile serrano",
+            "unit": "Gramos",
+            "qty": 20,
+            "forma": "Picado fino",
+            "proceso": "Sofrito"
+          },
+          {
+            "name": "Aceite vegetal",
+            "unit": "Mililitros",
+            "qty": 5,
+            "forma": "Líquido",
+            "proceso": "Calentado"
+          },
+          {
+            "name": "Sal",
+            "unit": "Gramos",
+            "qty": 3,
+            "forma": "Natural",
+            "proceso": "Integrado"
+          },
+          {
+            "name": "Pan integral",
+            "unit": "Rebanadas",
+            "qty": 2,
+            "forma": "Rebanadas",
+            "proceso": "Crudo"
+          }
+        ],
+        "ingredients": [
+          "Huevo (3 Piezas), Entero, Cocido",
+          "Jitomate (75 Gramos), Cubos chicos, Sofrito",
+          "Cebolla (20 Gramos), Picado fino, Sofrito",
+          "Chile serrano (20 Gramos), Picado fino, Sofrito",
+          "Aceite vegetal (5 Mililitros), Líquido, Calentado",
+          "Sal (3 Gramos), Natural, Integrado",
+          "Pan integral (2 Rebanadas), Rebanadas, Crudo"
+        ],
+        "prep": "",
+        "assignedMeal": "Desayuno",
+        "portions": 1
+      },
+      {
+        "id": "222172",
+        "title": "Huevo con espicana y champiñones",
+        "category": "Desayuno",
+        "time": "15 min",
+        "cals": "400",
+        "price": 0,
+        "img": "http://127.0.0.1:5050/api/images/222172",
+        "ingredients_raw": [
+          {
+            "name": "Huevo",
+            "unit": "Piezas",
+            "qty": 3,
+            "forma": "Entero",
+            "proceso": "Cocido"
+          },
+          {
+            "name": "Champiñones",
+            "unit": "Gramos",
+            "qty": 100,
+            "forma": "Rebanadas",
+            "proceso": "Sofrito"
+          },
+          {
+            "name": "Espinaca",
+            "unit": "Gramos",
+            "qty": 30,
+            "forma": "Natural",
+            "proceso": "Sofrito"
+          },
+          {
+            "name": "Aceite vegetal",
+            "unit": "Mililitros",
+            "qty": 5,
+            "forma": "Líquido",
+            "proceso": "Calentado"
+          },
+          {
+            "name": "Sal",
+            "unit": "Gramos",
+            "qty": 3,
+            "forma": "Natural",
+            "proceso": "Integrado"
+          },
+          {
+            "name": "Aguacate",
+            "unit": "Gramos",
+            "qty": 50,
+            "forma": "Rebanadas",
+            "proceso": "Crudo"
+          }
+        ],
+        "ingredients": [
+          "Huevo (3 Piezas), Entero, Cocido",
+          "Champiñones (100 Gramos), Rebanadas, Sofrito",
+          "Espinaca (30 Gramos), Natural, Sofrito",
+          "Aceite vegetal (5 Mililitros), Líquido, Calentado",
+          "Sal (3 Gramos), Natural, Integrado",
+          "Aguacate (50 Gramos), Rebanadas, Crudo"
+        ],
+        "prep": "",
+        "assignedMeal": "Comida",
+        "portions": 1
+      },
+      {
+        "id": "108633",
+        "title": "Omellet de huevo con jamon y panela",
+        "category": "Desayuno",
+        "time": "18 min",
+        "cals": "550",
+        "price": 0,
+        "img": "http://127.0.0.1:5050/api/images/108633",
+        "ingredients_raw": [
+          {
+            "name": "Huevo",
+            "unit": "Piezas",
+            "qty": 3,
+            "forma": "Entero",
+            "proceso": "Cocido"
+          },
+          {
+            "name": "Queso panela",
+            "unit": "Gramos",
+            "qty": 75,
+            "forma": "Cubos chicos",
+            "proceso": "Integrado"
+          },
+          {
+            "name": "Jamón de pavo",
+            "unit": "Gramos",
+            "qty": 75,
+            "forma": "Cuadros chicos",
+            "proceso": "Sofrito"
+          },
+          {
+            "name": "Aceite vegetal",
+            "unit": "Mililitros",
+            "qty": 5,
+            "forma": "Líquido",
+            "proceso": "Calentado"
+          },
+          {
+            "name": "Sal",
+            "unit": "Gramos",
+            "qty": 3,
+            "forma": "Natural",
+            "proceso": "Integrado"
+          },
+          {
+            "name": "Aguacate",
+            "unit": "Gramos",
+            "qty": 50,
+            "forma": "Rebanadas",
+            "proceso": "Crudo"
+          }
+        ],
+        "ingredients": [
+          "Huevo (3 Piezas), Entero, Cocido",
+          "Queso panela (75 Gramos), Cubos chicos, Integrado",
+          "Jamón de pavo (75 Gramos), Cuadros chicos, Sofrito",
+          "Aceite vegetal (5 Mililitros), Líquido, Calentado",
+          "Sal (3 Gramos), Natural, Integrado",
+          "Aguacate (50 Gramos), Rebanadas, Crudo"
+        ],
+        "prep": "",
+        "assignedMeal": "Cena",
+        "portions": 1
+      }
+    ],
+    "1": [
+      {
+        "id": "497388",
+        "title": "Enchiladas de queso",
+        "category": "Desayuno",
+        "time": "22 min",
+        "cals": "550",
+        "price": 0,
+        "img": "http://127.0.0.1:5050/api/images/497388",
+        "ingredients_raw": [
+          {
+            "name": "Tortilla de maíz",
+            "unit": "Piezas",
+            "qty": 4,
+            "forma": "Entero",
+            "proceso": "Calentado"
+          },
+          {
+            "name": "Queso panela",
+            "unit": "Gramos",
+            "qty": 80,
+            "forma": "Cubos chicos",
+            "proceso": "Integrado"
+          },
+          {
+            "name": "Tomate",
+            "unit": "Gramos",
+            "qty": 120,
+            "forma": "Cubos chicos",
+            "proceso": "Sofrito"
+          },
+          {
+            "name": "Chile serrano",
+            "unit": "Gramos",
+            "qty": 20,
+            "forma": "Picado fino",
+            "proceso": "Sofrito"
+          },
+          {
+            "name": "Sal",
+            "unit": "Gramos",
+            "qty": 5,
+            "forma": "Natural",
+            "proceso": "Integrado"
+          },
+          {
+            "name": "Caldo de pollo",
+            "unit": "Gramos",
+            "qty": 5,
+            "forma": "Harina",
+            "proceso": "Integrado"
+          },
+          {
+            "name": "Cilantro",
+            "unit": "Gramos",
+            "qty": 5,
+            "forma": "Picado fino",
+            "proceso": "Crudo"
+          },
+          {
+            "name": "Aceite vegetal",
+            "unit": "Mililitros",
+            "qty": 5,
+            "forma": "Líquido",
+            "proceso": "Calentado"
+          }
+        ],
+        "ingredients": [
+          "Tortilla de maíz (4 Piezas), Entero, Calentado",
+          "Queso panela (80 Gramos), Cubos chicos, Integrado",
+          "Tomate (120 Gramos), Cubos chicos, Sofrito",
+          "Chile serrano (20 Gramos), Picado fino, Sofrito",
+          "Sal (5 Gramos), Natural, Integrado",
+          "Caldo de pollo (5 Gramos), Harina, Integrado",
+          "Cilantro (5 Gramos), Picado fino, Crudo",
+          "Aceite vegetal (5 Mililitros), Líquido, Calentado"
+        ],
+        "prep": "",
+        "assignedMeal": "Desayuno",
+        "portions": 1
+      },
+      {
+        "id": "689174",
+        "title": "Sincronizadas de champiñones",
+        "category": "Desayuno",
+        "time": "18 min",
+        "cals": "560",
+        "price": 0,
+        "img": "http://127.0.0.1:5050/api/images/689174",
+        "ingredients_raw": [
+          {
+            "name": "Tortillas de harina",
+            "unit": "Piezas",
+            "qty": 4,
+            "forma": "Entero",
+            "proceso": "Calentado"
+          },
+          {
+            "name": "Champiñones",
+            "unit": "Gramos",
+            "qty": 100,
+            "forma": "Rebanadas",
+            "proceso": "Sofrito"
+          },
+          {
+            "name": "Queso oaxaca",
+            "unit": "Gramos",
+            "qty": 75,
+            "forma": "Deshebrado",
+            "proceso": "Integrado"
+          },
+          {
+            "name": "Sal",
+            "unit": "Gramos",
+            "qty": 5,
+            "forma": "Natural",
+            "proceso": "Integrado"
+          },
+          {
+            "name": "Aceite vegetal",
+            "unit": "Mililitros",
+            "qty": 5,
+            "forma": "Líquido",
+            "proceso": "Calentado"
+          }
+        ],
+        "ingredients": [
+          "Tortillas de harina (4 Piezas), Entero, Calentado",
+          "Champiñones (100 Gramos), Rebanadas, Sofrito",
+          "Queso oaxaca (75 Gramos), Deshebrado, Integrado",
+          "Sal (5 Gramos), Natural, Integrado",
+          "Aceite vegetal (5 Mililitros), Líquido, Calentado"
+        ],
+        "prep": "",
+        "assignedMeal": "Comida",
+        "portions": 1
+      },
+      {
+        "id": "544133",
+        "title": "Sándwich de jamón y panela",
+        "category": "Desayuno",
+        "time": "350 min",
+        "cals": "10",
+        "price": 0,
+        "img": "http://127.0.0.1:5050/api/images/544133",
+        "ingredients_raw": [
+          {
+            "name": "Pan integral",
+            "unit": "Rebanadas",
+            "qty": 2,
+            "forma": "Rebanadas",
+            "proceso": "Crudo"
+          },
+          {
+            "name": "Jamón de pavo",
+            "unit": "Gramos",
+            "qty": 30,
+            "forma": "Rebanadas",
+            "proceso": "Crudo"
+          },
+          {
+            "name": "Queso panela",
+            "unit": "Gramos",
+            "qty": 30,
+            "forma": "Rebanadas",
+            "proceso": "Crudo"
+          },
+          {
+            "name": "Jitomate",
+            "unit": "Gramos",
+            "qty": 25,
+            "forma": "Rebanadas",
+            "proceso": "Crudo"
+          },
+          {
+            "name": "Aguacate",
+            "unit": "Gramos",
+            "qty": 20,
+            "forma": "Rebanadas",
+            "proceso": "Crudo"
+          },
+          {
+            "name": "Mayonesa",
+            "unit": "Gramos",
+            "qty": 5,
+            "forma": "Untado",
+            "proceso": "Integrado"
+          }
+        ],
+        "ingredients": [
+          "Pan integral (2 Rebanadas), Rebanadas, Crudo",
+          "Jamón de pavo (30 Gramos), Rebanadas, Crudo",
+          "Queso panela (30 Gramos), Rebanadas, Crudo",
+          "Jitomate (25 Gramos), Rebanadas, Crudo",
+          "Aguacate (20 Gramos), Rebanadas, Crudo",
+          "Mayonesa (5 Gramos), Untado, Integrado"
+        ],
+        "prep": "",
+        "assignedMeal": "Cena",
+        "portions": 1
+      },
+      {
+        "id": "544133",
+        "title": "Sándwich de jamón y panela",
+        "category": "Desayuno",
+        "time": "350 min",
+        "cals": "10",
+        "price": 0,
+        "img": "http://127.0.0.1:5050/api/images/544133",
+        "ingredients_raw": [
+          {
+            "name": "Pan integral",
+            "unit": "Rebanadas",
+            "qty": 2,
+            "forma": "Rebanadas",
+            "proceso": "Crudo"
+          },
+          {
+            "name": "Jamón de pavo",
+            "unit": "Gramos",
+            "qty": 30,
+            "forma": "Rebanadas",
+            "proceso": "Crudo"
+          },
+          {
+            "name": "Queso panela",
+            "unit": "Gramos",
+            "qty": 30,
+            "forma": "Rebanadas",
+            "proceso": "Crudo"
+          },
+          {
+            "name": "Jitomate",
+            "unit": "Gramos",
+            "qty": 25,
+            "forma": "Rebanadas",
+            "proceso": "Crudo"
+          },
+          {
+            "name": "Aguacate",
+            "unit": "Gramos",
+            "qty": 20,
+            "forma": "Rebanadas",
+            "proceso": "Crudo"
+          },
+          {
+            "name": "Mayonesa",
+            "unit": "Gramos",
+            "qty": 5,
+            "forma": "Untado",
+            "proceso": "Integrado"
+          }
+        ],
+        "ingredients": [
+          "Pan integral (2 Rebanadas), Rebanadas, Crudo",
+          "Jamón de pavo (30 Gramos), Rebanadas, Crudo",
+          "Queso panela (30 Gramos), Rebanadas, Crudo",
+          "Jitomate (25 Gramos), Rebanadas, Crudo",
+          "Aguacate (20 Gramos), Rebanadas, Crudo",
+          "Mayonesa (5 Gramos), Untado, Integrado"
+        ],
+        "prep": "",
+        "assignedMeal": "Colación",
+        "portions": 1
+      }
+    ],
+    "2": [
+      {
+        "id": "923457",
+        "title": "Calabacitas con elote y queso panela",
+        "category": "Comida",
+        "time": "30 min",
+        "cals": "540",
+        "price": 0,
+        "img": "http://127.0.0.1:5050/api/images/923457",
+        "ingredients_raw": [
+          {
+            "name": "Calabacita",
+            "unit": "Gramos",
+            "qty": 300,
+            "forma": "Cubos medianos",
+            "proceso": "Sofrito"
+          },
+          {
+            "name": "Elote desgranado",
+            "unit": "Gramos",
+            "qty": 80,
+            "forma": "Granos",
+            "proceso": "Sofrito"
+          },
+          {
+            "name": "Jitomate",
+            "unit": "Gramos",
+            "qty": 120,
+            "forma": "Cubos chicos",
+            "proceso": "Sofrito"
+          },
+          {
+            "name": "Cebolla",
+            "unit": "Gramos",
+            "qty": 60,
+            "forma": "Picado fino",
+            "proceso": "Sofrito"
+          },
+          {
+            "name": "Chile serrano",
+            "unit": "Gramos",
+            "qty": 15,
+            "forma": "Picado fino",
+            "proceso": "Sofrito"
+          },
+          {
+            "name": "Queso panela",
+            "unit": "Gramos",
+            "qty": 60,
+            "forma": "Cubos chicos",
+            "proceso": "Integrado"
+          },
+          {
+            "name": "Cilantro",
+            "unit": "Gramos",
+            "qty": 5,
+            "forma": "Picado fino",
+            "proceso": "Crudo"
+          },
+          {
+            "name": "Sal",
+            "unit": "Gramos",
+            "qty": 3,
+            "forma": "Natural",
+            "proceso": "Integrado"
+          },
+          {
+            "name": "Aceite vegetal",
+            "unit": "Mililitros",
+            "qty": 5,
+            "forma": "Líquido",
+            "proceso": "Calentado"
+          },
+          {
+            "name": "Tortilla de maíz",
+            "unit": "Piezas",
+            "qty": 4,
+            "forma": "Entero",
+            "proceso": "Calentado"
+          }
+        ],
+        "ingredients": [
+          "Calabacita (300 Gramos), Cubos medianos, Sofrito",
+          "Elote desgranado (80 Gramos), Granos, Sofrito",
+          "Jitomate (120 Gramos), Cubos chicos, Sofrito",
+          "Cebolla (60 Gramos), Picado fino, Sofrito",
+          "Chile serrano (15 Gramos), Picado fino, Sofrito",
+          "Queso panela (60 Gramos), Cubos chicos, Integrado",
+          "Cilantro (5 Gramos), Picado fino, Crudo",
+          "Sal (3 Gramos), Natural, Integrado",
+          "Aceite vegetal (5 Mililitros), Líquido, Calentado",
+          "Tortilla de maíz (4 Piezas), Entero, Calentado"
+        ],
+        "prep": "",
+        "assignedMeal": "Desayuno",
+        "portions": 1
+      },
+      {
+        "id": "914424",
+        "title": "Picadillo de res con papa y zanahoria",
+        "category": "Comida",
+        "time": "30 min",
+        "cals": "650",
+        "price": 0,
+        "img": "http://127.0.0.1:5050/api/images/914424",
+        "ingredients_raw": [
+          {
+            "name": "Carne molida de res",
+            "unit": "Gramos",
+            "qty": 180,
+            "forma": "Molido",
+            "proceso": "Dorado"
+          },
+          {
+            "name": "Papa",
+            "unit": "Gramos",
+            "qty": 150,
+            "forma": "Cubos medianos",
+            "proceso": "Cocido"
+          },
+          {
+            "name": "Zanahoria",
+            "unit": "Gramos",
+            "qty": 60,
+            "forma": "Cubos chicos",
+            "proceso": "Cocido"
+          },
+          {
+            "name": "Jitomate",
+            "unit": "Gramos",
+            "qty": 200,
+            "forma": "Cubos chicos",
+            "proceso": "Sofrito"
+          },
+          {
+            "name": "Cebolla",
+            "unit": "Gramos",
+            "qty": 60,
+            "forma": "Picado fino",
+            "proceso": "Sofrito"
+          },
+          {
+            "name": "Ajo",
+            "unit": "Gramos",
+            "qty": 5,
+            "forma": "Picado fino",
+            "proceso": "Sofrito"
+          },
+          {
+            "name": "Aceite vegetal",
+            "unit": "Mililitros",
+            "qty": 5,
+            "forma": "Líquido",
+            "proceso": "Calentado"
+          },
+          {
+            "name": "Sal",
+            "unit": "Gramos",
+            "qty": 3,
+            "forma": "Natural",
+            "proceso": "Integrado"
+          },
+          {
+            "name": "Caldo de pollo",
+            "unit": "Gramos",
+            "qty": 3,
+            "forma": "Harina",
+            "proceso": "Integrado"
+          },
+          {
+            "name": "Tortilla de maíz",
+            "unit": "Piezas",
+            "qty": 4,
+            "forma": "Entero",
+            "proceso": "Calentado"
+          }
+        ],
+        "ingredients": [
+          "Carne molida de res (180 Gramos), Molido, Dorado",
+          "Papa (150 Gramos), Cubos medianos, Cocido",
+          "Zanahoria (60 Gramos), Cubos chicos, Cocido",
+          "Jitomate (200 Gramos), Cubos chicos, Sofrito",
+          "Cebolla (60 Gramos), Picado fino, Sofrito",
+          "Ajo (5 Gramos), Picado fino, Sofrito",
+          "Aceite vegetal (5 Mililitros), Líquido, Calentado",
+          "Sal (3 Gramos), Natural, Integrado",
+          "Caldo de pollo (3 Gramos), Harina, Integrado",
+          "Tortilla de maíz (4 Piezas), Entero, Calentado"
+        ],
+        "prep": "",
+        "assignedMeal": "Comida",
+        "portions": 1
+      },
+      {
+        "id": "937834",
+        "title": "Molletes con pico de gallo",
+        "category": "Cena",
+        "time": "20 min",
+        "cals": "720",
+        "price": 0,
+        "img": "http://127.0.0.1:5050/api/images/937834",
+        "ingredients_raw": [
+          {
+            "name": "Bolillo",
+            "unit": "Pieza",
+            "qty": 1,
+            "forma": "Rebanadas",
+            "proceso": "Horneado"
+          },
+          {
+            "name": "Frijoles refritos",
+            "unit": "Gramos",
+            "qty": 120,
+            "forma": "Molido",
+            "proceso": "Calentado"
+          },
+          {
+            "name": "Queso oaxaca",
+            "unit": "Gramos",
+            "qty": 60,
+            "forma": "Deshebrado",
+            "proceso": "Gratinado"
+          },
+          {
+            "name": "Mantequilla",
+            "unit": "Gramos",
+            "qty": 10,
+            "forma": "Untado",
+            "proceso": "Calentado"
+          },
+          {
+            "name": "Tomate",
+            "unit": "Gramos",
+            "qty": 80,
+            "forma": "Cubos chicos",
+            "proceso": "Crudo"
+          },
+          {
+            "name": "Cebolla",
+            "unit": "Gramos",
+            "qty": 20,
+            "forma": "Picado fino",
+            "proceso": "Crudo"
+          },
+          {
+            "name": "Chile serrano",
+            "unit": "Gramos",
+            "qty": 10,
+            "forma": "Picado fino",
+            "proceso": "Crudo"
+          },
+          {
+            "name": "Cilantro",
+            "unit": "Gramos",
+            "qty": 5,
+            "forma": "Picado fino",
+            "proceso": "Crudo"
+          },
+          {
+            "name": "Limón",
+            "unit": "Gramos",
+            "qty": 10,
+            "forma": "Líquido",
+            "proceso": "Integrado"
+          },
+          {
+            "name": "Sal",
+            "unit": "Gramos",
+            "qty": 2,
+            "forma": "Natural",
+            "proceso": "Integrado"
+          }
+        ],
+        "ingredients": [
+          "Bolillo (1 Pieza), Rebanadas, Horneado",
+          "Frijoles refritos (120 Gramos), Molido, Calentado",
+          "Queso oaxaca (60 Gramos), Deshebrado, Gratinado",
+          "Mantequilla (10 Gramos), Untado, Calentado",
+          "Tomate (80 Gramos), Cubos chicos, Crudo",
+          "Cebolla (20 Gramos), Picado fino, Crudo",
+          "Chile serrano (10 Gramos), Picado fino, Crudo",
+          "Cilantro (5 Gramos), Picado fino, Crudo",
+          "Limón (10 Gramos), Líquido, Integrado",
+          "Sal (2 Gramos), Natural, Integrado"
+        ],
+        "prep": "",
+        "assignedMeal": "Cena",
+        "portions": 1
+      },
+      {
+        "id": "977195",
+        "title": "Sopecitos de chorizo con frijol",
+        "category": "Cena",
+        "time": "20 min",
+        "cals": "850",
+        "price": 0,
+        "img": "http://127.0.0.1:5050/api/images/977195",
+        "ingredients_raw": [
+          {
+            "name": "Sopecitos",
+            "unit": "Pieza",
+            "qty": 3,
+            "forma": "Entero",
+            "proceso": "Calentado"
+          },
+          {
+            "name": "Chorizo",
+            "unit": "Gramos",
+            "qty": 80,
+            "forma": "Molido",
+            "proceso": "Dorado"
+          },
+          {
+            "name": "Frijoles refritos",
+            "unit": "Gramos",
+            "qty": 100,
+            "forma": "Molido",
+            "proceso": "Calentado"
+          },
+          {
+            "name": "Lechuga romana",
+            "unit": "Gramos",
+            "qty": 30,
+            "forma": "Picado fino",
+            "proceso": "Crudo"
+          },
+          {
+            "name": "Crema",
+            "unit": "Mililitros",
+            "qty": 20,
+            "forma": "Untado",
+            "proceso": "Integrado"
+          },
+          {
+            "name": "Queso fresco",
+            "unit": "Gramos",
+            "qty": 30,
+            "forma": "Deshebrado",
+            "proceso": "Crudo"
+          },
+          {
+            "name": "Salsa verde",
+            "unit": "Mililitros",
+            "qty": 30,
+            "forma": "Líquido",
+            "proceso": "Integrado"
+          },
+          {
+            "name": "Aceite vegetal",
+            "unit": "Mililitros",
+            "qty": 5,
+            "forma": "Líquido",
+            "proceso": "Calentado"
+          }
+        ],
+        "ingredients": [
+          "Sopecitos (3 Pieza), Entero, Calentado",
+          "Chorizo (80 Gramos), Molido, Dorado",
+          "Frijoles refritos (100 Gramos), Molido, Calentado",
+          "Lechuga romana (30 Gramos), Picado fino, Crudo",
+          "Crema (20 Mililitros), Untado, Integrado",
+          "Queso fresco (30 Gramos), Deshebrado, Crudo",
+          "Salsa verde (30 Mililitros), Líquido, Integrado",
+          "Aceite vegetal (5 Mililitros), Líquido, Calentado"
+        ],
+        "prep": "",
+        "assignedMeal": "Colación",
+        "portions": 1
+      }
+    ],
+    "3": [],
+    "4": [],
+    "5": [],
+    "6": []
+  },
+  "dynamicDays": [
+    {
+      "dayName": "Jue",
+      "dateStr": "15 Ene",
+      "fullDate": "2026-01-15T22:35:14.671Z",
+      "isTomorrow": true
+    },
+    {
+      "dayName": "Vie",
+      "dateStr": "16 Ene",
+      "fullDate": "2026-01-16T22:35:14.671Z",
+      "isTomorrow": false
+    },
+    {
+      "dayName": "Sáb",
+      "dateStr": "17 Ene",
+      "fullDate": "2026-01-17T22:35:14.671Z",
+      "isTomorrow": false
+    },
+    {
+      "dayName": "Dom",
+      "dateStr": "18 Ene",
+      "fullDate": "2026-01-18T22:35:14.671Z",
+      "isTomorrow": false
+    },
+    {
+      "dayName": "Lun",
+      "dateStr": "19 Ene",
+      "fullDate": "2026-01-19T22:35:14.671Z",
+      "isTomorrow": false
+    },
+    {
+      "dayName": "Mar",
+      "dateStr": "20 Ene",
+      "fullDate": "2026-01-20T22:35:14.671Z",
+      "isTomorrow": false
+    },
+    {
+      "dayName": "Mi ",
+      "dateStr": "21 Ene",
+      "fullDate": "2026-01-21T22:35:14.671Z",
+      "isTomorrow": false
+    }
+  ],
+  "excludedIngredients": [
+    "Aceite vegetal",
+    "Caldo de pollo",
+    "Sal",
+    "Salsa verde"
+  ],
+  "clientMeta": {
+    "uiVersion": "publicweb-v1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"
+  },
+  "days": [
+    "2026-01-15",
+    "2026-01-16",
+    "2026-01-17",
+    "2026-01-18",
+    "2026-01-19",
+    "2026-01-20",
+    "2026-01-21"
+  ],
+  "recipeBlocks": [
+    {
+      "day": "2026-01-15",
+      "day_index": 0,
+      "slot": "Desayuno",
+      "recipe": {
+        "id": "676335",
+        "title": "Huevo a la mexicana"
+      },
+      "portions": 1,
+      "prep": "",
+      "ingredients": [
+        {
+          "name": "Huevo",
+          "unit": "Piezas",
+          "qty": 3.0,
+          "form": "Entero",
+          "process": "Cocido"
+        },
+        {
+          "name": "Jitomate",
+          "unit": "Gramos",
+          "qty": 75.0,
+          "form": "Cubos chicos",
+          "process": "Sofrito"
+        },
+        {
+          "name": "Cebolla",
+          "unit": "Gramos",
+          "qty": 20.0,
+          "form": "Picado fino",
+          "process": "Sofrito"
+        },
+        {
+          "name": "Chile serrano",
+          "unit": "Gramos",
+          "qty": 20.0,
+          "form": "Picado fino",
+          "process": "Sofrito"
+        },
+        {
+          "name": "Pan integral",
+          "unit": "Rebanadas",
+          "qty": 2.0,
+          "form": "Rebanadas",
+          "process": "Crudo"
+        }
+      ]
+    },
+    {
+      "day": "2026-01-15",
+      "day_index": 0,
+      "slot": "Comida",
+      "recipe": {
+        "id": "222172",
+        "title": "Huevo con espicana y champiñones"
+      },
+      "portions": 1,
+      "prep": "",
+      "ingredients": [
+        {
+          "name": "Huevo",
+          "unit": "Piezas",
+          "qty": 3.0,
+          "form": "Entero",
+          "process": "Cocido"
+        },
+        {
+          "name": "Champiñones",
+          "unit": "Gramos",
+          "qty": 100.0,
+          "form": "Rebanadas",
+          "process": "Sofrito"
+        },
+        {
+          "name": "Espinaca",
+          "unit": "Gramos",
+          "qty": 30.0,
+          "form": "Natural",
+          "process": "Sofrito"
+        },
+        {
+          "name": "Aguacate",
+          "unit": "Gramos",
+          "qty": 50.0,
+          "form": "Rebanadas",
+          "process": "Crudo"
+        }
+      ]
+    },
+    {
+      "day": "2026-01-15",
+      "day_index": 0,
+      "slot": "Cena",
+      "recipe": {
+        "id": "108633",
+        "title": "Omellet de huevo con jamon y panela"
+      },
+      "portions": 1,
+      "prep": "",
+      "ingredients": [
+        {
+          "name": "Huevo",
+          "unit": "Piezas",
+          "qty": 3.0,
+          "form": "Entero",
+          "process": "Cocido"
+        },
+        {
+          "name": "Queso panela",
+          "unit": "Gramos",
+          "qty": 75.0,
+          "form": "Cubos chicos",
+          "process": "Integrado"
+        },
+        {
+          "name": "Jamón de pavo",
+          "unit": "Gramos",
+          "qty": 75.0,
+          "form": "Cuadros chicos",
+          "process": "Sofrito"
+        },
+        {
+          "name": "Aguacate",
+          "unit": "Gramos",
+          "qty": 50.0,
+          "form": "Rebanadas",
+          "process": "Crudo"
+        }
+      ]
+    },
+    {
+      "day": "2026-01-16",
+      "day_index": 1,
+      "slot": "Desayuno",
+      "recipe": {
+        "id": "497388",
+        "title": "Enchiladas de queso"
+      },
+      "portions": 1,
+      "prep": "",
+      "ingredients": [
+        {
+          "name": "Tortilla de maíz",
+          "unit": "Piezas",
+          "qty": 4.0,
+          "form": "Entero",
+          "process": "Calentado"
+        },
+        {
+          "name": "Queso panela",
+          "unit": "Gramos",
+          "qty": 80.0,
+          "form": "Cubos chicos",
+          "process": "Integrado"
+        },
+        {
+          "name": "Tomate",
+          "unit": "Gramos",
+          "qty": 120.0,
+          "form": "Cubos chicos",
+          "process": "Sofrito"
+        },
+        {
+          "name": "Chile serrano",
+          "unit": "Gramos",
+          "qty": 20.0,
+          "form": "Picado fino",
+          "process": "Sofrito"
+        },
+        {
+          "name": "Cilantro",
+          "unit": "Gramos",
+          "qty": 5.0,
+          "form": "Picado fino",
+          "process": "Crudo"
+        }
+      ]
+    },
+    {
+      "day": "2026-01-16",
+      "day_index": 1,
+      "slot": "Comida",
+      "recipe": {
+        "id": "689174",
+        "title": "Sincronizadas de champiñones"
+      },
+      "portions": 1,
+      "prep": "",
+      "ingredients": [
+        {
+          "name": "Tortillas de harina",
+          "unit": "Piezas",
+          "qty": 4.0,
+          "form": "Entero",
+          "process": "Calentado"
+        },
+        {
+          "name": "Champiñones",
+          "unit": "Gramos",
+          "qty": 100.0,
+          "form": "Rebanadas",
+          "process": "Sofrito"
+        },
+        {
+          "name": "Queso oaxaca",
+          "unit": "Gramos",
+          "qty": 75.0,
+          "form": "Deshebrado",
+          "process": "Integrado"
+        }
+      ]
+    },
+    {
+      "day": "2026-01-16",
+      "day_index": 1,
+      "slot": "Cena",
+      "recipe": {
+        "id": "544133",
+        "title": "Sándwich de jamón y panela"
+      },
+      "portions": 1,
+      "prep": "",
+      "ingredients": [
+        {
+          "name": "Pan integral",
+          "unit": "Rebanadas",
+          "qty": 2.0,
+          "form": "Rebanadas",
+          "process": "Crudo"
+        },
+        {
+          "name": "Jamón de pavo",
+          "unit": "Gramos",
+          "qty": 30.0,
+          "form": "Rebanadas",
+          "process": "Crudo"
+        },
+        {
+          "name": "Queso panela",
+          "unit": "Gramos",
+          "qty": 30.0,
+          "form": "Rebanadas",
+          "process": "Crudo"
+        },
+        {
+          "name": "Jitomate",
+          "unit": "Gramos",
+          "qty": 25.0,
+          "form": "Rebanadas",
+          "process": "Crudo"
+        },
+        {
+          "name": "Aguacate",
+          "unit": "Gramos",
+          "qty": 20.0,
+          "form": "Rebanadas",
+          "process": "Crudo"
+        },
+        {
+          "name": "Mayonesa",
+          "unit": "Gramos",
+          "qty": 5.0,
+          "form": "Untado",
+          "process": "Integrado"
+        }
+      ]
+    },
+    {
+      "day": "2026-01-16",
+      "day_index": 1,
+      "slot": "Colación",
+      "recipe": {
+        "id": "544133",
+        "title": "Sándwich de jamón y panela"
+      },
+      "portions": 1,
+      "prep": "",
+      "ingredients": [
+        {
+          "name": "Pan integral",
+          "unit": "Rebanadas",
+          "qty": 2.0,
+          "form": "Rebanadas",
+          "process": "Crudo"
+        },
+        {
+          "name": "Jamón de pavo",
+          "unit": "Gramos",
+          "qty": 30.0,
+          "form": "Rebanadas",
+          "process": "Crudo"
+        },
+        {
+          "name": "Queso panela",
+          "unit": "Gramos",
+          "qty": 30.0,
+          "form": "Rebanadas",
+          "process": "Crudo"
+        },
+        {
+          "name": "Jitomate",
+          "unit": "Gramos",
+          "qty": 25.0,
+          "form": "Rebanadas",
+          "process": "Crudo"
+        },
+        {
+          "name": "Aguacate",
+          "unit": "Gramos",
+          "qty": 20.0,
+          "form": "Rebanadas",
+          "process": "Crudo"
+        },
+        {
+          "name": "Mayonesa",
+          "unit": "Gramos",
+          "qty": 5.0,
+          "form": "Untado",
+          "process": "Integrado"
+        }
+      ]
+    },
+    {
+      "day": "2026-01-17",
+      "day_index": 2,
+      "slot": "Desayuno",
+      "recipe": {
+        "id": "923457",
+        "title": "Calabacitas con elote y queso panela"
+      },
+      "portions": 1,
+      "prep": "",
+      "ingredients": [
+        {
+          "name": "Calabacita",
+          "unit": "Gramos",
+          "qty": 300.0,
+          "form": "Cubos medianos",
+          "process": "Sofrito"
+        },
+        {
+          "name": "Elote desgranado",
+          "unit": "Gramos",
+          "qty": 80.0,
+          "form": "Granos",
+          "process": "Sofrito"
+        },
+        {
+          "name": "Jitomate",
+          "unit": "Gramos",
+          "qty": 120.0,
+          "form": "Cubos chicos",
+          "process": "Sofrito"
+        },
+        {
+          "name": "Cebolla",
+          "unit": "Gramos",
+          "qty": 60.0,
+          "form": "Picado fino",
+          "process": "Sofrito"
+        },
+        {
+          "name": "Chile serrano",
+          "unit": "Gramos",
+          "qty": 15.0,
+          "form": "Picado fino",
+          "process": "Sofrito"
+        },
+        {
+          "name": "Queso panela",
+          "unit": "Gramos",
+          "qty": 60.0,
+          "form": "Cubos chicos",
+          "process": "Integrado"
+        },
+        {
+          "name": "Cilantro",
+          "unit": "Gramos",
+          "qty": 5.0,
+          "form": "Picado fino",
+          "process": "Crudo"
+        },
+        {
+          "name": "Tortilla de maíz",
+          "unit": "Piezas",
+          "qty": 4.0,
+          "form": "Entero",
+          "process": "Calentado"
+        }
+      ]
+    },
+    {
+      "day": "2026-01-17",
+      "day_index": 2,
+      "slot": "Comida",
+      "recipe": {
+        "id": "914424",
+        "title": "Picadillo de res con papa y zanahoria"
+      },
+      "portions": 1,
+      "prep": "",
+      "ingredients": [
+        {
+          "name": "Carne molida de res",
+          "unit": "Gramos",
+          "qty": 180.0,
+          "form": "Molido",
+          "process": "Dorado"
+        },
+        {
+          "name": "Papa",
+          "unit": "Gramos",
+          "qty": 150.0,
+          "form": "Cubos medianos",
+          "process": "Cocido"
+        },
+        {
+          "name": "Zanahoria",
+          "unit": "Gramos",
+          "qty": 60.0,
+          "form": "Cubos chicos",
+          "process": "Cocido"
+        },
+        {
+          "name": "Jitomate",
+          "unit": "Gramos",
+          "qty": 200.0,
+          "form": "Cubos chicos",
+          "process": "Sofrito"
+        },
+        {
+          "name": "Cebolla",
+          "unit": "Gramos",
+          "qty": 60.0,
+          "form": "Picado fino",
+          "process": "Sofrito"
+        },
+        {
+          "name": "Ajo",
+          "unit": "Gramos",
+          "qty": 5.0,
+          "form": "Picado fino",
+          "process": "Sofrito"
+        },
+        {
+          "name": "Tortilla de maíz",
+          "unit": "Piezas",
+          "qty": 4.0,
+          "form": "Entero",
+          "process": "Calentado"
+        }
+      ]
+    },
+    {
+      "day": "2026-01-17",
+      "day_index": 2,
+      "slot": "Cena",
+      "recipe": {
+        "id": "937834",
+        "title": "Molletes con pico de gallo"
+      },
+      "portions": 1,
+      "prep": "",
+      "ingredients": [
+        {
+          "name": "Bolillo",
+          "unit": "Pieza",
+          "qty": 1.0,
+          "form": "Rebanadas",
+          "process": "Horneado"
+        },
+        {
+          "name": "Frijoles refritos",
+          "unit": "Gramos",
+          "qty": 120.0,
+          "form": "Molido",
+          "process": "Calentado"
+        },
+        {
+          "name": "Queso oaxaca",
+          "unit": "Gramos",
+          "qty": 60.0,
+          "form": "Deshebrado",
+          "process": "Gratinado"
+        },
+        {
+          "name": "Mantequilla",
+          "unit": "Gramos",
+          "qty": 10.0,
+          "form": "Untado",
+          "process": "Calentado"
+        },
+        {
+          "name": "Tomate",
+          "unit": "Gramos",
+          "qty": 80.0,
+          "form": "Cubos chicos",
+          "process": "Crudo"
+        },
+        {
+          "name": "Cebolla",
+          "unit": "Gramos",
+          "qty": 20.0,
+          "form": "Picado fino",
+          "process": "Crudo"
+        },
+        {
+          "name": "Chile serrano",
+          "unit": "Gramos",
+          "qty": 10.0,
+          "form": "Picado fino",
+          "process": "Crudo"
+        },
+        {
+          "name": "Cilantro",
+          "unit": "Gramos",
+          "qty": 5.0,
+          "form": "Picado fino",
+          "process": "Crudo"
+        },
+        {
+          "name": "Limón",
+          "unit": "Gramos",
+          "qty": 10.0,
+          "form": "Líquido",
+          "process": "Integrado"
+        }
+      ]
+    },
+    {
+      "day": "2026-01-17",
+      "day_index": 2,
+      "slot": "Colación",
+      "recipe": {
+        "id": "977195",
+        "title": "Sopecitos de chorizo con frijol"
+      },
+      "portions": 1,
+      "prep": "",
+      "ingredients": [
+        {
+          "name": "Sopecitos",
+          "unit": "Pieza",
+          "qty": 3.0,
+          "form": "Entero",
+          "process": "Calentado"
+        },
+        {
+          "name": "Chorizo",
+          "unit": "Gramos",
+          "qty": 80.0,
+          "form": "Molido",
+          "process": "Dorado"
+        },
+        {
+          "name": "Frijoles refritos",
+          "unit": "Gramos",
+          "qty": 100.0,
+          "form": "Molido",
+          "process": "Calentado"
+        },
+        {
+          "name": "Lechuga romana",
+          "unit": "Gramos",
+          "qty": 30.0,
+          "form": "Picado fino",
+          "process": "Crudo"
+        },
+        {
+          "name": "Crema",
+          "unit": "Mililitros",
+          "qty": 20.0,
+          "form": "Untado",
+          "process": "Integrado"
+        },
+        {
+          "name": "Queso fresco",
+          "unit": "Gramos",
+          "qty": 30.0,
+          "form": "Deshebrado",
+          "process": "Crudo"
+        }
+      ]
+    }
+  ],
+  "offerOverrides": {},
+  "quoteSnapshot": {
+    "ingredients_xlsx": "C:\\Users\\Huawei\\Documents\\SmartKet\\Recetas\\Ingredientes.xlsx",
+    "items": [
+      {
+        "ingredient": "Aguacate",
+        "sell_mode": "bulk",
+        "selected_offer_index": 0,
+        "default_offer_index": 0,
+        "override_applied": false,
+        "offer_brand": "granel",
+        "offer_presentation": "granel",
+        "offer_place": "Aurrera",
+        "offers": [
+          {
+            "index": 0,
+            "brand": "granel",
+            "buy": 50.0,
+            "sale": 55.0,
+            "presentation": "granel",
+            "unit": "gramos",
+            "qty": 1000.0,
+            "bulk": true,
+            "multiple": 100.0,
+            "place": "Aurrera"
+          }
+        ],
+        "required_qty": 140.0,
+        "waste_qty": 60.0,
+        "line_total": 11.0,
+        "bulk_unit": "gramos",
+        "sold_qty": 200.0,
+        "unit_price": 0.055,
+        "multiple": 100.0
+      },
+      {
+        "ingredient": "Ajo",
+        "sell_mode": "bulk",
+        "selected_offer_index": 0,
+        "default_offer_index": 0,
+        "override_applied": false,
+        "offer_brand": "granel",
+        "offer_presentation": "granel",
+        "offer_place": "Aurrera",
+        "offers": [
+          {
+            "index": 0,
+            "brand": "granel",
+            "buy": 299.0,
+            "sale": 350.0,
+            "presentation": "granel",
+            "unit": "gramos",
+            "qty": 1000.0,
+            "bulk": true,
+            "multiple": 20.0,
+            "place": "Aurrera"
+          }
+        ],
+        "required_qty": 5.0,
+        "waste_qty": 15.0,
+        "line_total": 7.0,
+        "bulk_unit": "gramos",
+        "sold_qty": 20.0,
+        "unit_price": 0.35,
+        "multiple": 20.0
+      },
+      {
+        "ingredient": "Calabacita",
+        "sell_mode": "bulk",
+        "selected_offer_index": 0,
+        "default_offer_index": 0,
+        "override_applied": false,
+        "offer_brand": "granel",
+        "offer_presentation": "granel",
+        "offer_place": "Aurrera",
+        "offers": [
+          {
+            "index": 0,
+            "brand": "granel",
+            "buy": 39.9,
+            "sale": 50.0,
+            "presentation": "granel",
+            "unit": "gramos",
+            "qty": 1000.0,
+            "bulk": true,
+            "multiple": 100.0,
+            "place": "Aurrera"
+          }
+        ],
+        "required_qty": 300.0,
+        "waste_qty": 0.0,
+        "line_total": 15.0,
+        "bulk_unit": "gramos",
+        "sold_qty": 300.0,
+        "unit_price": 0.05,
+        "multiple": 100.0
+      },
+      {
+        "ingredient": "Carne molida de res",
+        "sell_mode": "bulk",
+        "selected_offer_index": 0,
+        "default_offer_index": 0,
+        "override_applied": false,
+        "offer_brand": "granel",
+        "offer_presentation": "granel",
+        "offer_place": "Aurrera",
+        "offers": [
+          {
+            "index": 0,
+            "brand": "granel",
+            "buy": 154.9,
+            "sale": 170.0,
+            "presentation": "granel",
+            "unit": "gramos",
+            "qty": 1000.0,
+            "bulk": true,
+            "multiple": 100.0,
+            "place": "Aurrera"
+          }
+        ],
+        "required_qty": 180.0,
+        "waste_qty": 20.0,
+        "line_total": 34.0,
+        "bulk_unit": "gramos",
+        "sold_qty": 200.0,
+        "unit_price": 0.17,
+        "multiple": 100.0
+      },
+      {
+        "ingredient": "Cebolla",
+        "sell_mode": "bulk",
+        "selected_offer_index": 0,
+        "default_offer_index": 0,
+        "override_applied": false,
+        "offer_brand": "granel",
+        "offer_presentation": "granel",
+        "offer_place": "Aurrera",
+        "offers": [
+          {
+            "index": 0,
+            "brand": "granel",
+            "buy": 29.9,
+            "sale": 35.0,
+            "presentation": "granel",
+            "unit": "gramos",
+            "qty": 1000.0,
+            "bulk": true,
+            "multiple": 50.0,
+            "place": "Aurrera"
+          }
+        ],
+        "required_qty": 160.0,
+        "waste_qty": 40.0,
+        "line_total": 7.0,
+        "bulk_unit": "gramos",
+        "sold_qty": 200.0,
+        "unit_price": 0.035,
+        "multiple": 50.0
+      },
+      {
+        "ingredient": "Chile serrano",
+        "sell_mode": "bulk",
+        "selected_offer_index": 0,
+        "default_offer_index": 0,
+        "override_applied": false,
+        "offer_brand": "granel",
+        "offer_presentation": "granel",
+        "offer_place": "Aurrera",
+        "offers": [
+          {
+            "index": 0,
+            "brand": "granel",
+            "buy": 62.8,
+            "sale": 68.0,
+            "presentation": "granel",
+            "unit": "gramos",
+            "qty": 1000.0,
+            "bulk": true,
+            "multiple": 30.0,
+            "place": "Aurrera"
+          }
+        ],
+        "required_qty": 65.0,
+        "waste_qty": 25.0,
+        "line_total": 6.12,
+        "bulk_unit": "gramos",
+        "sold_qty": 90.0,
+        "unit_price": 0.068,
+        "multiple": 30.0
+      },
+      {
+        "ingredient": "Chorizo",
+        "sell_mode": "bulk",
+        "selected_offer_index": 0,
+        "default_offer_index": 0,
+        "override_applied": false,
+        "offer_brand": "granel",
+        "offer_presentation": "granel",
+        "offer_place": "Aurrera",
+        "offers": [
+          {
+            "index": 0,
+            "brand": "granel",
+            "buy": 104.0,
+            "sale": 110.0,
+            "presentation": "granel",
+            "unit": "gramos",
+            "qty": 1000.0,
+            "bulk": true,
+            "multiple": 50.0,
+            "place": "Aurrera"
+          },
+          {
+            "index": 1,
+            "brand": "chata",
+            "buy": 26.0,
+            "sale": 35.0,
+            "presentation": "envase",
+            "unit": "gramos",
+            "qty": 215.0,
+            "bulk": false,
+            "multiple": null,
+            "place": "Aurrera"
+          }
+        ],
+        "required_qty": 80.0,
+        "waste_qty": 20.0,
+        "line_total": 11.0,
+        "bulk_unit": "gramos",
+        "sold_qty": 100.0,
+        "unit_price": 0.11,
+        "multiple": 50.0
+      },
+      {
+        "ingredient": "Cilantro",
+        "sell_mode": "bulk",
+        "selected_offer_index": 0,
+        "default_offer_index": 0,
+        "override_applied": false,
+        "offer_brand": "granel",
+        "offer_presentation": "manojo",
+        "offer_place": "Aurrera",
+        "offers": [
+          {
+            "index": 0,
+            "brand": "granel",
+            "buy": 12.9,
+            "sale": 14.19,
+            "presentation": "manojo",
+            "unit": "gramos",
+            "qty": 50.0,
+            "bulk": true,
+            "multiple": null,
+            "place": "Aurrera"
+          }
+        ],
+        "required_qty": 15.0,
+        "waste_qty": 0.0,
+        "line_total": 4.26,
+        "bulk_unit": "gramos",
+        "sold_qty": 15.0,
+        "unit_price": 0.2838,
+        "multiple": null
+      },
+      {
+        "ingredient": "Jitomate",
+        "sell_mode": "bulk",
+        "selected_offer_index": 0,
+        "default_offer_index": 0,
+        "override_applied": false,
+        "offer_brand": "granel",
+        "offer_presentation": "granel",
+        "offer_place": "Aurrera",
+        "offers": [
+          {
+            "index": 0,
+            "brand": "granel",
+            "buy": 14.5,
+            "sale": 15.95,
+            "presentation": "granel",
+            "unit": "gramos",
+            "qty": 1000.0,
+            "bulk": true,
+            "multiple": 25.0,
+            "place": "Aurrera"
+          }
+        ],
+        "required_qty": 445.0,
+        "waste_qty": 5.0,
+        "line_total": 7.18,
+        "bulk_unit": "gramos",
+        "sold_qty": 450.0,
+        "unit_price": 0.01595,
+        "multiple": 25.0
+      },
+      {
+        "ingredient": "Lechuga romana",
+        "sell_mode": "bulk",
+        "selected_offer_index": 0,
+        "default_offer_index": 0,
+        "override_applied": false,
+        "offer_brand": "granel",
+        "offer_presentation": "pieza",
+        "offer_place": "Aurrera",
+        "offers": [
+          {
+            "index": 0,
+            "brand": "granel",
+            "buy": 24.9,
+            "sale": 27.39,
+            "presentation": "pieza",
+            "unit": "gramos",
+            "qty": 500.0,
+            "bulk": true,
+            "multiple": null,
+            "place": "Aurrera"
+          }
+        ],
+        "required_qty": 30.0,
+        "waste_qty": 0.0,
+        "line_total": 1.64,
+        "bulk_unit": "gramos",
+        "sold_qty": 30.0,
+        "unit_price": 0.05478,
+        "multiple": null
+      },
+      {
+        "ingredient": "Limón",
+        "sell_mode": "bulk",
+        "selected_offer_index": 0,
+        "default_offer_index": 0,
+        "override_applied": false,
+        "offer_brand": "granel",
+        "offer_presentation": "granel",
+        "offer_place": "Aurrera",
+        "offers": [
+          {
+            "index": 0,
+            "brand": "granel",
+            "buy": 37.5,
+            "sale": 41.25,
+            "presentation": "granel",
+            "unit": "gramos",
+            "qty": 1000.0,
+            "bulk": true,
+            "multiple": 50.0,
+            "place": "Aurrera"
+          },
+          {
+            "index": 1,
+            "brand": "Marketside",
+            "buy": 35.9,
+            "sale": 39.49,
+            "presentation": "malla",
+            "unit": "gramos",
+            "qty": 1000.0,
+            "bulk": false,
+            "multiple": null,
+            "place": "Aurrera"
+          }
+        ],
+        "required_qty": 10.0,
+        "waste_qty": 40.0,
+        "line_total": 2.06,
+        "bulk_unit": "gramos",
+        "sold_qty": 50.0,
+        "unit_price": 0.04125,
+        "multiple": 50.0
+      },
+      {
+        "ingredient": "Papa",
+        "sell_mode": "bulk",
+        "selected_offer_index": 0,
+        "default_offer_index": 0,
+        "override_applied": false,
+        "offer_brand": "granel",
+        "offer_presentation": "granel",
+        "offer_place": "Aurrera",
+        "offers": [
+          {
+            "index": 0,
+            "brand": "granel",
+            "buy": 32.9,
+            "sale": 36.19,
+            "presentation": "granel",
+            "unit": "gramos",
+            "qty": 1000.0,
+            "bulk": true,
+            "multiple": 30.0,
+            "place": "Aurrera"
+          }
+        ],
+        "required_qty": 150.0,
+        "waste_qty": 0.0,
+        "line_total": 5.43,
+        "bulk_unit": "gramos",
+        "sold_qty": 150.0,
+        "unit_price": 0.03619,
+        "multiple": 30.0
+      },
+      {
+        "ingredient": "Tomate",
+        "sell_mode": "bulk",
+        "selected_offer_index": 0,
+        "default_offer_index": 0,
+        "override_applied": false,
+        "offer_brand": "granel",
+        "offer_presentation": "granel",
+        "offer_place": "Aurrera",
+        "offers": [
+          {
+            "index": 0,
+            "brand": "granel",
+            "buy": 59.0,
+            "sale": 64.9,
+            "presentation": "granel",
+            "unit": "gramos",
+            "qty": 1000.0,
+            "bulk": true,
+            "multiple": 30.0,
+            "place": "Aurrera"
+          }
+        ],
+        "required_qty": 200.0,
+        "waste_qty": 10.0,
+        "line_total": 13.63,
+        "bulk_unit": "gramos",
+        "sold_qty": 210.0,
+        "unit_price": 0.0649,
+        "multiple": 30.0
+      },
+      {
+        "ingredient": "Tortilla de maíz",
+        "sell_mode": "bulk",
+        "selected_offer_index": 1,
+        "default_offer_index": 1,
+        "override_applied": false,
+        "offer_brand": "granel",
+        "offer_presentation": "bolsa",
+        "offer_place": "Aurrera",
+        "offers": [
+          {
+            "index": 0,
+            "brand": "granel",
+            "buy": 16.0,
+            "sale": 17.6,
+            "presentation": "bolsa",
+            "unit": "piezas",
+            "qty": 30.0,
+            "bulk": true,
+            "multiple": 1.0,
+            "place": "Aurrera"
+          },
+          {
+            "index": 1,
+            "brand": "granel",
+            "buy": 15.0,
+            "sale": 16.5,
+            "presentation": "bolsa",
+            "unit": "piezas",
+            "qty": 30.0,
+            "bulk": true,
+            "multiple": 1.0,
+            "place": "Aurrera"
+          }
+        ],
+        "required_qty": 12.0,
+        "waste_qty": 0.0,
+        "line_total": 6.6,
+        "bulk_unit": "piezas",
+        "sold_qty": 12.0,
+        "unit_price": 0.55,
+        "multiple": 1.0
+      },
+      {
+        "ingredient": "Zanahoria",
+        "sell_mode": "bulk",
+        "selected_offer_index": 0,
+        "default_offer_index": 0,
+        "override_applied": false,
+        "offer_brand": "granel",
+        "offer_presentation": "granel",
+        "offer_place": "Aurrera",
+        "offers": [
+          {
+            "index": 0,
+            "brand": "granel",
+            "buy": 14.9,
+            "sale": 16.39,
+            "presentation": "granel",
+            "unit": "gramos",
+            "qty": 1000.0,
+            "bulk": true,
+            "multiple": 25.0,
+            "place": "Aurrera"
+          }
+        ],
+        "required_qty": 60.0,
+        "waste_qty": 15.0,
+        "line_total": 1.23,
+        "bulk_unit": "gramos",
+        "sold_qty": 75.0,
+        "unit_price": 0.01639,
+        "multiple": 25.0
+      },
+      {
+        "ingredient": "Bolillo",
+        "sell_mode": "package",
+        "selected_offer_index": 0,
+        "default_offer_index": 0,
+        "override_applied": false,
+        "offer_brand": "granel",
+        "offer_presentation": "pieza",
+        "offer_place": "Aurrera",
+        "offers": [
+          {
+            "index": 0,
+            "brand": "granel",
+            "buy": 2.0,
+            "sale": 2.5,
+            "presentation": "pieza",
+            "unit": "pieza",
+            "qty": 1.0,
+            "bulk": false,
+            "multiple": null,
+            "place": "Aurrera"
+          }
+        ],
+        "required_qty": 1.0,
+        "waste_qty": 0.0,
+        "line_total": 2.5,
+        "package_unit": "pieza",
+        "package_qty": 1.0,
+        "packages_needed": 1,
+        "unit_price": 2.5
+      },
+      {
+        "ingredient": "Champiñones",
+        "sell_mode": "package",
+        "selected_offer_index": 0,
+        "default_offer_index": 0,
+        "override_applied": false,
+        "offer_brand": "herdez",
+        "offer_presentation": "lata",
+        "offer_place": "Aurrera",
+        "offers": [
+          {
+            "index": 0,
+            "brand": "herdez",
+            "buy": 20.0,
+            "sale": 25.0,
+            "presentation": "lata",
+            "unit": "gramos",
+            "qty": 186.0,
+            "bulk": false,
+            "multiple": null,
+            "place": "Aurrera"
+          }
+        ],
+        "required_qty": 200.0,
+        "waste_qty": 172.0,
+        "line_total": 50.0,
+        "package_unit": "gramos",
+        "package_qty": 186.0,
+        "packages_needed": 2,
+        "unit_price": 25.0
+      },
+      {
+        "ingredient": "Crema",
+        "sell_mode": "package",
+        "selected_offer_index": 0,
+        "default_offer_index": 0,
+        "override_applied": false,
+        "offer_brand": "Lala",
+        "offer_presentation": "envase",
+        "offer_place": "Aurrera",
+        "offers": [
+          {
+            "index": 0,
+            "brand": "Lala",
+            "buy": 47.0,
+            "sale": 51.7,
+            "presentation": "envase",
+            "unit": "mililitro",
+            "qty": 900.0,
+            "bulk": false,
+            "multiple": null,
+            "place": "Aurrera"
+          },
+          {
+            "index": 1,
+            "brand": "Alpura",
+            "buy": 49.0,
+            "sale": 53.9,
+            "presentation": "envase",
+            "unit": "mililitro",
+            "qty": 900.0,
+            "bulk": false,
+            "multiple": null,
+            "place": "Aurrera"
+          }
+        ],
+        "required_qty": 20.0,
+        "waste_qty": 880.0,
+        "line_total": 51.7,
+        "package_unit": "mililitro",
+        "package_qty": 900.0,
+        "packages_needed": 1,
+        "unit_price": 51.7
+      },
+      {
+        "ingredient": "Elote desgranado",
+        "sell_mode": "package",
+        "selected_offer_index": 0,
+        "default_offer_index": 0,
+        "override_applied": false,
+        "offer_brand": "Herdez",
+        "offer_presentation": "lata",
+        "offer_place": "Aurrera",
+        "offers": [
+          {
+            "index": 0,
+            "brand": "Herdez",
+            "buy": 13.5,
+            "sale": 14.85,
+            "presentation": "lata",
+            "unit": "gramos",
+            "qty": 220.0,
+            "bulk": false,
+            "multiple": null,
+            "place": "Aurrera"
+          },
+          {
+            "index": 1,
+            "brand": "La Huerta",
+            "buy": 59.0,
+            "sale": 64.9,
+            "presentation": "bolsa",
+            "unit": "gramos",
+            "qty": 500.0,
+            "bulk": false,
+            "multiple": null,
+            "place": "Aurrera"
+          }
+        ],
+        "required_qty": 80.0,
+        "waste_qty": 140.0,
+        "line_total": 14.85,
+        "package_unit": "gramos",
+        "package_qty": 220.0,
+        "packages_needed": 1,
+        "unit_price": 14.85
+      },
+      {
+        "ingredient": "Espinaca",
+        "sell_mode": "package",
+        "selected_offer_index": 0,
+        "default_offer_index": 0,
+        "override_applied": false,
+        "offer_brand": "Marketside",
+        "offer_presentation": "bolsa",
+        "offer_place": "Aurrera",
+        "offers": [
+          {
+            "index": 0,
+            "brand": "Marketside",
+            "buy": 49.0,
+            "sale": 53.9,
+            "presentation": "bolsa",
+            "unit": "gramos",
+            "qty": 280.0,
+            "bulk": false,
+            "multiple": null,
+            "place": "Aurrera"
+          },
+          {
+            "index": 1,
+            "brand": "Taylor Farms",
+            "buy": 49.9,
+            "sale": 54.89,
+            "presentation": "bolsa",
+            "unit": "gramos",
+            "qty": 255.0,
+            "bulk": false,
+            "multiple": null,
+            "place": "Aurrera"
+          }
+        ],
+        "required_qty": 30.0,
+        "waste_qty": 250.0,
+        "line_total": 53.9,
+        "package_unit": "gramos",
+        "package_qty": 280.0,
+        "packages_needed": 1,
+        "unit_price": 53.9
+      },
+      {
+        "ingredient": "Frijoles refritos",
+        "sell_mode": "package",
+        "selected_offer_index": 1,
+        "default_offer_index": 1,
+        "override_applied": false,
+        "offer_brand": "La Sierra",
+        "offer_presentation": "bolsa",
+        "offer_place": "Aurrera",
+        "offers": [
+          {
+            "index": 0,
+            "brand": "Isadora",
+            "buy": 24.0,
+            "sale": 26.4,
+            "presentation": "bolsa",
+            "unit": "gramos",
+            "qty": 430.0,
+            "bulk": false,
+            "multiple": null,
+            "place": "Aurrera"
+          },
+          {
+            "index": 1,
+            "brand": "La Sierra",
+            "buy": 22.0,
+            "sale": 24.2,
+            "presentation": "bolsa",
+            "unit": "gramos",
+            "qty": 430.0,
+            "bulk": false,
+            "multiple": null,
+            "place": "Aurrera"
+          }
+        ],
+        "required_qty": 220.0,
+        "waste_qty": 210.0,
+        "line_total": 24.2,
+        "package_unit": "gramos",
+        "package_qty": 430.0,
+        "packages_needed": 1,
+        "unit_price": 24.2
+      },
+      {
+        "ingredient": "Huevo",
+        "sell_mode": "package",
+        "selected_offer_index": 1,
+        "default_offer_index": 1,
+        "override_applied": false,
+        "offer_brand": "Aurrera",
+        "offer_presentation": "cartera",
+        "offer_place": "Aurrera",
+        "offers": [
+          {
+            "index": 0,
+            "brand": "San Juan",
+            "buy": 57.0,
+            "sale": 62.7,
+            "presentation": "cartera",
+            "unit": "piezas",
+            "qty": 18.0,
+            "bulk": false,
+            "multiple": null,
+            "place": "Aurrera"
+          },
+          {
+            "index": 1,
+            "brand": "Aurrera",
+            "buy": 54.0,
+            "sale": 59.4,
+            "presentation": "cartera",
+            "unit": "piezas",
+            "qty": 18.0,
+            "bulk": false,
+            "multiple": null,
+            "place": "Aurrera"
+          }
+        ],
+        "required_qty": 9.0,
+        "waste_qty": 9.0,
+        "line_total": 59.4,
+        "package_unit": "piezas",
+        "package_qty": 18.0,
+        "packages_needed": 1,
+        "unit_price": 59.4
+      },
+      {
+        "ingredient": "Jamón de pavo",
+        "sell_mode": "package",
+        "selected_offer_index": 0,
+        "default_offer_index": 0,
+        "override_applied": false,
+        "offer_brand": "FUD",
+        "offer_presentation": "empaque",
+        "offer_place": "Aurrera",
+        "offers": [
+          {
+            "index": 0,
+            "brand": "FUD",
+            "buy": 35.0,
+            "sale": 38.5,
+            "presentation": "empaque",
+            "unit": "gramos",
+            "qty": 290.0,
+            "bulk": false,
+            "multiple": null,
+            "place": "Aurrera"
+          },
+          {
+            "index": 1,
+            "brand": "Bafar",
+            "buy": 48.0,
+            "sale": 52.8,
+            "presentation": "empaque",
+            "unit": "gramos",
+            "qty": 250.0,
+            "bulk": false,
+            "multiple": null,
+            "place": "Aurrera"
+          }
+        ],
+        "required_qty": 135.0,
+        "waste_qty": 155.0,
+        "line_total": 38.5,
+        "package_unit": "gramos",
+        "package_qty": 290.0,
+        "packages_needed": 1,
+        "unit_price": 38.5
+      },
+      {
+        "ingredient": "Mantequilla",
+        "sell_mode": "package",
+        "selected_offer_index": 0,
+        "default_offer_index": 0,
+        "override_applied": false,
+        "offer_brand": "Lala",
+        "offer_presentation": "barra",
+        "offer_place": "Aurrera",
+        "offers": [
+          {
+            "index": 0,
+            "brand": "Lala",
+            "buy": 49.0,
+            "sale": 53.9,
+            "presentation": "barra",
+            "unit": "gramos",
+            "qty": 225.0,
+            "bulk": false,
+            "multiple": null,
+            "place": "Aurrera"
+          },
+          {
+            "index": 1,
+            "brand": "Gloria",
+            "buy": 52.0,
+            "sale": 57.2,
+            "presentation": "barra",
+            "unit": "gramos",
+            "qty": 225.0,
+            "bulk": false,
+            "multiple": null,
+            "place": "Aurrera"
+          }
+        ],
+        "required_qty": 10.0,
+        "waste_qty": 215.0,
+        "line_total": 53.9,
+        "package_unit": "gramos",
+        "package_qty": 225.0,
+        "packages_needed": 1,
+        "unit_price": 53.9
+      },
+      {
+        "ingredient": "Mayonesa",
+        "sell_mode": "package",
+        "selected_offer_index": 0,
+        "default_offer_index": 0,
+        "override_applied": false,
+        "offer_brand": "Heinz",
+        "offer_presentation": "envase",
+        "offer_place": "Aurrera",
+        "offers": [
+          {
+            "index": 0,
+            "brand": "Heinz",
+            "buy": 48.0,
+            "sale": 52.8,
+            "presentation": "envase",
+            "unit": "gramos",
+            "qty": 390.0,
+            "bulk": false,
+            "multiple": null,
+            "place": "Aurrera"
+          },
+          {
+            "index": 1,
+            "brand": "McCormick",
+            "buy": 55.0,
+            "sale": 60.5,
+            "presentation": "envase",
+            "unit": "gramos",
+            "qty": 390.0,
+            "bulk": false,
+            "multiple": null,
+            "place": "Aurrera"
+          }
+        ],
+        "required_qty": 10.0,
+        "waste_qty": 380.0,
+        "line_total": 52.8,
+        "package_unit": "gramos",
+        "package_qty": 390.0,
+        "packages_needed": 1,
+        "unit_price": 52.8
+      },
+      {
+        "ingredient": "Pan integral",
+        "sell_mode": "package",
+        "selected_offer_index": 1,
+        "default_offer_index": 1,
+        "override_applied": false,
+        "offer_brand": "Great Value",
+        "offer_presentation": "bolsa",
+        "offer_place": "Aurrera",
+        "offers": [
+          {
+            "index": 0,
+            "brand": "Bimbo",
+            "buy": 55.0,
+            "sale": 60.5,
+            "presentation": "bolsa",
+            "unit": "rebanadas",
+            "qty": 23.0,
+            "bulk": false,
+            "multiple": null,
+            "place": "Aurrera"
+          },
+          {
+            "index": 1,
+            "brand": "Great Value",
+            "buy": 45.0,
+            "sale": 49.5,
+            "presentation": "bolsa",
+            "unit": "rebanadas",
+            "qty": 23.0,
+            "bulk": false,
+            "multiple": null,
+            "place": "Aurrera"
+          }
+        ],
+        "required_qty": 6.0,
+        "waste_qty": 17.0,
+        "line_total": 49.5,
+        "package_unit": "rebanadas",
+        "package_qty": 23.0,
+        "packages_needed": 1,
+        "unit_price": 49.5
+      },
+      {
+        "ingredient": "Queso fresco",
+        "sell_mode": "package",
+        "selected_offer_index": 0,
+        "default_offer_index": 0,
+        "override_applied": false,
+        "offer_brand": "La Villita",
+        "offer_presentation": "empaque",
+        "offer_place": "Aurrera",
+        "offers": [
+          {
+            "index": 0,
+            "brand": "La Villita",
+            "buy": 58.0,
+            "sale": 63.8,
+            "presentation": "empaque",
+            "unit": "gramos",
+            "qty": 400.0,
+            "bulk": false,
+            "multiple": null,
+            "place": "Aurrera"
+          },
+          {
+            "index": 1,
+            "brand": "Fud",
+            "buy": 65.0,
+            "sale": 71.5,
+            "presentation": "empaque",
+            "unit": "gramos",
+            "qty": 400.0,
+            "bulk": false,
+            "multiple": null,
+            "place": "Aurrera"
+          }
+        ],
+        "required_qty": 30.0,
+        "waste_qty": 370.0,
+        "line_total": 63.8,
+        "package_unit": "gramos",
+        "package_qty": 400.0,
+        "packages_needed": 1,
+        "unit_price": 63.8
+      },
+      {
+        "ingredient": "Queso oaxaca",
+        "sell_mode": "package",
+        "selected_offer_index": 1,
+        "default_offer_index": 1,
+        "override_applied": false,
+        "offer_brand": "Fud",
+        "offer_presentation": "empaque",
+        "offer_place": "Aurrera",
+        "offers": [
+          {
+            "index": 0,
+            "brand": "Nochebuena",
+            "buy": 85.0,
+            "sale": 93.5,
+            "presentation": "empaque",
+            "unit": "gramos",
+            "qty": 400.0,
+            "bulk": false,
+            "multiple": null,
+            "place": "Aurrera"
+          },
+          {
+            "index": 1,
+            "brand": "Fud",
+            "buy": 79.0,
+            "sale": 86.9,
+            "presentation": "empaque",
+            "unit": "gramos",
+            "qty": 400.0,
+            "bulk": false,
+            "multiple": null,
+            "place": "Aurrera"
+          }
+        ],
+        "required_qty": 135.0,
+        "waste_qty": 265.0,
+        "line_total": 86.9,
+        "package_unit": "gramos",
+        "package_qty": 400.0,
+        "packages_needed": 1,
+        "unit_price": 86.9
+      },
+      {
+        "ingredient": "Queso panela",
+        "sell_mode": "package",
+        "selected_offer_index": 1,
+        "default_offer_index": 1,
+        "override_applied": false,
+        "offer_brand": "La Villita",
+        "offer_presentation": "empaque",
+        "offer_place": "Aurrera",
+        "offers": [
+          {
+            "index": 0,
+            "brand": "Lala",
+            "buy": 69.0,
+            "sale": 75.9,
+            "presentation": "empaque",
+            "unit": "gramos",
+            "qty": 400.0,
+            "bulk": false,
+            "multiple": null,
+            "place": "Aurrera"
+          },
+          {
+            "index": 1,
+            "brand": "La Villita",
+            "buy": 62.0,
+            "sale": 68.2,
+            "presentation": "empaque",
+            "unit": "gramos",
+            "qty": 400.0,
+            "bulk": false,
+            "multiple": null,
+            "place": "Aurrera"
+          }
+        ],
+        "required_qty": 275.0,
+        "waste_qty": 125.0,
+        "line_total": 68.2,
+        "package_unit": "gramos",
+        "package_qty": 400.0,
+        "packages_needed": 1,
+        "unit_price": 68.2
+      },
+      {
+        "ingredient": "Sopecitos",
+        "sell_mode": "package",
+        "selected_offer_index": 1,
+        "default_offer_index": 1,
+        "override_applied": false,
+        "offer_brand": "granel",
+        "offer_presentation": "paquete",
+        "offer_place": "Aurrera",
+        "offers": [
+          {
+            "index": 0,
+            "brand": "Ochoa",
+            "buy": 37.0,
+            "sale": 40.7,
+            "presentation": "paquete",
+            "unit": "pieza",
+            "qty": 10.0,
+            "bulk": false,
+            "multiple": null,
+            "place": "Aurrera"
+          },
+          {
+            "index": 1,
+            "brand": "granel",
+            "buy": 30.0,
+            "sale": 33.0,
+            "presentation": "paquete",
+            "unit": "pieza",
+            "qty": 10.0,
+            "bulk": false,
+            "multiple": null,
+            "place": "Aurrera"
+          }
+        ],
+        "required_qty": 3.0,
+        "waste_qty": 7.0,
+        "line_total": 33.0,
+        "package_unit": "pieza",
+        "package_qty": 10.0,
+        "packages_needed": 1,
+        "unit_price": 33.0
+      },
+      {
+        "ingredient": "Tortillas de harina",
+        "sell_mode": "package",
+        "selected_offer_index": 1,
+        "default_offer_index": 1,
+        "override_applied": false,
+        "offer_brand": "Mission",
+        "offer_presentation": "bolsa",
+        "offer_place": "Aurrera",
+        "offers": [
+          {
+            "index": 0,
+            "brand": "Tía Rosa",
+            "buy": 35.0,
+            "sale": 38.5,
+            "presentation": "bolsa",
+            "unit": "piezas",
+            "qty": 10.0,
+            "bulk": false,
+            "multiple": null,
+            "place": "Aurrera"
+          },
+          {
+            "index": 1,
+            "brand": "Mission",
+            "buy": 30.0,
+            "sale": 33.0,
+            "presentation": "bolsa",
+            "unit": "piezas",
+            "qty": 10.0,
+            "bulk": false,
+            "multiple": null,
+            "place": "Aurrera"
+          }
+        ],
+        "required_qty": 4.0,
+        "waste_qty": 6.0,
+        "line_total": 33.0,
+        "package_unit": "piezas",
+        "package_qty": 10.0,
+        "packages_needed": 1,
+        "unit_price": 33.0
+      }
+    ],
+    "order_total": 869.3,
+    "issues": []
+  },
+  "schema_version": 2
+}

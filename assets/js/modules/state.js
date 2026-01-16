@@ -54,3 +54,18 @@ function getOfferOverrides() {
     // Devuelve copia para no mutar por accidente desde otros módulos
     return { ...offerOverrides };
 }
+
+// === Expose overrides API to window
+
+/* =========================================================
+   ✅ Expose overrides API to window (para asegurar que app.js pueda leer/escribir overrides)
+   - Importante cuando los scripts se cargan con type="module" o bundlers
+   ========================================================= */
+try {
+    window.setOfferOverride = window.setOfferOverride || setOfferOverride;
+    window.getOfferOverride = window.getOfferOverride || getOfferOverride;
+    window.clearOfferOverride = window.clearOfferOverride || clearOfferOverride;
+    window.clearOfferOverrides = window.clearOfferOverrides || clearOfferOverrides;
+    window.getOfferOverrides = window.getOfferOverrides || getOfferOverrides;
+} catch (_) { /* noop */ }
+
